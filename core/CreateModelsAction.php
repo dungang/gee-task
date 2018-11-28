@@ -1,0 +1,50 @@
+<?php
+namespace app\core;
+
+use Yii;
+use yii\base\Model;
+
+class CreateModelsAction extends BaseAction
+{
+
+    public $formName;
+
+    public function run()
+    {
+        $count = count(Yii::$app->request->post($this->formName, []));
+        /* @var $model \yii\db\ActiveRecord */
+        /* @var $models \yii\db\ActiveRecord[] */
+        $model = \Yii::createObject($this->modelClass);
+        $model->load(\Yii::$app->request->queryParams);
+        $models = [
+            $model
+        ];
+        $data = [
+            'models' => $models
+        ];
+        for ($i = 1; $i < $count; $i ++) {
+            $model = \Yii::createObject($this->modelClass);
+            $model->load(\Yii::$app->request->queryParams);
+            $models[] = $models;
+        }
+
+        if (($loaded = Model::loadMultiple($models, Yii::$app->request->post())) && Model::validateMultiple($models)) {
+            Yii::$app->db->transaction(function ($db) use ($models) {
+                foreach ($models as $model) {
+                    $model->save(false);
+                }
+            });
+            return $this->controller->redirectOnSuccess(\Yii::$app->request->referrer, "添加成功");
+        }
+
+        if (\Yii::$app->request->isPost) {
+            if ($loaded === false) {
+                return $this->controller->renderOnFail($this->id, $data, '可能表达的字段跟服务端不一致');
+            }
+            return $this->controller->renderOnFail($this->id, $data);
+        }
+
+        return $this->controller->render($this->id, $data);
+    }
+}
+
