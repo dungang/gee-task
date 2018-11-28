@@ -41,7 +41,7 @@ class Story extends \app\core\BaseModel
     public function rules()
     {
         return [
-            [['sprint_id', 'status', 'project_id', 'user_id', 'creator_id'], 'required'],
+            [['sprint_id', 'status', 'project_id', 'user_id'], 'required'],
             [['sprint_id', 'important', 'project_id', 'user_id', 'last_user_id', 'creator_id', 'created_at', 'updated_at', 'is_del'], 'integer'],
             [['story_type', 'status', 'project_version'], 'string', 'max' => 32],
             [['name'], 'string', 'max' => 128],
@@ -69,6 +69,15 @@ class Story extends \app\core\BaseModel
             'project_version' => '版本',
             'is_del' => 'Is Del',
         ];
+    }
+    
+    public function behaviors(){
+        $b = parent::behaviors();
+        $b['onSaveEvent'] = [
+            'class'=>'app\behaviors\TriggerCustomEventOnSave',
+            'customEventName'=>'sprint.assgin.task',
+        ];
+        return $b;
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\db\Query;
 
 /**
  * This is the model class for table "gt_event".
@@ -22,6 +23,15 @@ class Event extends \app\core\BaseModel
     public static function tableName()
     {
         return 'gt_event';
+    }
+    
+    public function behaviors(){
+        $b = parent::behaviors();
+        $b['cleanCache'] = [
+            'class'=>'app\behaviors\CleanCacheBehavior',
+            'cacheKey'=>'event.handlders'
+        ];
+        return $b;
     }
 
     /**
@@ -60,5 +70,38 @@ class Event extends \app\core\BaseModel
     public static function find()
     {
         return new EventQuery(get_called_class());
+    }
+    
+    /**
+     * 获取事件的所有处理器
+     * @param string $eventName
+     * @return NULL|array
+     */
+    public static function getEventHandlers($eventName) {
+        if(!($handlersMap = Yii::$app->cache->get('event.handlers'))){
+            $query = new Query();
+            $handlersMap = [];
+            $handlers = $query->select('e.code,h.handler')->from(['e'=>Event::tableName()])
+            ->innerJoin(['h'=>EventHandler::tableName()],'e.id = h.event_id')->all();
+            if($handlers){
+                foreach($handlers as $event => $handler){
+                    if(!isset($handlersMap[$event])){
+                        $handlersMap[$event]=[];
+                    }
+                    $handlersMap[$event][] = $handler;
+                }
+            }
+            Yii::$app->cache->add('event.handlers', $handlersMap);
+        }
+        return isset($handlersMap[$eventName])?$handlersMap[$eventName]:null;
+    }
+    
+    public static function triggerCustomEvent($eventName,$params=[]){
+        $handlers = self::getEventHandlers($eventName);
+        if(is_array($handlers)) {
+            foreach($handlers as $handler) {
+                call_user_method('process', new $handler(),$params);
+            }
+        }
     }
 }

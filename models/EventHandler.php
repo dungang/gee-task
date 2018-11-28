@@ -1,5 +1,4 @@
 <?php
-
 namespace app\models;
 
 use Yii;
@@ -17,7 +16,9 @@ use Yii;
  */
 class EventHandler extends \app\core\BaseModel
 {
+
     /**
+     *
      * {@inheritdoc}
      */
     public static function tableName()
@@ -25,22 +26,71 @@ class EventHandler extends \app\core\BaseModel
         return 'gt_event_handler';
     }
 
+    public function behaviors()
+    {
+        $b = parent::behaviors();
+        $b['cleanCache'] = [
+            'class' => 'app\behaviors\CleanCacheBehavior',
+            'cacheKey' => 'event.handlders'
+        ];
+        return $b;
+    }
+
     /**
+     *
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['event_id', 'created_at', 'updated_at', 'name', 'handler'], 'required'],
-            [['event_id', 'created_at', 'updated_at'], 'integer'],
-            [['name'], 'string', 'max' => 64],
-            [['handler'], 'string', 'max' => 128],
-            [['intro'], 'string', 'max' => 255],
-            [['handler'], 'unique'],
+            [
+                [
+                    'event_id',
+                    'name',
+                    'handler'
+                ],
+                'required'
+            ],
+            [
+                [
+                    'event_id',
+                    'created_at',
+                    'updated_at'
+                ],
+                'integer'
+            ],
+            [
+                [
+                    'name'
+                ],
+                'string',
+                'max' => 64
+            ],
+            [
+                [
+                    'handler'
+                ],
+                'string',
+                'max' => 128
+            ],
+            [
+                [
+                    'intro'
+                ],
+                'string',
+                'max' => 255
+            ],
+            [
+                [
+                    'handler'
+                ],
+                'unique'
+            ]
         ];
     }
 
     /**
+     *
      * {@inheritdoc}
      */
     public function attributeLabels()
@@ -52,11 +102,12 @@ class EventHandler extends \app\core\BaseModel
             'updated_at' => '更新时间',
             'name' => '名称',
             'handler' => '处理器',
-            'intro' => '介绍',
+            'intro' => '介绍'
         ];
     }
 
     /**
+     *
      * {@inheritdoc}
      * @return EventHandlerQuery the active query used by this AR class.
      */

@@ -1,6 +1,7 @@
 <?php
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
+use app\models\StoryStatus;
 
 /* @var $this yii\web\View */
 /* @var $model modules\sprint\models\StoryActive */
@@ -11,15 +12,9 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(); ?>
 
-    <?= $form->field($model, 'story_id')->textInput() ?>
+    <?= $form->field($model, 'old_status')->dropDownList(StoryStatus::allIdToName('id','name',['is_backlog'=>0])) ?>
 
-    <?= $form->field($model, 'old_status')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'new_status')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'creator_id')->textInput() ?>
-
-    <?= $form->field($model, 'created_at')->textInput() ?>
+    <?= $form->field($model, 'new_status')->dropDownList(StoryStatus::allIdToName('id','name',['is_backlog'=>0])) ?>
 
     <?= $form->field($model, 'remark')->textInput(['maxlength' => true]) ?>
 
