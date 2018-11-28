@@ -75,14 +75,15 @@ class MiscHelper
                 if($project_id == $_project_id) {
                     $rootItem = [
                         'label'=>$org['name'],
-                        'url'=>['/project/space','id'=>$org['id']]
+                        'url'=>['/space','id'=>$org['id']]
                     ];
-                } else {
+                } 
+                //else {
                     $switchProjects[] = [
                         'label'=>$org['name'],
                         'url'=>['/switch-project','id'=>$org['id']]
                     ];
-                }
+                //}
             }
             if($rootItem == null) {
                 $rootItem = array_shift($switchProjects);

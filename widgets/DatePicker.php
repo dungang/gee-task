@@ -26,8 +26,10 @@ class DatePicker extends InputWidget
     public function run(){
         $this->clientOptions = ArrayHelper::merge([
             'autoclose'=>true,
+            'zIndexOffset'=>10000,
             'todayBtn'=>'linked',
             'todayHighlight'=>true,
+            'clearBtn'=>true,
         ],$this->clientOptions);
         $this->clientOptions['language'] = \Yii::$app->language;
         $this->clientOptions['format'] = $this->format;

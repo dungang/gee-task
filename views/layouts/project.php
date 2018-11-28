@@ -43,10 +43,9 @@ AppAsset::register($this);
     ];
 
     if (! Yii::$app->user->isGuest && $switchProjects = MiscHelper::switchProjectMenuItems()) {
-        isset($switchProjects['label']) && $logoItem['brandLabel'] = $switchProjects['label'];
-        isset($switchProjects['url']) && $logoItem['brandUrl'] = $switchProjects['url'];
+        //         isset($switchProjects['label']) && $logoItem['brandLabel'] = $switchProjects['label'];
+        //         isset($switchProjects['url']) && $logoItem['brandUrl'] = $switchProjects['url'];
     }
-
     NavBar::begin($logoItem);
 
     echo Nav::widget([
@@ -66,7 +65,43 @@ AppAsset::register($this);
                 ]
             ],
             [
-                'label' => '<i class="glyphicon glyphicon-user"></i> ' . Yii::$app->user->identity->username,
+                'label'=>'<i class="glyphicon glyphicon-tasks"></i> 迭代',
+                'url'=>[
+                    '/sprint/default/index'
+                ]
+            ],
+            [
+                'label'=>'<i class="glyphicon glyphicon-check"></i> 会议',
+                'url'=>[
+                    '/meet/default/index'
+                ]
+            ],
+            [
+                'label'=>'<i class="glyphicon glyphicon-paperclip"></i> 变更',
+                'url'=>[
+                    '/change/default/index'
+                ]
+            ],
+            [
+                'label'=>'<i class="glyphicon glyphicon-list"></i> 产品Backlog',
+                'url'=>[
+                    '/backlog/default/index'
+                ]
+            ],
+            [
+                'label'=>'<i class="glyphicon glyphicon-user"></i> 成员',
+                'url'=>[
+                    '/member/default/index'
+                ]
+            ],
+            [
+                'label'=>'<i class="glyphicon glyphicon-comment"></i> 机器人',
+                'url'=>[
+                    '/robot/default/index'
+                ]
+            ],
+            [
+                'label' => '<i class="glyphicon glyphicon-cog"></i> ' . Yii::$app->user->identity->username,
                 'items' => [
                     [
                         'label' => '<i class="glyphicon glyphicon-credit-card"></i> 个人信息',
@@ -95,8 +130,8 @@ AppAsset::register($this);
     ]);
     NavBar::end();
     ?>
-    <div class="modal fade" id="switch-project-dialog" tabindex="-1" role="dialog"
-			aria-labelledby="switchProjectDialog">
+    <div class="modal fade" id="switch-project-dialog" tabindex="-1"
+			role="dialog" aria-labelledby="switchProjectDialog">
 			<div class="modal-dialog" role="document">
 				<div class="modal-content">
 					<div class="modal-header">
@@ -129,14 +164,20 @@ AppAsset::register($this);
 			</div>
 		</div>
 		<div class="container">
-        <?=Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []])?>
         <?= Alert::widget() ?>
         <?= Notify::widget() ?>
-        <?= $content ?>
+        
+		<div class="jumbotron bg-primary">
+			<?php $project = MiscHelper::getProject();?>
+        	<h1 class="modal-title"><?= Html::encode($project['name']) ?></h1>
+        	<p><?= $this->title?></p>
+			</div>
+        
+        	<?= $content ?>
         <?php
 
         SimpleModal::begin([
-            'size' => 'modal-lg',
+            //'size' => 'modal-lg',
             'header' => '加载中 ... ',
             'options' => [
                 'id' => 'modal-dailog'

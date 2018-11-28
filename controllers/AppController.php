@@ -30,5 +30,6 @@ abstract class AppController extends BaseController
         ];
         return $behaviors;
     }
+    
 }
 

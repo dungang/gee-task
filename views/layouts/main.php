@@ -55,48 +55,82 @@ AppAsset::register($this);
                 ]
             ],
             [
+                'label' => '故事状态',
+                'url' => [
+                    '/story-status/index'
+                ]
+            ],
+            [
+                'label' => '事件',
+                'items' => [
+                    [
+                        'label' => '事件维护',
+                        'url' => [
+                            '/event/index'
+                        ]
+                    ],
+                    [
+                        'label' => '事件处理器',
+                        'url' => [
+                            '/event-handler/index'
+                        ]
+                    ]
+                ]
+            ],
+            [
+                'label' => '机器人',
+                'items' => [
+                    [
+                        'label' => '机器人维护',
+                        'url' => [
+                            '/im-robot/index'
+                        ]
+                    ],
+                    [
+                        'label' => '机器人消息模板',
+                        'url' => [
+                            '/robot-message/index'
+                        ]
+                    ]
+                ]
+            ],
+            [
+                'label' => '用户',
+                'url' => [
+                    '/user/index'
+                ]
+            ],
+            [
                 'label' => '系统',
                 'items' => [
                     [
-                        'label' => '用户',
-                        'url' => [
-                            '/user'
-                        ]
-                    ],
-                    [
-                        'label' => '事件',
-                        'url' => [
-                            '/event'
-                        ]
-                    ],
-                    [
                         'label' => '路由',
                         'url' => [
-                            '/ac-route'
+                            '/ac-route/index'
                         ]
                     ],
                     [
                         'label' => '模块',
                         'url' => [
-                            '/app-module'
+                            '/app-module/index'
                         ]
                     ],
                     [
                         'label' => '角色',
                         'url' => [
-                            '/auth-role'
+                            '/auth-role/index'
                         ]
                     ],
                     [
                         'label' => '权限',
                         'url' => [
-                            '/auth-permission'
+                            '/auth-permission/index'
                         ]
                     ],
                     [
                         'label' => '规则',
                         'url' => [
-                            '/auth-rule'
+                            '/auth-rule/index'
                         ]
                     ]
                 ]
@@ -134,7 +168,7 @@ AppAsset::register($this);
         <?php
 
         SimpleModal::begin([
-            'size' => 'modal-lg',
+            //'size' => 'modal-lg',
             'header' => '对话框',
             'options' => [
                 'id' => 'modal-dailog'

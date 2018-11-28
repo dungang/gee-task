@@ -269,7 +269,7 @@ class BaseController extends Controller
         return $this->thenRender('exception', null, $params, $message);
     }
 
-    public final function render($view, $params = [])
+    public function render($view, $params = [])
     {
         if (\Yii::$app->request->isAjax) {
             return parent::renderAjax($view, $params);

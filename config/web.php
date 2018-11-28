@@ -18,7 +18,13 @@ $config = [
         '@npm' => '@vendor/npm-asset'
     ],
     'modules'=>[
-        'sprint'=>'modules\sprint\Module'
+        'space'=>'modules\space\Module',
+        'member'=>'modules\member\Module',
+        'meet'=>'modules\meet\Module',
+        'change'=>'modules\change\Module',
+        'sprint'=>'modules\sprint\Module',
+        'backlog'=>'modules\backlog\Module',
+        'robot'=>'modules\robot\Module',
     ],
     'components' => [
         'request' => [
@@ -65,7 +71,7 @@ $config = [
                 'yii\bootstrap\BootstrapAsset' => [
                     'baseUrl' => '@web/css/',
                     'css' => [
-                        'bootstrap.min.css'
+                        'bootstrap-united.min.css'
                     ], // 去除 bootstrap.css
                     'sourcePath' => null // 防止在 frontend/web/asset 下生产文件
                 ]

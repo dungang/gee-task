@@ -2,9 +2,6 @@
 
 namespace app\controllers;
 
-use app\helpers\MiscHelper;
-use app\models\Project;
-use yii\web\NotFoundHttpException;
 
 /**
  * ProjectController implements the CRUD actions for Project model.
@@ -53,34 +50,6 @@ class ProjectController extends AdminController
                 ]
             ],
 		];
-	}
-	
-	/**
-	 * 控制台
-	 *
-	 * @param null|int $id
-	 * @return string
-	 */
-	public function actionSpace($id = null)
-	{
-	    if ($id == null) {
-	        $id = MiscHelper::getProjectId();
-	    }
-	    if ($id == null) {
-	        return $this->redirect(['/project/index']);
-	    }
-	    
-	    return $this->render('space', [
-	        'model' => $this->findModel($id)
-	    ]);
-	}
-	
-	protected function findModel($condition)
-	{
-	    if ($org = Project::findOne($condition)) {
-	        return $org;
-	    }
-	    throw new NotFoundHttpException('The requested page does not exist.');
 	}
 	
 }

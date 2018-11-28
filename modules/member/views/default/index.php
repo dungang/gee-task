@@ -7,12 +7,10 @@ use yii\grid\GridView;
 /* @var $searchModel modules\member\models\ProjectMemberSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Project Members';
+$this->title = '成员';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="project-member-index">
-
-    <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
         <?= Html::a('添加 Project Member', ['create'], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
@@ -20,16 +18,13 @@ $this->params['breadcrumbs'][] = $this->title;
 
     <?= GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
         'columns' => [
             [
-                'attribute' => 'project_id',
-                'format'=>'raw',
-                'value'=>function($model,$key,$index,$column){
-                    return Html::a($model['project_id'],['view','id'=>$model['project_id']],['data-toggle'=>'modal','data-target'=>'#modal-dailog']);
+                'attribute'=>'user_id',
+                'value'=>function($model){
+                    return $model->username;
                 }
-        	],
-            'user_id',
+            ],
             'position',
 
             [

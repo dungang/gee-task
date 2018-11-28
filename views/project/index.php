@@ -24,20 +24,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             [
-                'attribute' => 'id',
+                'attribute' => 'name',
                 'format'=>'raw',
                 'value'=>function($model,$key,$index,$column){
-                    return Html::a($model['id'],['view','id'=>$model['id']],['data-toggle'=>'modal','data-target'=>'#modal-dailog']);
+                    return Html::a($model['name'],['/switch-project','id'=>$model['id']]);
                 }
         	],
-            'name',
             'web_site',
-            'is_achived',
-            'creator_id',
-            //'created_at',
-            //'updated_at',
-            //'is_del',
-
+            [
+                'attribute'=>'is_achived',
+                'class'=>'app\grid\BoolColumn'
+            ],
+            [
+                'attribute'=>'created_at',
+                'format'=>'date',
+                'class'=>'\app\grid\DateTimeColumn'
+            ],
             [
                 'class' => '\app\grid\ActionColumn',
                 'buttonsOptions'=>[

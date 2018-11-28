@@ -30,7 +30,7 @@ class Event extends \app\core\BaseModel
     public function rules()
     {
         return [
-            [['created_at', 'updated_at', 'name', 'code'], 'required'],
+            [['name', 'code'], 'required'],
             [['created_at', 'updated_at'], 'integer'],
             [['name', 'code'], 'string', 'max' => 64],
             [['intro'], 'string', 'max' => 255],

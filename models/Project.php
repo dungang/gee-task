@@ -55,6 +55,18 @@ class Project extends \app\core\BaseModel
             'is_del' => 'Is Del',
         ];
     }
+    
+    public function init(){
+        parent::init();
+        $this->on(self::EVENT_AFTER_INSERT,function($event){
+            $mem = new ProjectMember([
+                'project_id'=>$this->id,
+                'user_id'=>$this->creator_id,
+                'position'=>'项目负责人'
+            ]);
+            $mem->save(false);
+        });
+    }
 
     /**
      * {@inheritdoc}

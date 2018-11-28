@@ -3,6 +3,7 @@
 namespace app\models;
 
 use Yii;
+use yii\helpers\ArrayHelper;
 
 /**
  * This is the model class for table "gt_project_member".
@@ -13,6 +14,8 @@ use Yii;
  */
 class ProjectMember extends \app\core\BaseModel
 {
+    public $username;
+    
     /**
      * {@inheritdoc}
      */
@@ -40,7 +43,7 @@ class ProjectMember extends \app\core\BaseModel
     public function attributeLabels()
     {
         return [
-            'project_id' => '组织',
+            'project_id' => '项目',
             'user_id' => '成员',
             'position' => '岗位',
         ];
@@ -53,5 +56,14 @@ class ProjectMember extends \app\core\BaseModel
     public static function find()
     {
         return new ProjectMemberQuery(get_called_class());
+    }
+    
+    public static function allIdToName($key = 'id', $val = 'name',$where=null,$orderBy=null)
+    {
+        $models = self::find()->select("$key,$val")->innerJoin(['u'=>User::tableName()],'user_id = u.id')->where($where)->orderBy($orderBy)->asArray()->all();
+        if (is_array($models)) {
+            return ArrayHelper::map($models, $key, $val);
+        }
+        return $models;
     }
 }

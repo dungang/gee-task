@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\ProjectMember;
+use app\models\User;
 
 /**
  * ProjectMemberSearch represents the model behind the search form of `app\models\ProjectMember`.
@@ -41,7 +42,8 @@ class ProjectMemberSearch extends ProjectMember
      */
     public function search($params)
     {
-        $query = ProjectMember::find();
+        $query = ProjectMember::find()->select(ProjectMember::tableName() .'.*,u.username')
+        ->innerJoin(['u'=>User::tableName()],'user_id=u.id');
 
         // add conditions that should always apply here
 

@@ -109,7 +109,7 @@ CREATE TABLE `gt_story` (
 	`sprint_id` INT(11) NOT NULL COMMENT '计划',
 	`story_type` VARCHAR(32) NOT NULL DEFAULT 'bug' COMMENT '类型',
 	`important` SMALLINT NOT NULL DEFAULT 0 COMMENT '优先程度',
-	`status` VARCHAR(32) NOT NULL COMMENT '状态',
+	`status` INT NOT NULL COMMENT '状态',
 	`project_id` INT(11) NOT NULL COMMENT '项目',
 	`user_id` INT(11) NOT NULL COMMENT '处理人',
 	`last_user_id` INT(11) NULL DEFAULT NULL COMMENT '更新者',
@@ -128,6 +128,7 @@ ENGINE=InnoDB;
 
 CREATE TABLE `gt_story_active` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`project_id` INT(11) NOT NULL COMMENT '项目',
 	`story_id` INT(11) NOT NULL COMMENT '故事',
 	`old_status` VARCHAR(32) NOT NULL COMMENT '旧状态',
 	`new_status` VARCHAR(32) NOT NULL COMMENT '新状态',
@@ -164,7 +165,7 @@ COLLATE='utf8mb4_general_ci'
 ENGINE=InnoDB;
 
 CREATE TABLE `gt_project_member` (
-	`project_id` INT(11) NOT NULL COMMENT '组织',
+	`project_id` INT(11) NOT NULL COMMENT '项目',
 	`user_id` INT(11) NOT NULL COMMENT '成员',
 	`position`  VARCHAR(64) NOT NULL COMMENT '岗位',
 	PRIMARY KEY (`project_id`, `user_id`),
@@ -207,6 +208,7 @@ ENGINE=InnoDB;
 CREATE TABLE `gt_project_robot` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`robot_id` INT(11) NOT NULL COMMENT '机器人',
+	`project_id` INT(11) NOT NULL COMMENT '项目',
 	`created_at` INT(11) NOT NULL COMMENT '添加时间',
 	`updated_at` INT(11) NOT NULL COMMENT '更新时间',
 	`name` VARCHAR(64) NULL DEFAULT NULL COMMENT '机器人名称',
@@ -219,7 +221,6 @@ ENGINE=InnoDB;
 
 CREATE TABLE `gt_robot_message` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`robot_id` INT(11) NOT NULL COMMENT '机器人',
 	`code` VARCHAR(64) NULL DEFAULT NULL COMMENT '消息代号',
 	`name` VARCHAR(64) NULL DEFAULT NULL COMMENT '消息名称',
 	`message` VARCHAR(255) NULL DEFAULT NULL COMMENT '消息模板',
@@ -321,10 +322,34 @@ CREATE TABLE `gt_role` (
 	`name` VARCHAR(64) NOT NULL UNIQUE COMMENT '名称',
 	`description` VARCHAR(255) NULL COMMENT '说明',
 	`scope` ENUM('ADMIN','POSITION') NOT NULL DEFAULT 'ADMIN' COMMENT '范围',
-	`is_sys` `is_sys` TINYINT(1) NULL DEFAULT '1' COMMENT '系统内置',
+	`is_sys` TINYINT(1) NULL DEFAULT '1' COMMENT '系统内置',
 	PRIMARY KEY (`id`)
 )
 COMMENT='积分'
+COLLATE='utf8mb4_general_ci'
+ENGINE=InnoDB;
+
+
+CREATE TABLE `gt_timeline` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`project_id` INT(11) NOT NULL COMMENT '项目',
+	`title` date NOT NULL UNIQUE COMMENT '名称',
+	`description` VARCHAR(255) NULL COMMENT '说明',
+	PRIMARY KEY (`id`)
+)
+COMMENT='时间线'
+COLLATE='utf8mb4_general_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `gt_story_status` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`is_backlog` TINYINT(1) NULL DEFAULT '0' COMMENT '产品Backlog',
+	`name` VARCHAR(64) NOT NULL UNIQUE COMMENT '名称',
+	`description` VARCHAR(255) NULL COMMENT '说明',
+	`sort` INT NOT NULL DEFAULT 0 COMMENT '排序',
+	PRIMARY KEY (`id`)
+)
+COMMENT='故事状态'
 COLLATE='utf8mb4_general_ci'
 ENGINE=InnoDB;
 
