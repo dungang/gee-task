@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 
 <div class="story-status-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id'=>'story-status-form','enableAjaxValidation' => true]); ?>
 
     <?= $form->field($model, 'is_backlog')->dropDownList(['0'=>'否','1'=>'是']) ?>
 

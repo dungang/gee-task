@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 
 <div class="project-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id'=>'project-form','enableAjaxValidation' => true]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

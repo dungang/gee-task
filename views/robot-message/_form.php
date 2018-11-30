@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 
 <div class="robot-message-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id'=>'robot-message-form','enableAjaxValidation' => true]); ?>
 
     <?= $form->field($model, 'code')->textInput(['maxlength' => true]) ?>
 

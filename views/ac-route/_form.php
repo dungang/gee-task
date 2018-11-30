@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="ac-route-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id'=>'ac-route-form','enableAjaxValidation' => true]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

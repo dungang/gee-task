@@ -7,7 +7,6 @@
 use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
-use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\widgets\Alert;
 use app\widgets\Notify;
@@ -35,19 +34,17 @@ AppAsset::register($this);
 <div class="wrap">
     <?php
     $logoItem = [
-        'brandLabel' => Yii::$app->name,
-        'brandUrl' => Yii::$app->homeUrl,
+        'brandLabel' => Yii::$app->name . ' <font class="h6">' . Yii::$app->version . '</font>',
+        'brandUrl' => [
+            '/space'
+        ],
         'options' => [
             'class' => 'navbar-default navbar-fixed-top'
         ]
     ];
 
-    if (! Yii::$app->user->isGuest && $switchProjects = MiscHelper::switchProjectMenuItems()) {
-        //         isset($switchProjects['label']) && $logoItem['brandLabel'] = $switchProjects['label'];
-        //         isset($switchProjects['url']) && $logoItem['brandUrl'] = $switchProjects['url'];
-    }
+    $switchProjects = MiscHelper::switchProjectMenuItems();
     NavBar::begin($logoItem);
-
     echo Nav::widget([
         'encodeLabels' => false,
         'options' => [
@@ -65,38 +62,44 @@ AppAsset::register($this);
                 ]
             ],
             [
-                'label'=>'<i class="glyphicon glyphicon-tasks"></i> 迭代',
-                'url'=>[
+                'label' => '<i class="glyphicon glyphicon-flag"></i> 故事地图',
+                'url' => [
+                    '/space/default/index'
+                ]
+            ],
+            [
+                'label' => '<i class="glyphicon glyphicon-tasks"></i> 迭代',
+                'url' => [
                     '/sprint/default/index'
                 ]
             ],
             [
-                'label'=>'<i class="glyphicon glyphicon-check"></i> 会议',
-                'url'=>[
+                'label' => '<i class="glyphicon glyphicon-check"></i> 会议',
+                'url' => [
                     '/meet/default/index'
                 ]
             ],
             [
-                'label'=>'<i class="glyphicon glyphicon-paperclip"></i> 变更',
-                'url'=>[
+                'label' => '<i class="glyphicon glyphicon-paperclip"></i> 变更',
+                'url' => [
                     '/change/default/index'
                 ]
             ],
             [
-                'label'=>'<i class="glyphicon glyphicon-list"></i> 产品Backlog',
-                'url'=>[
+                'label' => '<i class="glyphicon glyphicon-list"></i> 产品Backlog',
+                'url' => [
                     '/backlog/default/index'
                 ]
             ],
             [
-                'label'=>'<i class="glyphicon glyphicon-user"></i> 成员',
-                'url'=>[
+                'label' => '<i class="glyphicon glyphicon-user"></i> 成员',
+                'url' => [
                     '/member/default/index'
                 ]
             ],
             [
-                'label'=>'<i class="glyphicon glyphicon-comment"></i> 机器人',
-                'url'=>[
+                'label' => '<i class="glyphicon glyphicon-comment"></i> 机器人',
+                'url' => [
                     '/robot/default/index'
                 ]
             ],
@@ -107,12 +110,22 @@ AppAsset::register($this);
                         'label' => '<i class="glyphicon glyphicon-credit-card"></i> 个人信息',
                         'url' => [
                             '/user/profile'
+                        ],
+                        'linkOptions' => [
+                            'data-toggle' => 'modal',
+                            'data-target' => '#modal-dailog'
+                        ]
+                    ],
+                    [
+                        'label' => '<i class="glyphicon glyphicon-dashboard"></i> 管理后台',
+                        'url' => [
+                            '/'
                         ]
                     ],
                     [
                         'label' => '<i class="glyphicon glyphicon-globe"></i> 我创建的项目',
                         'url' => [
-                            '/project/index'
+                            '/myproject/default/index'
                         ]
                     ],
                     [
@@ -167,10 +180,12 @@ AppAsset::register($this);
         <?= Alert::widget() ?>
         <?= Notify::widget() ?>
         
-		<div class="jumbotron bg-primary">
+		<div class="jumbotron">
 			<?php $project = MiscHelper::getProject();?>
-        	<h1 class="modal-title"><?= Html::encode($project['name']) ?></h1>
-        	<p><?= $this->title?></p>
+        	<h1><?= Html::encode($project['name']) ?> <small><?= $this->title?></small>
+				</h1>
+				<p>个体和互动高于流程和工具 , 可工作软件高于详尽的文档</p>
+				<p>客户合作高于合同谈判 , 响应变化高于遵循计划</p>
 			</div>
         
         	<?= $content ?>
@@ -180,7 +195,8 @@ AppAsset::register($this);
             //'size' => 'modal-lg',
             'header' => '加载中 ... ',
             'options' => [
-                'id' => 'modal-dailog'
+                'id' => 'modal-dailog',
+                'data-backdrop' => 'static'
             ]
         ]);
         echo "请耐心等待...";

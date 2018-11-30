@@ -71,6 +71,7 @@ class User extends BaseModel implements IdentityInterface
     public function rules()
     {
         return [
+            [['username','nick_name','email'],'required'],
             [
                 'status',
                 'default',

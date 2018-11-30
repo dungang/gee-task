@@ -25,6 +25,8 @@ class DeleteModelsAction extends BaseAction
         try {
             Yii::$app->db->transaction(function ($db) use ($models) {
                 foreach ($models as $model) {
+                    //动态绑定行为
+                    $model->attachBehaviors($this->modelBehaviors);
                     $model->delete();
                 }
             });

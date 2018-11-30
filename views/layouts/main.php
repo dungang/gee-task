@@ -55,6 +55,18 @@ AppAsset::register($this);
                 ]
             ],
             [
+                'label' => '前台',
+                'url' => [
+                    '/space'
+                ]
+            ],
+            [
+                'label' => '项目',
+                'url' => [
+                    '/project/index'
+                ]
+            ],
+            [
                 'label' => '故事状态',
                 'url' => [
                     '/story-status/index'
@@ -142,6 +154,10 @@ AppAsset::register($this);
                         'label' => '个人信息',
                         'url' => [
                             '/user/profile'
+                        ],
+                        'linkOptions' => [
+                            'data-toggle' => 'modal',
+                            'data-target' => '#modal-dailog'
                         ]
                     ],
                     [

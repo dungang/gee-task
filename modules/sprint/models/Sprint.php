@@ -33,7 +33,7 @@ class Sprint extends \app\core\BaseModel
     public function rules()
     {
         return [
-            [['project_id'], 'required'],
+            [['project_id','name','status'], 'required'],
             [['project_id', 'created_at', 'updated_at', 'is_del'], 'integer'],
             [['status'], 'string'],
             [['start_date', 'end_date'], 'safe'],

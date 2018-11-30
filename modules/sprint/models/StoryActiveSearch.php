@@ -5,7 +5,6 @@ namespace modules\sprint\models;
 use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
-use modules\sprint\models\StoryActive;
 
 /**
  * StoryActiveSearch represents the model behind the search form of `modules\sprint\models\StoryActive`.
@@ -18,7 +17,7 @@ class StoryActiveSearch extends StoryActive
     public function rules()
     {
         return [
-            [['id', 'story_id', 'creator_id', 'created_at'], 'integer'],
+            [['id', 'project_id', 'story_id', 'old_user', 'new_user', 'creator_id', 'created_at'], 'integer'],
             [['old_status', 'new_status', 'remark'], 'safe'],
         ];
     }
@@ -60,7 +59,10 @@ class StoryActiveSearch extends StoryActive
         // grid filtering conditions
         $query->andFilterWhere([
             'id' => $this->id,
+            'project_id' => $this->project_id,
             'story_id' => $this->story_id,
+            'old_user' => $this->old_user,
+            'new_user' => $this->new_user,
             'creator_id' => $this->creator_id,
             'created_at' => $this->created_at,
         ]);

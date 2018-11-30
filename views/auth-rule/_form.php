@@ -10,7 +10,7 @@ use yii\widgets\ActiveForm;
 
 <div class="auth-rule-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id'=>'auth-rule-form','enableAjaxValidation' => true]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

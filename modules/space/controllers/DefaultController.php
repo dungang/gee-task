@@ -21,13 +21,20 @@ class DefaultController extends AppController
                     'project_id'=> $project_id,
                 ]
             ],
-            'create' => [
-                'class' => 'app\core\CreateModelAction',
-                'modelClass' => [
-                    'class' => 'modules\space\models\Timeline',
-                    'project_id'=> $project_id,
-                ]
-            ],
+		    'create' => [
+		        'class' => 'app\core\CreateModelAction',
+		        'modelClass' => [
+		            'class' => 'modules\space\models\Timeline',
+		            'project_id'=> $project_id,
+		        ]
+		    ],
+		    'update' => [
+		        'class' => 'app\core\UpdateModelAction',
+		        'modelClass' => [
+		            'class' => 'modules\space\models\Timeline',
+		            'project_id'=> $project_id,
+		        ]
+		    ],
             'delete' => [
                 'class' => 'app\core\DeleteModelAction',
                 'modelClass' => [

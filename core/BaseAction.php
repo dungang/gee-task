@@ -15,6 +15,8 @@ class BaseAction extends Action
 {
     const EVENT_BEFORE_RUN = 'beforeRun';
     
+    public $modelBehaviors = [];
+    
     /**
      * \Yii::createObject 的参数
      * ['class'=>'className','prop'=>'val']
@@ -28,6 +30,13 @@ class BaseAction extends Action
      * @var null|array
      */
     public $mustArgs = null;
+    
+    /**
+     * 成功操作的跳转地址，如果没有是设置使用默认的
+     * @var string
+     */
+    public $successRediretUrl = false;
+    
     
     /**
      * 

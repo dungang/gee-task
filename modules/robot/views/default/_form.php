@@ -2,6 +2,7 @@
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\models\Robot;
+use app\widgets\EmojiOneArea;
 
 /* @var $this yii\web\View */
 /* @var $model modules\robot\models\ProjectRobot */
@@ -10,11 +11,11 @@ use app\models\Robot;
 
 <div class="project-robot-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id'=>'project-robot-form','enableAjaxValidation' => true]); ?>
 
     <?= $form->field($model, 'robot_id')->dropDownList(Robot::allIdToName()) ?>
 
-    <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
+    <?= $form->field($model, 'name')->textInput(['maxlength' => true,'id'=>'robot-name']) ?>
 
     <?= $form->field($model, 'webhook')->textInput(['maxlength' => true]) ?>
 
@@ -22,6 +23,12 @@ use app\models\Robot;
         <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>
     </div>
 
-    <?php ActiveForm::end(); ?>
+    <?php
+
+    ActiveForm::end();
+    EmojiOneArea::widget([
+        'id' => 'robot-name'
+    ]);
+    ?>
 
 </div>

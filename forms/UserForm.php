@@ -61,7 +61,7 @@ class UserForm extends Model
             'status' => '状态',
             'email' => '邮箱',
             'mobile' => '手机',
-            'mobile' => '角色',
+            'role' => '角色',
             'password'=>'密码',
         ];
     }

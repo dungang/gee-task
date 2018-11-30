@@ -9,7 +9,7 @@ use yii\widgets\ActiveForm;
 
 <div class="change-category-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id'=>'change-category-form','enableAjaxValidation' => true]); ?>
 
     <?= $form->field($model, 'name')->textarea(['rows' => 6]) ?>
 

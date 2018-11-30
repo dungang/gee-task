@@ -10,16 +10,17 @@ use app\models\Robot;
 
 $this->title = '机器人';
 $this->params['breadcrumbs'][] = $this->title;
+$dataProvider->pagination = false;
 ?>
 <div class="project-robot-index">
 
     <p>
         <?= Html::a('添加 Project Robot', ['create'], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
     </p>
-
-    <?= GridView::widget([
+	
+    <?php echo GridView::widget([
         'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
+        'summary'=>false,
         'columns' => [
             'name',
             [

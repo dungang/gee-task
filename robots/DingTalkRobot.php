@@ -150,10 +150,9 @@ class DingTalkRobot extends BaseObject implements RobotSender
      * @param boolean|array $atMobiles
      * @param boolean $isAll
      */
-    public function sendMessage($title,$msg,$mobiles)
+    public function sendMessage($title,$msg)
     {
         $this->msg = $msg;
-        $this->atMobiles = $mobiles;
         $this->title = $title;
         $fullMsg = false;
         if ($this->msg_type == 'text') {

@@ -10,7 +10,7 @@ use app\models\ChangeCategory;
 
 <div class="change-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id'=>'change-form-form','enableAjaxValidation' => true]); ?>
 
     <?= $form->field($model, 'category_id')->dropDownList(ChangeCategory::allIdToName()) ?>
 

@@ -18,6 +18,10 @@ use app\models\ProjectMember;
 class MiscHelper
 {
     
+    public static function goBackButton(){
+        return Html::button('<i class="glyphicon glyphicon-chevron-left"></i> 返回',['class' => 'btn btn-warning','onclick'=>'window.history.back()']);
+    }
+    
     public static function getProjectId(){
         return \Yii::$app->session->get(SwitchProjectFilter::SWITCH_PROJECT_ID);
     }

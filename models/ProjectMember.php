@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 use yii\helpers\ArrayHelper;
+use app\helpers\MiscHelper;
 
 /**
  * This is the model class for table "gt_project_member".
@@ -15,6 +16,8 @@ use yii\helpers\ArrayHelper;
 class ProjectMember extends \app\core\BaseModel
 {
     public $username;
+    
+    public $nick_name;
     
     /**
      * {@inheritdoc}
@@ -45,6 +48,8 @@ class ProjectMember extends \app\core\BaseModel
         return [
             'project_id' => '项目',
             'user_id' => '成员',
+            'username' => '账号',
+            'nick_name' => '姓名',
             'position' => '岗位',
         ];
     }
@@ -58,12 +63,16 @@ class ProjectMember extends \app\core\BaseModel
         return new ProjectMemberQuery(get_called_class());
     }
     
-    public static function allIdToName($key = 'id', $val = 'name',$where=null,$orderBy=null)
+    public static function allIdToName($key = 'id', $val = 'name',$where=[],$orderBy=null)
     {
         $models = self::find()->select("$key,$val")->innerJoin(['u'=>User::tableName()],'user_id = u.id')->where($where)->orderBy($orderBy)->asArray()->all();
         if (is_array($models)) {
             return ArrayHelper::map($models, $key, $val);
         }
         return $models;
+    }
+    
+    public static function onePrjectMemIdNames(){
+        return self::allIdToName('user_id','nick_name',['project_id'=>MiscHelper::getProjectId()]);
     }
 }

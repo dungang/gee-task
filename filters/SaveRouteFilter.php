@@ -10,6 +10,10 @@ use app\models\AuthItemChild;
 
 /**
  * 自動記錄請求的route
+ * 开发阶段生效
+ * 生产环境不会启用
+ * 主要是帮助开发者自动填充基础的权限，模块，路由等关联的关系，
+ * 避免手工录入遗漏
  *
  * @author dungang
  *        

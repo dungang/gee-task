@@ -8,9 +8,9 @@ namespace modules\sprint;
  */
 class Module extends \yii\base\Module
 {
-    const EVENT_ASSIGN_TASK = 'sprint.assign.task';
+    const CUSTOM_EVENT_STORY_CREATE = 'sprint.story.create';
     
-    const EVENT_ADD_STORY_ACTIVE = 'sprint.add.story.active';
+    const CUSTOM_EVENT_STORY_CHANGE = 'sprint.story.change';
     
     /**
      * {@inheritdoc}

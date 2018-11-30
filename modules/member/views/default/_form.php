@@ -11,7 +11,7 @@ use app\models\User;
 
 <div class="project-member-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id'=>'project-member-form','enableAjaxValidation' => true]); ?>
 
     <?= $form->field($model, 'user_id')->dropDownList(User::allIdToName('id','username')) ?>
 

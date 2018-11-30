@@ -26,12 +26,11 @@ class EventHandler extends \app\core\BaseModel
         return 'gt_event_handler';
     }
 
-    public function behaviors()
-    {
+    public function behaviors(){
         $b = parent::behaviors();
         $b['cleanCache'] = [
-            'class' => 'app\behaviors\CleanCacheBehavior',
-            'cacheKey' => 'event.handlders'
+            'class'=>'app\behaviors\CleanCacheBehavior',
+            'cacheKey'=>Event::CacheKey
         ];
         return $b;
     }

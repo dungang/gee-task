@@ -77,6 +77,10 @@ CREATE TABLE `gt_project` (
 	`name` VARCHAR(64) NOT NULL COMMENT '名称',
 	`web_site` VARCHAR(128) NULL DEFAULT NULL COMMENT '官网',
 	`is_achived` TINYINT(1) NOT NULL DEFAULT '0' COMMENT '归档',
+	`cycle` ENUM('WEEK','MONTH') NOT NULL DEFAULT 'WEEK' COMMENT '迭代周期',
+	`planning_meet` TINYINT NOT NULL DEFAULT 5 COMMENT '规划会议日',
+	`review_meet` TINYINT NOT NULL DEFAULT 3 COMMENT '评审会议日',
+	`retrospective_day` TINYINT NOT NULL DEFAULT 5 COMMENT '顾会议日',
 	`creator_id` INT(11) NOT NULL COMMENT '创始人',
 	`created_at` INT(11) NULL DEFAULT NULL COMMENT '添加日期',
 	`updated_at` INT(11) NULL DEFAULT NULL COMMENT '更新日期',
@@ -138,6 +142,20 @@ CREATE TABLE `gt_story_active` (
 	PRIMARY KEY (`id`)
 )
 COMMENT='故事活动'
+COLLATE='utf8mb4_general_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `gt_story_acceptance` (
+	`id` INT(11) NOT NULL AUTO_INCREMENT,
+	`project_id` INT(11) NOT NULL COMMENT '项目',
+	`story_id` INT(11) NOT NULL COMMENT '故事',
+	`creator_id` INT(11) NOT NULL COMMENT '处理人',
+	`created_at` INT(11) NOT NULL COMMENT '添加时间',
+	`updated_at` INT(11) NULL DEFAULT NULL COMMENT '更新时间',
+	`acceptance` VARCHAR(128) NULL COMMENT '接受项',
+	PRIMARY KEY (`id`)
+)
+COMMENT='验收测试'
 COLLATE='utf8mb4_general_ci'
 ENGINE=InnoDB;
 

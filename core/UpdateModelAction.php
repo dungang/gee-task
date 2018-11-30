@@ -1,6 +1,10 @@
 <?php
 namespace app\core;
 
+use Yii;
+use yii\bootstrap\ActiveForm;
+use yii\web\Response;
+
 class UpdateModelAction extends BaseAction
 {
     public function run($id)
@@ -11,8 +15,21 @@ class UpdateModelAction extends BaseAction
         $data = [
             'model' => $model
         ];
+        
+        
+        //ajax表单验证
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post())) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+        
+        //动态绑定行为
+        $model->attachBehaviors($this->modelBehaviors);
         if (($loaded = $model->load(\Yii::$app->request->post())) && $model->save()) {
-            return $this->controller->redirectOnSuccess(\Yii::$app->request->referrer,"修改成功");
+            if(!$this->successRediretUrl) {
+                $this->successRediretUrl = \Yii::$app->request->referrer;
+            }
+            return $this->controller->redirectOnSuccess($this->successRediretUrl, "修改成功");
         }
         
         if (\Yii::$app->request->isPost) {

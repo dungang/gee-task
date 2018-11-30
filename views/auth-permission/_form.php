@@ -11,7 +11,7 @@ use app\models\AuthRule;
 
 <div class="auth-permission-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id'=>'auth-permission-form','enableAjaxValidation' => true]); ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
     

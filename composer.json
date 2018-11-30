@@ -1,21 +1,17 @@
 {
-	"name" : "yiisoft/yii2-app-basic",
-	"description" : "Yii 2 Basic Project Template",
+	"name" : "dungang/geetask",
+	"description" : "一个适合小团队的简化的敏捷项目管理系统",
 	"keywords" : [
-		"yii2",
-		"framework",
-		"basic",
-		"project template"
+		"ACP",
+		"Scrum",
+		"PHP"
 	],
 	"homepage" : "http://www.yiiframework.com/",
 	"type" : "project",
-	"license" : "BSD-3-Clause",
+	"license" : "MIT License",
 	"support" : {
-		"issues" : "https://github.com/yiisoft/yii2/issues?state=open",
-		"forum" : "http://www.yiiframework.com/forum/",
-		"wiki" : "http://www.yiiframework.com/wiki/",
-		"irc" : "irc://irc.freenode.net/yii",
-		"source" : "https://github.com/yiisoft/yii2"
+		"issues" : "https://github.com/dungang/geetask/issues?state=open",
+		"source" : "https://github.com/dungang/geetask"
 	},
 	"minimum-stability" : "stable",
 	"require" : {

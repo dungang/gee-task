@@ -1,5 +1,4 @@
 <?php
-
 use yii\helpers\Html;
 use yii\grid\GridView;
 
@@ -9,37 +8,43 @@ use yii\grid\GridView;
 
 $this->title = '成员';
 $this->params['breadcrumbs'][] = $this->title;
+$dataProvider->pagination = false;
 ?>
 <div class="project-member-index">
 
-    <p>
+	<p>
         <?= Html::a('添加 Project Member', ['create'], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
     </p>
 
-    <?= GridView::widget([
+    <?php
+
+    echo GridView::widget([
         'dataProvider' => $dataProvider,
+        'summary' => false,
         'columns' => [
             [
-                'attribute'=>'user_id',
-                'value'=>function($model){
+                'attribute' => 'user_id',
+                'value' => function ($model) {
                     return $model->username;
                 }
             ],
+            'nick_name',
             'position',
 
             [
                 'class' => '\app\grid\ActionColumn',
-                'buttonsOptions'=>[
-                    'update'=>[
-                        'data-toggle'=>'modal',
-                        'data-target'=>'#modal-dailog',
+                'buttonsOptions' => [
+                    'update' => [
+                        'data-toggle' => 'modal',
+                        'data-target' => '#modal-dailog'
                     ],
-                    'view'=>[
-                        'data-toggle'=>'modal',
-                        'data-target'=>'#modal-dailog',
-                    ],
+                    'view' => [
+                        'data-toggle' => 'modal',
+                        'data-target' => '#modal-dailog'
+                    ]
                 ]
-        	]
-       ]
-    ]); ?>
+            ]
+        ]
+    ]);
+    ?>
 </div>

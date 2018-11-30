@@ -8,13 +8,13 @@ use yii\bootstrap\ActiveForm;
 $this->title = '用户中心';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
-<div class="user-update">
+<div class="modal-header">
+	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+	<h4 class="modal-title"><?= Html::encode($this->title) ?></h4>
+</div>
+<div class="modal-body">
 
-	<h1><?= Html::encode($this->title) ?></h1>
-
-	<div class="user-form">
-
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id'=>'profile-form','enableAjaxValidation' => true]); ?>
 
     <?= $form->field($model, 'username')->hiddenInput()->label(false) ?>
     <?= $form->field($model, 'nick_name')->textInput() ?>
@@ -28,7 +28,5 @@ $this->params['breadcrumbs'][] = $this->title;
     </div>
 
     <?php ActiveForm::end(); ?>
-
-</div>
 
 </div>

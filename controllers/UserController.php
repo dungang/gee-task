@@ -15,8 +15,9 @@ class UserController extends AdminController
     public $userActions = [
         'profile'
     ];
-    
-    public function actions(){
+
+    public function actions()
+    {
         return [
             'index' => [
                 'class' => 'app\core\ListModelsAction',
@@ -35,10 +36,9 @@ class UserController extends AdminController
                 'modelClass' => [
                     'class' => 'app\models\User'
                 ]
-            ],
+            ]
         ];
     }
-
 
     /**
      * Creates a new User model.
@@ -85,17 +85,13 @@ class UserController extends AdminController
         ]);
     }
 
-  
     public function actionProfile()
     {
         $model = $this->findModel(\Yii::$app->user->id);
         $form = new UserForm();
         $form->loadUser($model);
         if ($form->load(\Yii::$app->request->post()) && $form->save()) {
-            return $this->redirectOnSuccess([
-                'view',
-                'id' => $model->id
-            ]);
+            return $this->redirectOnSuccess(\Yii::$app->request->referrer, "更新成功");
         }
         return $this->render('profile', [
             'model' => $form

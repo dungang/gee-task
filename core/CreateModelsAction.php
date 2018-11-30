@@ -22,9 +22,13 @@ class CreateModelsAction extends BaseAction
         $data = [
             'models' => $models
         ];
+        //动态绑定行为
+        $model->attachBehaviors($this->modelBehaviors);
         for ($i = 1; $i < $count; $i ++) {
             $model = \Yii::createObject($this->modelClass);
             $model->load(\Yii::$app->request->queryParams);
+            //动态绑定行为
+            $model->attachBehaviors($this->modelBehaviors);
             $models[] = $models;
         }
 

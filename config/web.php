@@ -25,6 +25,7 @@ $config = [
         'sprint'=>'modules\sprint\Module',
         'backlog'=>'modules\backlog\Module',
         'robot'=>'modules\robot\Module',
+        'myproject'=>'modules\myproject\Module',
     ],
     'components' => [
         'request' => [

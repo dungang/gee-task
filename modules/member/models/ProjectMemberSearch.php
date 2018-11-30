@@ -42,7 +42,7 @@ class ProjectMemberSearch extends ProjectMember
      */
     public function search($params)
     {
-        $query = ProjectMember::find()->select(ProjectMember::tableName() .'.*,u.username')
+        $query = ProjectMember::find()->select(ProjectMember::tableName() .'.*,u.username,u.nick_name')
         ->innerJoin(['u'=>User::tableName()],'user_id=u.id');
 
         // add conditions that should always apply here

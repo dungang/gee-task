@@ -12,10 +12,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="story-active-index">
 
-    <h1><?= Html::encode($this->title) ?></h1>
-
     <p>
-        <?= Html::a('添加 Story Active', ['create'], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
+        <?= Html::a('添加 Story Active', ['create','StoryActive[story_id]'=>$searchModel->story_id,'StoryActive[sprint_id]'=>$searchModel->sprint_id], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
     </p>
 
     <?= GridView::widget([

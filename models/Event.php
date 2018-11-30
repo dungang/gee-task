@@ -17,6 +17,8 @@ use yii\db\Query;
  */
 class Event extends \app\core\BaseModel
 {
+    
+    const CacheKey = 'event.handlers';
     /**
      * {@inheritdoc}
      */
@@ -29,7 +31,7 @@ class Event extends \app\core\BaseModel
         $b = parent::behaviors();
         $b['cleanCache'] = [
             'class'=>'app\behaviors\CleanCacheBehavior',
-            'cacheKey'=>'event.handlders'
+            'cacheKey'=>self::CacheKey
         ];
         return $b;
     }
@@ -78,20 +80,20 @@ class Event extends \app\core\BaseModel
      * @return NULL|array
      */
     public static function getEventHandlers($eventName) {
-        if(!($handlersMap = Yii::$app->cache->get('event.handlers'))){
+        if(!($handlersMap = Yii::$app->cache->get(self::CacheKey))){
             $query = new Query();
             $handlersMap = [];
             $handlers = $query->select('e.code,h.handler')->from(['e'=>Event::tableName()])
             ->innerJoin(['h'=>EventHandler::tableName()],'e.id = h.event_id')->all();
             if($handlers){
-                foreach($handlers as $event => $handler){
-                    if(!isset($handlersMap[$event])){
-                        $handlersMap[$event]=[];
+                foreach($handlers as  $handler){
+                    if(!isset($handlersMap[$handler['code']])){
+                        $handlersMap[$handler['code']]=[];
                     }
-                    $handlersMap[$event][] = $handler;
+                    $handlersMap[$handler['code']][] = $handler['handler'];
                 }
             }
-            Yii::$app->cache->add('event.handlers', $handlersMap);
+            Yii::$app->cache->add(self::CacheKey, $handlersMap);
         }
         return isset($handlersMap[$eventName])?$handlersMap[$eventName]:null;
     }

@@ -3,12 +3,13 @@
 namespace modules\sprint\models;
 
 use Yii;
+use modules\sprint\Module;
 
 /**
  * This is the model class for table "gt_story".
  *
  * @property int $id
- * @property int $sprint_id 计划
+ * @property int $sprint_id 计划编号
  * @property string $story_type 类型
  * @property string $status 状态
  * @property int $important 优先程度
@@ -41,7 +42,7 @@ class Story extends \app\core\BaseModel
     public function rules()
     {
         return [
-            [['sprint_id', 'status', 'project_id', 'user_id'], 'required'],
+            [['sprint_id', 'status', 'project_id'], 'required'],
             [['sprint_id', 'important', 'project_id', 'user_id', 'last_user_id', 'creator_id', 'created_at', 'updated_at', 'is_del'], 'integer'],
             [['story_type', 'status', 'project_version'], 'string', 'max' => 32],
             [['name'], 'string', 'max' => 128],
@@ -55,7 +56,7 @@ class Story extends \app\core\BaseModel
     {
         return [
             'id' => 'ID',
-            'sprint_id' => '计划',
+            'sprint_id' => '计划编号',
             'story_type' => '类型',
             'status' => '状态',
             'important' => '优先程度',
@@ -74,8 +75,11 @@ class Story extends \app\core\BaseModel
     public function behaviors(){
         $b = parent::behaviors();
         $b['onSaveEvent'] = [
-            'class'=>'app\behaviors\TriggerCustomEventOnSave',
-            'customEventName'=>'sprint.assgin.task',
+            'class'=>'\app\behaviors\TriggerCustomEventOnSave',
+            'customEvents'=>[
+                self::EVENT_AFTER_INSERT=>Module::CUSTOM_EVENT_STORY_CREATE,
+                self::EVENT_AFTER_UPDATE=>Module::CUSTOM_EVENT_STORY_CHANGE,
+            ],
         ];
         return $b;
     }

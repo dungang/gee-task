@@ -10,7 +10,7 @@ use app\models\Event;
 
 <div class="event-handler-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id'=>'event-handler-form','enableAjaxValidation' => true]); ?>
 
     <?= $form->field($model, 'event_id')->dropDownList(Event::allIdToName()) ?>
     

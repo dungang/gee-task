@@ -6,6 +6,7 @@ use app\models\StoryStatus;
 use modules\sprint\models\Story;
 use app\models\ProjectMember;
 use app\widgets\FixedTableHeader;
+use app\helpers\MiscHelper;
 
 /* @var $this yii\web\View */
 /* @var $searchModel modules\sprint\models\StorySearch */
@@ -13,7 +14,7 @@ use app\widgets\FixedTableHeader;
 $sprint = Sprint::findOne([
     'id' => $searchModel->sprint_id
 ]);
-$this->title = '#' . $searchModel->sprint_id . $sprint->name . '的用户故事';
+$this->title = '#' . $searchModel->sprint_id . $sprint->name . '用户故事';
 $this->params['breadcrumbs'][] = $this->title;
 $storyStatuses = StoryStatus::allIdToName('id', 'name', [
     'is_backlog' => 0
@@ -22,7 +23,10 @@ $storyStatuses = StoryStatus::allIdToName('id', 'name', [
 <div class="story-index">
 
 	<p>
-        <?= Html::a('添加 Story', ['create'], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
+		<?= MiscHelper::goBackButton()?>
+        <?= Html::a('添加 Story', ['create','Story[sprint_id]'=>$sprint->id], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
+        
+        时间段：<?= $sprint->start_date ?> 至 <?= $sprint->end_date ?>
     </p>
 
     <?php
@@ -43,12 +47,11 @@ $storyStatuses = StoryStatus::allIdToName('id', 'name', [
 
         $colWidth['taskName'] += $statusWidth;
     }
-    
+
     $dataProvider->pagination = false;
-   
 
     echo GridView::widget([
-        'summary'=>false,
+        'summary' => false,
         'headerRowOptions' => [
             'id' => 'fixed-table-header'
         ],
@@ -70,7 +73,7 @@ $storyStatuses = StoryStatus::allIdToName('id', 'name', [
                 'attribute' => 'id',
                 'format' => 'raw',
                 'value' => function ($model, $key, $index, $column) {
-                    return Html::a($model['id'], [
+                    return Html::a('#'.$model['id'], [
                         'view',
                         'id' => $model['id']
                     ], [
@@ -100,9 +103,10 @@ $storyStatuses = StoryStatus::allIdToName('id', 'name', [
                         '/sprint/story-active/create',
                         'StoryActive[old_status]' => $model['status'],
                         'StoryActive[sprint_id]' => $model['sprint_id'],
-                        'StoryActive[story_id]' => $model['id']
+                        'StoryActive[story_id]' => $model['id'],
+                        'StoryActive[old_user]' => $model['user_id'],
                     ], [
-                        'title' => '请添加操作日志',
+                        'title' => '变更状态',
                         'data-toggle' => 'modal',
                         'data-target' => '#modal-dailog'
                     ]);
@@ -116,8 +120,10 @@ $storyStatuses = StoryStatus::allIdToName('id', 'name', [
                     'width' => $colWidth['user_id'] . 'px'
                 ],
                 'attribute' => 'user_id',
-                'filter'=>ProjectMember::allIdToName('user_id','username',['project_id'=>$searchModel->project_id]),
-                'class'=>'app\grid\FilterColumn',
+                'filter' => ProjectMember::allIdToName('user_id', 'username', [
+                    'project_id' => $searchModel->project_id
+                ]),
+                'class' => 'app\grid\FilterColumn'
             ],
             [
                 'headerOptions' => [
@@ -140,7 +146,11 @@ $storyStatuses = StoryStatus::allIdToName('id', 'name', [
             ]
         ]
     ]);
-    FixedTableHeader::widget(['options'=>['id'=>'fixed-table-header']]);
+    FixedTableHeader::widget([
+        'options' => [
+            'id' => 'fixed-table-header'
+        ]
+    ]);
     ?>
 </div>
 

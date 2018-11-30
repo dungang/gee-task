@@ -98,7 +98,7 @@ AAA;
        ]
     ]); ?>
 <?php else: ?>
-    <?= "<?= " ?>ListView::widget([
+    <?= "<?php echo " ?>ListView::widget([
         'dataProvider' => $dataProvider,
         'itemOptions' => ['class' => 'item'],
         'itemView' => function ($model, $key, $index, $widget) {

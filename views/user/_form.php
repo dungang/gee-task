@@ -9,7 +9,7 @@ use app\models\Role;
 
 <div class="user-form">
 
-    <?php $form = ActiveForm::begin(); ?>
+    <?php $form = ActiveForm::begin(['id'=>'user-form','enableAjaxValidation' => true]); ?>
 
     <div class="row">
 		<div class="col-md-6">

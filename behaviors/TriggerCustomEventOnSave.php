@@ -2,22 +2,27 @@
 namespace app\behaviors;
 
 use yii\base\Behavior;
-use yii\db\ActiveRecord;
 use app\models\Event;
 
 class TriggerCustomEventOnSave extends Behavior
 {
-    public $customEventName;
-    
-    public function events() {
-       return [
-           ActiveRecord::EVENT_AFTER_INSERT => 'triggerCustomEvent',
-           ActiveRecord::EVENT_AFTER_UPDATE => 'triggerCustomEvent',
-       ];
+
+    public $customEvents = [];
+
+    public function events()
+    {
+        $events = [];
+        foreach (array_keys($this->customEvents) as $event) {
+            $events[$event] = 'triggerCustomEvent';
+        }
+        return $events;
     }
-    
-    public function triggerCustomEvent($event){
-        Event::triggerCustomEvent($this->customEventName,$event);
+
+    public function triggerCustomEvent($event)
+    {
+        if ($this->customEvents[$event->name]) {
+            Event::triggerCustomEvent($this->customEvents[$event->name], $this->owner);
+        }
     }
 }
 

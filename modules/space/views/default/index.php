@@ -5,7 +5,7 @@ use yii\widgets\ListView;
 
 /* @var $this yii\web\View */
 /* @var $dataProvider yii\data\ActiveDataProvider */
-$this->title = '项目控制台';
+$this->title = '故事地图';
 $this->params['breadcrumbs'][] = [
     'label' => 'Projects',
     'url' => [
@@ -33,10 +33,10 @@ echo ListView::widget([
     ],
     'itemView' => function ($model, $key, $index, $widget) {
         return '<div class="timeline__content">
-					<div>
-						<strong style="font-size: medium;">' . $model->title . '</strong>
-					</div>
-					' . $model->description . '
+					<p style="font-size: medium;">
+						' . Html::a($model->title,['update','id'=>$model->id],['class' => 'text-primary','data-toggle'=>'modal','data-target'=>'#modal-dailog']) . '
+					</p>
+					<p style="font-size: medium;">' . $model->description . '</p>
 				</div>';
     }
 ])?>
