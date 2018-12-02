@@ -129,6 +129,12 @@ AppAsset::register($this);
                         ]
                     ],
                     [
+                        'label' => '<i class="glyphicon glyphicon-leaf"></i> 关于' . Yii::$app->name,
+                        'url' => [
+                            '/site/about'
+                        ]
+                    ],
+                    [
                         'label' => '<i class="glyphicon glyphicon-off"></i> 退出',
                         'url' => [
                             '/site/logout'
