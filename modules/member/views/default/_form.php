@@ -13,7 +13,7 @@ use app\models\User;
 
     <?php $form = ActiveForm::begin(['id'=>'project-member-form','enableAjaxValidation' => true]); ?>
 
-    <?= $form->field($model, 'user_id')->dropDownList(User::allIdToName('id','username')) ?>
+    <?= $form->field($model, 'user_id')->dropDownList(User::allIdToName('id','nick_name')) ?>
 
     <?= $form->field($model, 'position')->radioList(Role::allIdToName('name','name',['scope'=>'POSITION']))?>
 

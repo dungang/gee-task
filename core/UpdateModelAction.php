@@ -7,10 +7,12 @@ use yii\web\Response;
 
 class UpdateModelAction extends BaseAction
 {
-    public function run($id)
+    public function run()
     {
+        
         /* @var $model \yii\db\ActiveRecord */
-        $model = $this->findModel($id);
+        $model = $this->findModel();
+        $model->getPrimaryKey();
         $model->load(\Yii::$app->request->queryParams);
         $data = [
             'model' => $model

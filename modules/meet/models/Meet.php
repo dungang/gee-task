@@ -35,7 +35,7 @@ class Meet extends \app\core\BaseModel
     public function rules()
     {
         return [
-            [['project_id', 'actors', 'meet_date', 'creator_id', 'created_at', 'updated_at', 'title', 'content'], 'required'],
+            [['actors', 'meet_date', 'title', 'content'], 'required'],
             [['project_id', 'creator_id', 'created_at', 'updated_at', 'is_del'], 'integer'],
             [['actors', 'content'], 'string'],
             [['meet_date'], 'safe'],

@@ -22,21 +22,21 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             [
-                'attribute' => 'id',
-                'format'=>'raw',
-                'value'=>function($model,$key,$index,$column){
-                    return Html::a($model['id'],['view','id'=>$model['id']],['data-toggle'=>'modal','data-target'=>'#modal-dailog']);
-                }
-        	],
+                'attribute'=>'created_at',
+                'format'=>'date',
+                'class'=>'app\grid\DateTimeColumn'
+            ],
             [
                 'attribute'=>'category_id',
                 'filter'=>ChangeCategory::allIdToName(),
                 'class'=>'app\grid\FilterColumn',
             ],
             [
-                'attribute'=>'created_at',
-                'format'=>'date',
-                'class'=>'app\grid\DateTimeColumn'
+                'attribute'=>'content',
+                'format'=>'html',
+                'value'=>function($model){
+                    return '<pre>'.$model->content.'</pre>';
+                }
             ],
             [
                 'class' => '\app\grid\ActionColumn',

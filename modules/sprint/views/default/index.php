@@ -22,15 +22,28 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             [
-                'attribute' => 'name',
+                'attribute' => 'id',
+                'headerOptions' => [
+                    'width' => '80px'
+                ],
                 'format' => 'raw',
                 'value' => function ($model, $key, $index, $column) {
-                    return Html::a($model['name'], [
+                    return Html::a('#'.$model['id'], [
                         'view',
                         'id' => $model['id']
                     ], [
                         'data-toggle' => 'modal',
                         'data-target' => '#modal-dailog'
+                    ]);
+                }
+            ],
+            [
+                'attribute' => 'name',
+                'format' => 'raw',
+                'value' => function ($model, $key, $index, $column) {
+                    return Html::a($model->name, [
+                        '/sprint/story/index',
+                        'StorySearch[sprint_id]' => $model['id']
                     ]);
                 }
             ],
@@ -44,16 +57,6 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute' => 'end_date',
                 'class' => 'app\grid\DatetimeColumn',
                 'format' => 'date'
-            ],
-            [
-                'label' => '故事',
-                'format' => 'raw',
-                'value' => function ($model, $key, $index, $column) {
-                    return Html::a('查看', [
-                        '/sprint/story/index',
-                        'StorySearch[sprint_id]' => $model['id']
-                    ]);
-                }
             ],
             [
                 'class' => '\app\grid\ActionColumn',

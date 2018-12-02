@@ -25,6 +25,9 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'meet_date',
                 'format'=>'date',
                 'class'=>'app\grid\DateTimeColumn',
+                'headerOptions' => [
+                    'width' => '120px'
+                ],
             ],
             [
                 'attribute' => 'title',

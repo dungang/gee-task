@@ -23,6 +23,8 @@ use app\widgets\EmojiOneArea;
     <?= $form->field($model, 'project_version')->textInput(['maxlength' => true]) ?>
 
     <?= $form->field($model, 'important')->textInput() ?>
+    
+    <?= $form->field($model, 'points')->textInput() ?>
 
     <div class="form-group">
         <?= Html::submitButton('保存', ['class' => 'btn btn-success']) ?>

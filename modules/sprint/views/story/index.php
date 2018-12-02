@@ -7,6 +7,7 @@ use modules\sprint\models\Story;
 use app\models\ProjectMember;
 use app\widgets\FixedTableHeader;
 use app\helpers\MiscHelper;
+use app\models\User;
 
 /* @var $this yii\web\View */
 /* @var $searchModel modules\sprint\models\StorySearch */
@@ -73,7 +74,7 @@ $storyStatuses = StoryStatus::allIdToName('id', 'name', [
                 'attribute' => 'id',
                 'format' => 'raw',
                 'value' => function ($model, $key, $index, $column) {
-                    return Html::a('#'.$model['id'], [
+                    return Html::a('#' . $model['id'], [
                         'view',
                         'id' => $model['id']
                     ], [
@@ -85,11 +86,27 @@ $storyStatuses = StoryStatus::allIdToName('id', 'name', [
             [
                 'headerOptions' => [
                     'width' => $colWidth['name'] . 'px'
+                    //'class'=>'text-overflow'
                 ],
                 'contentOptions' => [
                     'width' => $colWidth['name'] . 'px'
+                    // 'class'=>'text-overflow'
                 ],
-                'attribute' => 'name'
+                'attribute' => 'name',
+                'format' => 'raw',
+                'value' => function ($model, $key, $index, $column) {
+                    return Html::a($model->name, [
+                        '/sprint/story-active/create',
+                        'StoryActive[old_status]' => $model['status'],
+                        'StoryActive[sprint_id]' => $model['sprint_id'],
+                        'StoryActive[story_id]' => $model['id'],
+                        'StoryActive[old_user]' => $model['user_id']
+                    ], [
+                        'title' => '变更状态',
+                        'data-toggle' => 'modal',
+                        'data-target' => '#modal-dailog'
+                    ]);
+                }
             ],
             [
                 'attribute' => 'status',
@@ -104,7 +121,7 @@ $storyStatuses = StoryStatus::allIdToName('id', 'name', [
                         'StoryActive[old_status]' => $model['status'],
                         'StoryActive[sprint_id]' => $model['sprint_id'],
                         'StoryActive[story_id]' => $model['id'],
-                        'StoryActive[old_user]' => $model['user_id'],
+                        'StoryActive[old_user]' => $model['user_id']
                     ], [
                         'title' => '变更状态',
                         'data-toggle' => 'modal',
@@ -120,9 +137,7 @@ $storyStatuses = StoryStatus::allIdToName('id', 'name', [
                     'width' => $colWidth['user_id'] . 'px'
                 ],
                 'attribute' => 'user_id',
-                'filter' => ProjectMember::allIdToName('user_id', 'username', [
-                    'project_id' => $searchModel->project_id
-                ]),
+                'filter' => User::allIdToName('id', 'nick_name'),
                 'class' => 'app\grid\FilterColumn'
             ],
             [
@@ -149,6 +164,12 @@ $storyStatuses = StoryStatus::allIdToName('id', 'name', [
     FixedTableHeader::widget([
         'options' => [
             'id' => 'fixed-table-header'
+        ],
+        'clientOptions'=>[
+            'offset'=>[
+                'top'=>'400',
+                'bottom'=>'100'
+            ]
         ]
     ]);
     ?>

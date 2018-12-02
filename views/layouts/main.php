@@ -10,6 +10,7 @@ use yii\widgets\Breadcrumbs;
 use app\widgets\Alert;
 use app\widgets\Notify;
 use app\widgets\SimpleModal;
+use app\helpers\MiscHelper;
 
 AppAsset::register($this);
 ?>
@@ -36,30 +37,17 @@ AppAsset::register($this);
             'class' => 'navbar-default navbar-fixed-top'
         ]
     ]);
-    echo Nav::widget([
-        'options' => [
-            'class' => 'navbar-nav navbar-right'
-        ],
-        'items' => Yii::$app->user->isGuest ? ([
-            [
-                'label' => '登录',
-                'url' => [
-                    '/site/login'
-                ]
+    $menus = [
+        [
+            'label' => '首页',
+            'url' => [
+                '/site/index'
             ]
-        ]) : ([
-            [
-                'label' => '首页',
-                'url' => [
-                    '/site/index'
-                ]
-            ],
-            [
-                'label' => '前台',
-                'url' => [
-                    '/space'
-                ]
-            ],
+        ]
+    ];
+    if (! \Yii::$app->user->isGuest && MiscHelper::isAdmin()) {
+        $menus = $menus + [
+
             [
                 'label' => '项目',
                 'url' => [
@@ -146,32 +134,61 @@ AppAsset::register($this);
                         ]
                     ]
                 ]
-            ],
-            [
-                'label' => Yii::$app->user->identity->username,
-                'items' => [
-                    [
-                        'label' => '个人信息',
-                        'url' => [
-                            '/user/profile'
-                        ],
-                        'linkOptions' => [
-                            'data-toggle' => 'modal',
-                            'data-target' => '#modal-dailog'
-                        ]
+            ]
+        ];
+    }
+    if (! \Yii::$app->user->isGuest) {
+        $menus[] = [
+            'label' => '控制台',
+            'url' => [
+                '/space'
+            ]
+        ];
+    }
+    $menus[] = [
+        'label' => '关于' . Yii::$app->name,
+        'url' => [
+            '/site/about'
+        ]
+    ];
+    if (! \Yii::$app->user->isGuest) {
+        $menus[] = [
+            'label' => Yii::$app->user->identity->nick_name,
+            'items' => [
+                [
+                    'label' => '个人信息',
+                    'url' => [
+                        '/user/profile'
                     ],
-                    [
-                        'label' => '退出',
-                        'url' => [
-                            '/site/logout'
-                        ],
-                        'linkOptions' => [
-                            'data-method' => 'post'
-                        ]
+                    'linkOptions' => [
+                        'data-toggle' => 'modal',
+                        'data-target' => '#modal-dailog'
+                    ]
+                ],
+                [
+                    'label' => '退出',
+                    'url' => [
+                        '/site/logout'
+                    ],
+                    'linkOptions' => [
+                        'data-method' => 'post'
                     ]
                 ]
             ]
-        ])
+        ];
+    } else {
+        $menus[] = [
+            'label' => '登录',
+            'url' => [
+                '/site/login'
+            ]
+        ];
+    }
+    echo Nav::widget([
+        'options' => [
+            'class' => 'navbar-nav navbar-right'
+        ],
+        'items' => $menus
     ]);
     NavBar::end();
     ?>

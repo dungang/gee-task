@@ -113,6 +113,7 @@ CREATE TABLE `gt_story` (
 	`sprint_id` INT(11) NOT NULL COMMENT '计划',
 	`story_type` VARCHAR(32) NOT NULL DEFAULT 'bug' COMMENT '类型',
 	`important` SMALLINT NOT NULL DEFAULT 0 COMMENT '优先程度',
+	`important` FLOAT NOT NULL DEFAULT 1 COMMENT '故事点',
 	`status` INT NOT NULL COMMENT '状态',
 	`project_id` INT(11) NOT NULL COMMENT '项目',
 	`user_id` INT(11) NOT NULL COMMENT '处理人',

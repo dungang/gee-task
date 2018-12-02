@@ -56,7 +56,7 @@ $config = [
         ],
         'db' => $db,
         'authManager' => [
-            'class' => 'yii\rbac\DbManager'
+            'class' => 'app\core\CoreAuthManager'
             // uncomment if you want to cache RBAC items hierarchy
             // 'cache' => 'cache',
         ],

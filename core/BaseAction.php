@@ -42,40 +42,36 @@ class BaseAction extends Action
      * 
      * @param \yii\db\ActiveRecordInterface $class
      * @throws InvalidConfigException
-     * @return string|bool
+     * @return mixed|bool
      */
-    protected function getPrimaryKey($class){
+    protected function getPrimaryKeyCondition($class){
         // query by primary key
         if(method_exists($class, 'primaryKey')) {
             $primaryKey = $class::primaryKey();
-            if (isset($primaryKey[0])) {
-                return $primaryKey[0];
+            $cond = [];
+            foreach($primaryKey as $key) {
+                $cond[$key] = \Yii::$app->request->get($key);
             }
+            return $cond;
         }
-        return false;
+        return null;
     }
 
 
-    protected function findModel($id)
+    protected function findModel()
     {
         $model = null;
         if ($this->modelClass) {
             if (is_string($this->modelClass)) {
-                $model = call_user_func(array(
-                    $this->modelClass,
-                    'findOne'
-                ), $id);
+                $class = $this->modelClass;
+                $args = [];
             } else if (is_array($this->modelClass) && isset($this->modelClass['class'])) {
                 $args = $this->modelClass;
                 $class = array_shift($args);
-                $primaryKey = $this->getPrimaryKey($class);
-                $condition = null;
-                if($primaryKey === false) {
-                    $condition = $id;
-                } else {
-                    $condition = [$primaryKey=>$id];
-                    $condition += $args;
-                }
+            }
+            if($class) {
+                
+                $condition = $this->getPrimaryKeyCondition($class) + $args;
                 $model = call_user_func(array(
                     $class,
                     'findOne'

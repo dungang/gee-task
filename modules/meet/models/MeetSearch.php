@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use modules\meet\models\Meet;
+use app\helpers\MiscHelper;
 
 /**
  * MeetSearch represents the model behind the search form of `modules\meet\models\Meet`.
@@ -18,7 +19,8 @@ class MeetSearch extends Meet
     public function rules()
     {
         return [
-            [['id', 'project_id', 'creator_id', 'created_at', 'updated_at', 'is_del'], 'integer'],
+            [['id', 'project_id', 'creator_id', 'is_del'], 'integer'],
+            [['created_at', 'updated_at'], 'date','format'=>'yyyy-mm-dd'],
             [['actors', 'meet_date', 'title', 'content'], 'safe'],
         ];
     }
@@ -47,6 +49,11 @@ class MeetSearch extends Meet
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'meet_date' => SORT_DESC,
+                ]
+            ],
         ]);
 
         $this->load($params);
@@ -63,14 +70,14 @@ class MeetSearch extends Meet
             'project_id' => $this->project_id,
             'meet_date' => $this->meet_date,
             'creator_id' => $this->creator_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
             'is_del' => $this->is_del,
         ]);
 
         $query->andFilterWhere(['like', 'actors', $this->actors])
             ->andFilterWhere(['like', 'title', $this->title])
-            ->andFilterWhere(['like', 'content', $this->content]);
+            ->andFilterWhere(['like', 'content', $this->content])
+            ->andFilterWhere(MiscHelper::betweenDayWithTimestamp('updated_at',$this->updated_at))
+            ->andFilterWhere(MiscHelper::betweenDayWithTimestamp('created_at',$this->created_at));
 
         return $dataProvider;
     }

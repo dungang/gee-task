@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use modules\sprint\models\Story;
+use app\helpers\MiscHelper;
 
 /**
  * StorySearch represents the model behind the search form of `modules\sprint\models\Story`.
@@ -18,8 +19,9 @@ class StorySearch extends Story
     public function rules()
     {
         return [
-            [['id', 'sprint_id', 'important', 'project_id', 'user_id', 'last_user_id', 'creator_id', 'created_at', 'updated_at', 'is_del'], 'integer'],
-            [['story_type', 'status', 'name', 'project_version'], 'safe'],
+            [['id', 'sprint_id','status', 'important', 'project_id', 'user_id', 'last_user_id', 'creator_id', 'is_del'], 'integer'],
+            [['created_at', 'updated_at'], 'date','format'=>'yyyy-mm-dd'],
+            [['story_type',  'name', 'points','project_version'], 'safe'],
         ];
     }
 
@@ -47,6 +49,11 @@ class StorySearch extends Story
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'important' => SORT_DESC,
+                ]
+            ],
         ]);
 
         $this->load($params);
@@ -62,19 +69,20 @@ class StorySearch extends Story
             'id' => $this->id,
             'sprint_id' => $this->sprint_id,
             'important' => $this->important,
+            'points' => $this->points,
             'project_id' => $this->project_id,
             'user_id' => $this->user_id,
             'last_user_id' => $this->last_user_id,
             'creator_id' => $this->creator_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
             'is_del' => $this->is_del,
         ]);
 
         $query->andFilterWhere(['like', 'story_type', $this->story_type])
             ->andFilterWhere(['like', 'status', $this->status])
             ->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'project_version', $this->project_version]);
+            ->andFilterWhere(['like', 'project_version', $this->project_version])
+            ->andFilterWhere(MiscHelper::betweenDayWithTimestamp('updated_at',$this->updated_at))
+            ->andFilterWhere(MiscHelper::betweenDayWithTimestamp('created_at',$this->created_at));
 
         return $dataProvider;
     }

@@ -6,7 +6,7 @@ use yii\widgets\DetailView;
 /* @var $this yii\web\View */
 /* @var $model app\models\ProjectMember */
 
-$this->title = $model->project_id;
+$this->title = '查看成员';
 $this->params['breadcrumbs'][] = ['label' => 'Project Members', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

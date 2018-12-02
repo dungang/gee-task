@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use modules\change\models\Change;
+use app\helpers\MiscHelper;
 
 /**
  * ChangeSearch represents the model behind the search form of `modules\change\models\Change`.
@@ -18,7 +19,8 @@ class ChangeSearch extends Change
     public function rules()
     {
         return [
-            [['id', 'project_id', 'category_id', 'creator_id', 'created_at', 'updated_at'], 'integer'],
+            [['id', 'project_id', 'category_id', 'creator_id'], 'integer'],
+            [['created_at', 'updated_at'], 'date','format'=>'yyyy-mm-dd'],
             [['content'], 'safe'],
         ];
     }
@@ -47,6 +49,11 @@ class ChangeSearch extends Change
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort'=>[
+                'defaultOrder'=>[
+                    'created_at'=> SORT_DESC,
+                ]
+            ]
         ]);
 
         $this->load($params);
@@ -63,11 +70,11 @@ class ChangeSearch extends Change
             'project_id' => $this->project_id,
             'category_id' => $this->category_id,
             'creator_id' => $this->creator_id,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
         ]);
 
-        $query->andFilterWhere(['like', 'content', $this->content]);
+        $query->andFilterWhere(['like', 'content', $this->content])
+        ->andFilterWhere(MiscHelper::betweenDayWithTimestamp('updated_at',$this->updated_at))
+        ->andFilterWhere(MiscHelper::betweenDayWithTimestamp('created_at',$this->created_at));
 
         return $dataProvider;
     }

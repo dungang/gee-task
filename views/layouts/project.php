@@ -104,7 +104,7 @@ AppAsset::register($this);
                 ]
             ],
             [
-                'label' => '<i class="glyphicon glyphicon-cog"></i> ' . Yii::$app->user->identity->username,
+                'label' => '<i class="glyphicon glyphicon-cog"></i> ' . Yii::$app->user->identity->nick_name,
                 'items' => [
                     [
                         'label' => '<i class="glyphicon glyphicon-credit-card"></i> 个人信息',

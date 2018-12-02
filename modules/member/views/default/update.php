@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\ProjectMember */
 
-$this->title = 'Update Project Member: ' . $model->project_id;
+$this->title = '更新成员';
 $this->params['breadcrumbs'][] = ['label' => 'Project Members', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->project_id, 'url' => ['view', 'project_id' => $model->project_id, 'user_id' => $model->user_id]];
 $this->params['breadcrumbs'][] = '更新';

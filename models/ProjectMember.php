@@ -33,7 +33,7 @@ class ProjectMember extends \app\core\BaseModel
     public function rules()
     {
         return [
-            [['project_id', 'user_id', 'position'], 'required'],
+            [['user_id', 'position'], 'required'],
             [['project_id', 'user_id'], 'integer'],
             [['position'], 'string', 'max' => 64],
             [['project_id', 'user_id'], 'unique', 'targetAttribute' => ['project_id', 'user_id']],

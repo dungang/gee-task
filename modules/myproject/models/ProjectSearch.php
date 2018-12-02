@@ -6,6 +6,7 @@ use Yii;
 use yii\base\Model;
 use yii\data\ActiveDataProvider;
 use app\models\Project;
+use app\helpers\MiscHelper;
 
 /**
  * ProjectSearch represents the model behind the search form of `app\models\Project`.
@@ -18,7 +19,8 @@ class ProjectSearch extends Project
     public function rules()
     {
         return [
-            [['id', 'is_achived', 'creator_id', 'created_at', 'updated_at', 'is_del'], 'integer'],
+            [['id', 'is_achived', 'creator_id', 'is_del'], 'integer'],
+            [['created_at', 'updated_at'], 'date','format'=>'yyyy-mm-dd'],
             [['name', 'web_site'], 'safe'],
         ];
     }
@@ -48,6 +50,11 @@ class ProjectSearch extends Project
 
         $dataProvider = new ActiveDataProvider([
             'query' => $query,
+            'sort' => [
+                'defaultOrder' => [
+                    'created_at' => SORT_DESC,
+                ]
+            ],
         ]);
 
         $this->load($params);
@@ -62,13 +69,13 @@ class ProjectSearch extends Project
         $query->andFilterWhere([
             'id' => $this->id,
             'is_achived' => $this->is_achived,
-            'created_at' => $this->created_at,
-            'updated_at' => $this->updated_at,
             'is_del' => $this->is_del,
         ]);
 
         $query->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'web_site', $this->web_site]);
+        ->andFilterWhere(['like', 'web_site', $this->web_site])
+        ->andFilterWhere(MiscHelper::betweenDayWithTimestamp('updated_at',$this->updated_at))
+        ->andFilterWhere(MiscHelper::betweenDayWithTimestamp('created_at',$this->created_at));
 
         return $dataProvider;
     }

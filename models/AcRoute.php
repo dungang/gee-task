@@ -49,33 +49,5 @@ class AcRoute extends AuthItem
             return false;
         }
     }
-
-    /**
-     * 前端用户，前端用户根据在项目中的职位决定权限。
-     * @param string $route
-     * @param array $params
-     *            参数（$GET or $POST）传递给规则使用的
-     * @return boolean
-     */
-    public static function canRouteInProject($route, $params = [])
-    {
-        $userId = \Yii::$app->user->id;
-        $authManager = \Yii::$app->getAuthManager();
-        $project = MiscHelper::getProject();
-        if ($project && isset($project['position'])) {
-            $assignments = [
-                new Assignment([
-                    'userId' => $userId,
-                    'roleName' => $project['position']
-                ])
-            ];
-            $authManager->loadFromCache();
-            if ($authManager->items !== null) {
-                return $authManager->checkAccessFromCache($userId, $route, $params, $assignments);
-            }
-            return $authManager->checkAccessRecursive($userId, $route, $params, $assignments);
-        }
-        return false;
-    }
 }
 

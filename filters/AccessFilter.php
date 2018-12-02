@@ -87,13 +87,9 @@ class AccessFilter extends ActionFilter
                 $params = Yii::$app->request->isPost ? Yii::$app->request->getBodyParams() : Yii::$app->request->getQueryParams();
                 
                 //后台管理权限检查
-                if ($this->isAdmin && AcRoute::canRoute($route, $params)) {
+                if (AcRoute::canRoute($route, $params)) {
                     return true;
-                    
-                    //项目应用界面的权限检查
-                } else if ($this->isAdmin == false &&  AcRoute::canRouteInProject($route, $params)){
-                    return true;
-                }
+                } 
             }
         }
         
