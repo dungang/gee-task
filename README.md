@@ -68,7 +68,7 @@ git clone https://github.com/dungang/gee-task.git
 cd gee-task
 composer install
 ```
-创建数据库 geetask , 编码一定是 utf8m4格式
+创建数据库 geetask , 编码一定是 utf8mb4格式
 
 如果是直接生产，请导入数据脚本db.sql
 
@@ -79,9 +79,12 @@ composer install
 效果图
 --
 
+- 管理后台
 ![后台首页](demo/index.png)
 
+- 项目控制台
 ![控制台](demo/space.png)
 
+- 一次迭代中的故事或任务
 ![迭代故事任务](demo/story.png)
 
