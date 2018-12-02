@@ -50,12 +50,12 @@ $this->params['breadcrumbs'][] = $this->title;
             'status',
             [
                 'attribute' => 'start_date',
-                'class' => 'app\grid\DatetimeColumn',
+                'class' => 'app\grid\DateTimeColumn',
                 'format' => 'date'
             ],
             [
                 'attribute' => 'end_date',
-                'class' => 'app\grid\DatetimeColumn',
+                'class' => 'app\grid\DateTimeColumn',
                 'format' => 'date'
             ],
             [

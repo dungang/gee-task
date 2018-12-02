@@ -10,22 +10,22 @@ $config = [
     'bootstrap' => [
         'log'
     ],
-    
+
     'language' => 'zh-CN',
     'aliases' => [
-        '@modules'=>'@app/modules',
+        '@modules' => '@app/modules',
         '@bower' => '@vendor/bower-asset',
         '@npm' => '@vendor/npm-asset'
     ],
-    'modules'=>[
-        'space'=>'modules\space\Module',
-        'member'=>'modules\member\Module',
-        'meet'=>'modules\meet\Module',
-        'change'=>'modules\change\Module',
-        'sprint'=>'modules\sprint\Module',
-        'backlog'=>'modules\backlog\Module',
-        'robot'=>'modules\robot\Module',
-        'myproject'=>'modules\myproject\Module',
+    'modules' => [
+        'space' => 'modules\space\Module',
+        'member' => 'modules\member\Module',
+        'meet' => 'modules\meet\Module',
+        'change' => 'modules\change\Module',
+        'sprint' => 'modules\sprint\Module',
+        'backlog' => 'modules\backlog\Module',
+        'robot' => 'modules\robot\Module',
+        'myproject' => 'modules\myproject\Module'
     ],
     'components' => [
         'request' => [
@@ -56,11 +56,11 @@ $config = [
         ],
         'db' => $db,
         'authManager' => [
-            'class' => 'app\core\CoreAuthManager'
+            'class' => 'app\core\CoreAuthManager',
             // uncomment if you want to cache RBAC items hierarchy
-            // 'cache' => 'cache',
+            'cache' => 'cache'
         ],
-        
+
         'formatter' => [
             'timeZone' => 'Asia/Shanghai',
             'datetimeFormat' => 'yyyy-MM-dd HH:mm:ss',
@@ -91,12 +91,12 @@ $config = [
         // // 'encryption' => 'ssl'
         // ]
         // ]
-        
-    // 'urlManager' => [
+
+        // 'urlManager' => [
         // 'enablePrettyUrl' => true,
         // 'showScriptName' => false,
-        
-    // 'rules' => [
+
+        // 'rules' => [
         // ],
         // ],
     ],
@@ -111,24 +111,23 @@ if (YII_ENV_DEV) {
         // uncomment the following to add your IP if you are not connecting from localhost.
         // 'allowedIPs' => ['127.0.0.1', '::1'],
     ];
-    
+
     $config['bootstrap'][] = 'gii';
     $config['modules']['gii'] = [
         'class' => 'yii\gii\Module',
-        'generators'=>[
-            'crud'=> [
+        'generators' => [
+            'crud' => [
                 'class' => 'yii\gii\generators\crud\Generator',
-                'templates'=>[
-                    'geetask'=>dirname(dirname(__FILE__)) . '/generators/crud/default'
-                ],
+                'templates' => [
+                    'geetask' => dirname(dirname(__FILE__)) . '/generators/crud/default'
+                ]
             ],
-            'model'=> [
-                'class'=>'yii\gii\generators\model\Generator',
-                'baseClass'=>'app\core\BaseModel',
-                'ns'=>'app\models',
-                'queryNs'=>'app\models'
-            ],
-            
+            'model' => [
+                'class' => 'yii\gii\generators\model\Generator',
+                'baseClass' => 'app\core\BaseModel',
+                'ns' => 'app\models',
+                'queryNs' => 'app\models'
+            ]
         ]
         // uncomment the following to add your IP if you are not connecting from localhost.
         // 'allowedIPs' => ['127.0.0.1', '::1'],

@@ -12,7 +12,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 
-
 -- 导出  表 newgeetask.auth_assignment 结构
 CREATE TABLE IF NOT EXISTS `auth_assignment` (
   `item_name` varchar(64) NOT NULL,
@@ -24,7 +23,6 @@ CREATE TABLE IF NOT EXISTS `auth_assignment` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 正在导出表  newgeetask.auth_assignment 的数据：~0 rows (大约)
-DELETE FROM `auth_assignment`;
 /*!40000 ALTER TABLE `auth_assignment` DISABLE KEYS */;
 /*!40000 ALTER TABLE `auth_assignment` ENABLE KEYS */;
 
@@ -44,7 +42,6 @@ CREATE TABLE IF NOT EXISTS `auth_item` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 正在导出表  newgeetask.auth_item 的数据：~189 rows (大约)
-DELETE FROM `auth_item`;
 /*!40000 ALTER TABLE `auth_item` DISABLE KEYS */;
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
 	('/ac-route/create', 4, 'ac route create', NULL, NULL, 1543224292, 1543224292),
@@ -233,7 +230,7 @@ INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `cr
 	('user-view', 2, 'user view', NULL, NULL, 1543209419, 1543209419),
 	('开发人员', 1, NULL, NULL, NULL, 1543562615, 1543562615),
 	('敏捷教练', 1, NULL, NULL, NULL, 1543562548, 1543562548),
-	('管理员1', 1, '', NULL, NULL, 1543288187, 1543288472),
+	('管理员', 1, '', NULL, NULL, 1543288187, 1543288472),
 	('部门负责人', 1, 'deparment charge', NULL, NULL, 1543218870, 1543218975),
 	('项目负责人', 1, NULL, NULL, NULL, 1543388020, 1543388020);
 /*!40000 ALTER TABLE `auth_item` ENABLE KEYS */;
@@ -248,8 +245,7 @@ CREATE TABLE IF NOT EXISTS `auth_item_child` (
   CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  newgeetask.auth_item_child 的数据：~320 rows (大约)
-DELETE FROM `auth_item_child`;
+-- 正在导出表  newgeetask.auth_item_child 的数据：~321 rows (大约)
 /*!40000 ALTER TABLE `auth_item_child` DISABLE KEYS */;
 INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 	('ac-route', '/ac-route/create'),
@@ -585,7 +581,6 @@ CREATE TABLE IF NOT EXISTS `auth_rule` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- 正在导出表  newgeetask.auth_rule 的数据：~0 rows (大约)
-DELETE FROM `auth_rule`;
 /*!40000 ALTER TABLE `auth_rule` DISABLE KEYS */;
 INSERT INTO `auth_rule` (`name`, `data`, `created_at`, `updated_at`) VALUES
 	('\\app\\rules\\IsMyProject', _binary 0x4F3A32313A226170705C72756C65735C49734D7950726F6A656374223A333A7B733A343A226E616D65223B733A32323A225C6170705C72756C65735C49734D7950726F6A656374223B733A393A22637265617465644174223B693A313534333330393933353B733A393A22757064617465644174223B693A313534333330393933353B7D, 1543309935, 1543309935);
@@ -603,8 +598,7 @@ CREATE TABLE IF NOT EXISTS `gt_change` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COMMENT='变更';
 
--- 正在导出表  newgeetask.gt_change 的数据：~0 rows (大约)
-DELETE FROM `gt_change`;
+-- 正在导出表  newgeetask.gt_change 的数据：~33 rows (大约)
 /*!40000 ALTER TABLE `gt_change` DISABLE KEYS */;
 INSERT INTO `gt_change` (`id`, `project_id`, `category_id`, `creator_id`, `content`, `created_at`, `updated_at`) VALUES
 	(1, 1, 1, 5, 'delete from sys_permission where id =  "31"\r\nupdate sys_permission SET name = "查看管理员" where id = "35"\r\nupdate sys_permission SET pid = "30", permission = "ebk-user:admin-add", name = "开通账号" where id = "36"\r\ndelete from sys_permission where id = "215"\r\nupdate sys_permission SET pid = "214", permission = "ta-user:admin-add", name = "开通账号" where id = "220"\r\nupdate sys_permission SET pid = "0", permission = "hotel-photo:*", name = "酒店信息管理-酒店图片" where id = "57" \r\ninsert into sys_permission (id, pid, permission, name ) values ("null", "209", "ta-settled:follow", "跟进权限" ) \r\ninsert into sys_permission (id, pid, permission, name ) values ("null", "209", "ta-settled:assign", "指派权限" ) \r\ninsert into sys_permission (id, pid, permission, name ) values ("null", "77", "hotel-settled:assign", "指派权限" )\r\ninsert into sys_permission (id, pid, permission, name ) values ("null", "77", "hotel-settled:follow", "跟进权限" )\r\nupdate sys_permission SET pid = "0", permission = "hotel-policy:*", name = "酒店业务-酒店信息管理-政策" where id = "62"\r\nupdate sys_permission SET pid = "0", permission = "hotel-audit:*", name = "审核中心-酒店信息审核" where id = "37"\r\nupdate sys_permission SET pid = "41", permission = "hotel-brokerage:check-cash", name = "充值确认" where id = "43"\r\nupdate sys_permission SET pid = "41", permission = "hotel-brokerage:check-invoice", name = "发票申请" where id = "230"\r\nupdate sys_permission SET pid = "77", permission = "hotel-settled:update-progress", name = "更新进度" where id = "81"\r\ninsert into sys_permission (id, pid, permission, name ) values (null, "30", "ebk-user:enabled", "酒店账号启用禁用" ) \r\nupdate sys_permission SET pid = "0", permission = "hotel-service:*", name = "酒店设施" where id = "78"\r\ndelete from sys_permission where id = "45" \r\ndelete from sys_permission where id = "50"\r\ndelete from sys_permission where id = "53"\r\nupdate sys_permission SET pid = "65", permission = "hotel-room:editStatus", name = "房型恢复" where id = "69"\r\nupdate sys_permission SET pid = "0", permission = "hotel-ask:*", name = "内容管理-评论系统" where id = "83" \r\ninsert into sys_permission (id, pid, permission, name ) values (null, "140", "sys-adv:edit", "广告编辑" )\r\ndelete from sys_permission where id = "179"\r\ndelete from sys_permission where id = "178" \r\nupdate sys_permission SET pid = "0", permission = "ta-brokerage-receipt:*", name = "财务管理-分销商发票管理" where id = "180"\r\nupdate sys_permission SET pid = "183", permission = "ta-brokerage-verify:edit", name = "拒绝提现审核" where id = "186"\r\ninsert into sys_permission (id, pid, permission, name ) values (null, "214", "ta-user:enabled", "分销商账号启用禁用" )\r\nupdate sys_permission SET pid = "214", permission = "ta-user:admin-add", name = "账号开通" where id = "220"\r\nupdate sys_permission SET pid = "214", permission = "ta-user:company-account", name = "管理员查看" where id = "219"\r\nupdate sys_permission SET pid = "209", permission = "ta-settled:view", name = "查看分销商详情" where id = "212"\r\ndelete from sys_permission where id = "221"\r\ndelete from sys_permission where id = "263"\r\ndelete from sys_permission where id = "274"\r\ndelete from sys_permission where id = "275"\r\nupdate sys_permission SET  name = "房型作废与恢复" where id = "69" \r\nupdate sys_permission SET pid = 86 where id = "286"\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n', 1528280986, 1528786339),
@@ -649,8 +643,7 @@ CREATE TABLE IF NOT EXISTS `gt_change_category` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='变更分类';
 
--- 正在导出表  newgeetask.gt_change_category 的数据：~0 rows (大约)
-DELETE FROM `gt_change_category`;
+-- 正在导出表  newgeetask.gt_change_category 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `gt_change_category` DISABLE KEYS */;
 INSERT INTO `gt_change_category` (`id`, `name`) VALUES
 	(1, 'SQL');
@@ -669,7 +662,6 @@ CREATE TABLE IF NOT EXISTS `gt_event` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='事件';
 
 -- 正在导出表  newgeetask.gt_event 的数据：~2 rows (大约)
-DELETE FROM `gt_event`;
 /*!40000 ALTER TABLE `gt_event` DISABLE KEYS */;
 INSERT INTO `gt_event` (`id`, `created_at`, `updated_at`, `name`, `code`, `intro`) VALUES
 	(1, 1543392882, 1543548341, '添加新的故事', 'sprint.story.create', '在迭代计划中添加新的故事'),
@@ -690,7 +682,6 @@ CREATE TABLE IF NOT EXISTS `gt_event_handler` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='事件处理器';
 
 -- 正在导出表  newgeetask.gt_event_handler 的数据：~2 rows (大约)
-DELETE FROM `gt_event_handler`;
 /*!40000 ALTER TABLE `gt_event_handler` DISABLE KEYS */;
 INSERT INTO `gt_event_handler` (`id`, `event_id`, `created_at`, `updated_at`, `name`, `handler`, `intro`) VALUES
 	(1, 1, 1543462486, 1543549720, '发送机器人消息', '\\modules\\sprint\\handlers\\OnCreateStorySendMessageHandler', '发送标题消息'),
@@ -713,7 +704,6 @@ CREATE TABLE IF NOT EXISTS `gt_meet` (
 ) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COMMENT='会议';
 
 -- 正在导出表  newgeetask.gt_meet 的数据：~47 rows (大约)
-DELETE FROM `gt_meet`;
 /*!40000 ALTER TABLE `gt_meet` DISABLE KEYS */;
 INSERT INTO `gt_meet` (`id`, `project_id`, `actors`, `meet_date`, `creator_id`, `created_at`, `updated_at`, `title`, `content`, `is_del`) VALUES
 	(1, 1, '技术，缪灵健', '2018-06-04', 1, 1528079565, 1528079565, '小义API测试环境测试计划', '<ol class=" list-paddingleft-2" style="list-style-type: decimal;"><li><p>陈铭验证bug。2018-06-04</p></li><li><p>NDA测试环境对接小义正式环境，并测试（API+单体酒店的订单流程）</p></li><ol class=" list-paddingleft-2" style="list-style-type: lower-alpha;"><li><p>环境 2018-06-04</p></li><li><p>测试 2018-06-05</p></li><li><p>写一遍用例，方便正式发布测试重要节点。<br/></p></li></ol><li><p>NDA发布到正式环境之后，再做一轮测试验证流程。2018-6-07</p></li></ol><p><br/></p><p>&nbsp;注意环节：</p><p>&nbsp;&nbsp;&nbsp;&nbsp;1.docker 容器的名称的问题（最好跟阿里云的技术沟通了解）</p><p><br/></p>', 0),
@@ -780,7 +770,6 @@ CREATE TABLE IF NOT EXISTS `gt_project` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='项目';
 
 -- 正在导出表  newgeetask.gt_project 的数据：~0 rows (大约)
-DELETE FROM `gt_project`;
 /*!40000 ALTER TABLE `gt_project` DISABLE KEYS */;
 INSERT INTO `gt_project` (`id`, `name`, `web_site`, `is_achived`, `creator_id`, `created_at`, `updated_at`, `is_del`) VALUES
 	(1, 'NDA', 'http://www.ndabooking.com', 0, 1, 1543371042, 1543371042, 0);
@@ -797,7 +786,6 @@ CREATE TABLE IF NOT EXISTS `gt_project_member` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='项目成员';
 
 -- 正在导出表  newgeetask.gt_project_member 的数据：~9 rows (大约)
-DELETE FROM `gt_project_member`;
 /*!40000 ALTER TABLE `gt_project_member` DISABLE KEYS */;
 INSERT INTO `gt_project_member` (`project_id`, `user_id`, `position`) VALUES
 	(1, 1, '项目负责人'),
@@ -824,7 +812,6 @@ CREATE TABLE IF NOT EXISTS `gt_project_robot` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='项目机器人';
 
 -- 正在导出表  newgeetask.gt_project_robot 的数据：~0 rows (大约)
-DELETE FROM `gt_project_robot`;
 /*!40000 ALTER TABLE `gt_project_robot` DISABLE KEYS */;
 INSERT INTO `gt_project_robot` (`id`, `robot_id`, `project_id`, `created_at`, `updated_at`, `name`, `webhook`) VALUES
 	(1, 1, 1, 1543400237, 1543462342, '林志玲', 'https://oapi.dingtalk.com/robot/send?access_token=53aded3bc5471775c8527c898e0734cfedf4822a4396b066a5b495f73009a3e8');
@@ -841,7 +828,6 @@ CREATE TABLE IF NOT EXISTS `gt_robot` (
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='即时机器人';
 
 -- 正在导出表  newgeetask.gt_robot 的数据：~0 rows (大约)
-DELETE FROM `gt_robot`;
 /*!40000 ALTER TABLE `gt_robot` DISABLE KEYS */;
 INSERT INTO `gt_robot` (`id`, `created_at`, `updated_at`, `name`, `code_full_class`) VALUES
 	(1, 1543400079, 1543462291, '钉钉', '\\app\\robots\\DingTalkRobot');
@@ -857,7 +843,6 @@ CREATE TABLE IF NOT EXISTS `gt_robot_message` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='机器人消息';
 
 -- 正在导出表  newgeetask.gt_robot_message 的数据：~0 rows (大约)
-DELETE FROM `gt_robot_message`;
 /*!40000 ALTER TABLE `gt_robot_message` DISABLE KEYS */;
 /*!40000 ALTER TABLE `gt_robot_message` ENABLE KEYS */;
 
@@ -873,10 +858,9 @@ CREATE TABLE IF NOT EXISTS `gt_role` (
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='积分';
 
 -- 正在导出表  newgeetask.gt_role 的数据：~4 rows (大约)
-DELETE FROM `gt_role`;
 /*!40000 ALTER TABLE `gt_role` DISABLE KEYS */;
 INSERT INTO `gt_role` (`id`, `name`, `scope`, `description`, `is_sys`) VALUES
-	(1, '管理员1', 'ADMIN', '', NULL),
+	(1, '管理员', 'ADMIN', '', NULL),
 	(2, '项目负责人', 'POSITION', 'product owner', 1),
 	(3, '敏捷教练', 'POSITION', 'project master', 1),
 	(4, '开发人员', 'POSITION', 'developer', 1);
@@ -892,7 +876,6 @@ CREATE TABLE IF NOT EXISTS `gt_setting` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统设置';
 
 -- 正在导出表  newgeetask.gt_setting 的数据：~0 rows (大约)
-DELETE FROM `gt_setting`;
 /*!40000 ALTER TABLE `gt_setting` DISABLE KEYS */;
 /*!40000 ALTER TABLE `gt_setting` ENABLE KEYS */;
 
@@ -911,7 +894,6 @@ CREATE TABLE IF NOT EXISTS `gt_sprint` (
 ) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COMMENT='迭代计划';
 
 -- 正在导出表  newgeetask.gt_sprint 的数据：~36 rows (大约)
-DELETE FROM `gt_sprint`;
 /*!40000 ALTER TABLE `gt_sprint` DISABLE KEYS */;
 INSERT INTO `gt_sprint` (`id`, `project_id`, `status`, `start_date`, `end_date`, `created_at`, `updated_at`, `name`, `is_del`) VALUES
 	(1, 1, 'done', '2018-06-05', '2018-06-05', 1527735186, 1528426290, 'dev4supplier', 0),
@@ -974,7 +956,6 @@ CREATE TABLE IF NOT EXISTS `gt_story` (
 ) ENGINE=InnoDB AUTO_INCREMENT=407 DEFAULT CHARSET=utf8mb4 COMMENT='用户故事';
 
 -- 正在导出表  newgeetask.gt_story 的数据：~404 rows (大约)
-DELETE FROM `gt_story`;
 /*!40000 ALTER TABLE `gt_story` DISABLE KEYS */;
 INSERT INTO `gt_story` (`id`, `sprint_id`, `story_type`, `status`, `important`, `points`, `project_id`, `user_id`, `last_user_id`, `creator_id`, `created_at`, `updated_at`, `name`, `project_version`, `is_del`) VALUES
 	(1, 1, 'requirement', 11, 100, 1, 1, 5, 9, 1, 1527735321, 1529395842, '酒店浏览后没记录到历史记录没有记录', NULL, 0),
@@ -1396,7 +1377,6 @@ CREATE TABLE IF NOT EXISTS `gt_story_acceptance` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='验收测试';
 
 -- 正在导出表  newgeetask.gt_story_acceptance 的数据：~0 rows (大约)
-DELETE FROM `gt_story_acceptance`;
 /*!40000 ALTER TABLE `gt_story_acceptance` DISABLE KEYS */;
 /*!40000 ALTER TABLE `gt_story_acceptance` ENABLE KEYS */;
 
@@ -1416,7 +1396,6 @@ CREATE TABLE IF NOT EXISTS `gt_story_active` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COMMENT='任务活动';
 
 -- 正在导出表  newgeetask.gt_story_active 的数据：~8 rows (大约)
-DELETE FROM `gt_story_active`;
 /*!40000 ALTER TABLE `gt_story_active` DISABLE KEYS */;
 INSERT INTO `gt_story_active` (`id`, `project_id`, `story_id`, `old_user`, `new_user`, `old_status`, `new_status`, `creator_id`, `created_at`, `remark`) VALUES
 	(1, 0, 1, 1, 1, '5', '5', 1, 1543550177, '🥘应该完成了'),
@@ -1441,7 +1420,6 @@ CREATE TABLE IF NOT EXISTS `gt_story_status` (
 ) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COMMENT='故事状态';
 
 -- 正在导出表  newgeetask.gt_story_status 的数据：~11 rows (大约)
-DELETE FROM `gt_story_status`;
 /*!40000 ALTER TABLE `gt_story_status` DISABLE KEYS */;
 INSERT INTO `gt_story_status` (`id`, `is_backlog`, `name`, `description`, `sort`) VALUES
 	(1, 1, '待评估', '产品负责人添加新的故事默认状态', 1000),
@@ -1468,7 +1446,6 @@ CREATE TABLE IF NOT EXISTS `gt_timeline` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='时间线';
 
 -- 正在导出表  newgeetask.gt_timeline 的数据：~6 rows (大约)
-DELETE FROM `gt_timeline`;
 /*!40000 ALTER TABLE `gt_timeline` DISABLE KEYS */;
 INSERT INTO `gt_timeline` (`id`, `project_id`, `title`, `description`) VALUES
 	(1, 1, '2018-11-28', '支持微信支付'),
@@ -1504,7 +1481,6 @@ CREATE TABLE IF NOT EXISTS `gt_user` (
 ) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COMMENT='用户';
 
 -- 正在导出表  newgeetask.gt_user 的数据：~16 rows (大约)
-DELETE FROM `gt_user`;
 /*!40000 ALTER TABLE `gt_user` DISABLE KEYS */;
 INSERT INTO `gt_user` (`id`, `username`, `nick_name`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `mobile`, `status`, `is_admin`, `is_super`, `def_project`, `created_at`, `updated_at`, `role`, `is_del`) VALUES
 	(1, 'admin', '管理员', 'dFIfQutSickXRaQXsZSCPB1LAJZ6FnbA', '$2y$13$m5Z6Ruhoi3NIVaCCdnhuvO4tS9SEeMOFEIWy4UXAw39qqPJaRVzTu', NULL, 'dungang@126.com', '', 10, 1, 1, 1, 1543204772, 1543460613, '部门负责人', 0),
