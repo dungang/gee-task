@@ -30,14 +30,21 @@ class DefaultController extends AppController
                     'sprint_id'=>0,
                 ]
             ],
-            'update' => [
-                'class' => 'app\core\UpdateModelAction',
-                'modelClass' => [
-                    'class' => 'modules\sprint\models\Story',
-                    'project_id'=>$project_id,
-                    'sprint_id'=>0,
-                ]
-            ],
+		    'update' => [
+		        'class' => 'app\core\UpdateModelAction',
+		        'modelClass' => [
+		            'class' => 'modules\sprint\models\Story',
+		            'project_id'=>$project_id,
+		            'sprint_id'=>0,
+		        ]
+		    ],
+		    'trans' => [
+		        'class' => 'app\core\UpdateModelAction',
+		        'modelClass' => [
+		            'class' => 'modules\sprint\models\Story',
+		            'project_id'=>$project_id,
+		        ]
+		    ],
             'view' => [
                 'class' => 'app\core\ViewModelAction',
                 'modelClass' => [

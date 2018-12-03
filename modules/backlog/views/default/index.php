@@ -49,6 +49,19 @@ $this->params['breadcrumbs'][] = $this->title;
                 ])
             ],
             [
+                'label' => '转移',
+                'format' => 'raw',
+                'value' => function ($model, $key, $index, $column) {
+                    return Html::a($model['name'], [
+                        'trans',
+                        'id' => $model['id']
+                    ], [
+                        'data-toggle' => 'modal',
+                        'data-target' => '#modal-dailog'
+                    ]);
+                }
+            ],
+            [
                 'label' => '接受项',
                 'format' => 'raw',
                 'value' => function ($model, $key, $index, $column) {
