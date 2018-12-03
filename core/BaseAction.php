@@ -58,7 +58,7 @@ class BaseAction extends Action
     }
 
 
-    protected function findModel()
+    protected function findModel($createOneOnNotFound=false)
     {
         $model = null;
         if ($this->modelClass) {
@@ -71,7 +71,7 @@ class BaseAction extends Action
             }
             if($class) {
                 
-                $condition = $this->getPrimaryKeyCondition($class) + $args;
+                $condition = array_merge($this->getPrimaryKeyCondition($class), $args);
                 $model = call_user_func(array(
                     $class,
                     'findOne'
@@ -80,6 +80,8 @@ class BaseAction extends Action
         }
         if ($model !== null) {
             return $model;
+        } else  if($createOneOnNotFound) {
+            return \Yii::createObject($this->modelClass);
         }
         
         throw new NotFoundHttpException('The requested page does not exist.');

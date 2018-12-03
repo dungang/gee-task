@@ -98,9 +98,20 @@ AppAsset::register($this);
                 ]
             ],
             [
-                'label' => '<i class="glyphicon glyphicon-comment"></i> 机器人',
-                'url' => [
-                    '/robot/default/index'
+                'label' => '<i class="glyphicon glyphicon-cutlery"></i> 工具',
+                'items' => [
+                    [
+                        'label' => '<i class="glyphicon glyphicon-warning-sign"></i> 阿里云日志',
+                        'url' => [
+                            '/aliyun-log/default/index'
+                        ]
+                    ],
+                    [
+                        'label' => '<i class="glyphicon glyphicon-comment"></i> 机器人',
+                        'url' => [
+                            '/robot/default/index'
+                        ]
+                    ]
                 ]
             ],
             [

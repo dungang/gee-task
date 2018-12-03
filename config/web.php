@@ -25,7 +25,8 @@ $config = [
         'sprint' => 'modules\sprint\Module',
         'backlog' => 'modules\backlog\Module',
         'robot' => 'modules\robot\Module',
-        'myproject' => 'modules\myproject\Module'
+        'myproject' => 'modules\myproject\Module',
+        'aliyun-log' => 'modules\aliyunlog\Module',
     ],
     'components' => [
         'request' => [

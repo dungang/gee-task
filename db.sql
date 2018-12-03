@@ -382,6 +382,17 @@ COMMENT='系统设置'
 COLLATE='utf8mb4_general_ci'
 ENGINE=InnoDB;
 
+CREATE TABLE `gt_aliyun_log` (
+	`project_id` INT(11) NOT NULL COMMENT '项目',
+	`endpoint` VARCHAR(64) NOT NULL,
+	`access_key` VARCHAR(64) NOT NULL,
+	`secret_key` VARCHAR(64) NOT NULL,
+	PRIMARY KEY (`project_id`)
+)
+COMMENT='阿里云日志'
+COLLATE='utf8mb4_general_ci'
+ENGINE=InnoDB;
+
 
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
 	('/ac-route/create', 4, 'ac route create', NULL, NULL, 1543224292, 1543224292),

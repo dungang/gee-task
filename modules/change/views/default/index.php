@@ -35,7 +35,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'attribute'=>'content',
                 'format'=>'html',
                 'value'=>function($model){
-                    return '<pre>'.$model->content.'</pre>';
+                    return '<pre style="width:750px;overflow-x:hidden;">'.$model->content.'</pre>';
                 }
             ],
             [
