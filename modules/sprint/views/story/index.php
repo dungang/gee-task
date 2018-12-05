@@ -37,7 +37,8 @@ $storyStatuses = StoryStatus::allIdToName('id', 'name', [
         'id' => 65, //编码
         'user_id' => 60, //被指派人
         'name' => 260, //任务名称
-        'action' => 100
+        'trans' => 60,
+        'action' => 100,
     ];
     //状态
     $statusWidth = $tableWidth;
@@ -140,6 +141,27 @@ $storyStatuses = StoryStatus::allIdToName('id', 'name', [
                 'filter' => User::allIdToName('id', 'nick_name'),
                 'class' => 'app\grid\FilterColumn'
             ],
+            [
+                'headerOptions' => [
+                    'width' => $colWidth['trans'] . 'px'
+                    //'class'=>'text-overflow'
+                ],
+                'contentOptions' => [
+                    'width' => $colWidth['trans'] . 'px'
+                    // 'class'=>'text-overflow'
+                ],
+                'label' => '转移',
+                'format' => 'raw',
+                'value' => function ($model, $key, $index, $column) {
+                return Html::a('设置', [
+                    'trans',
+                    'id' => $model['id']
+                ], [
+                    'data-toggle' => 'modal',
+                    'data-target' => '#modal-dailog'
+                ]);
+                }
+                ],
             [
                 'headerOptions' => [
                     'width' => $colWidth['action'] . 'px'

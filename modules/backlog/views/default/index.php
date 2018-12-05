@@ -52,7 +52,7 @@ $this->params['breadcrumbs'][] = $this->title;
                 'label' => '转移',
                 'format' => 'raw',
                 'value' => function ($model, $key, $index, $column) {
-                    return Html::a($model['name'], [
+                    return Html::a('设置', [
                         'trans',
                         'id' => $model['id']
                     ], [

@@ -5,7 +5,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model modules\sprint\models\Story */
 
-$this->title = 'Update Story: ' . $model->name;
+$this->title = 'Update Story:  #' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Stories', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = '更新';
