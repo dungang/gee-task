@@ -45,7 +45,7 @@ CREATE TABLE IF NOT EXISTS `auth_item` (
   CONSTRAINT `auth_item_ibfk_1` FOREIGN KEY (`rule_name`) REFERENCES `auth_rule` (`name`) ON DELETE SET NULL ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  geetask.auth_item 的数据：~195 rows (大约)
+-- 正在导出表  geetask.auth_item 的数据：~199 rows (大约)
 /*!40000 ALTER TABLE `auth_item` DISABLE KEYS */;
 INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
 	('/ac-route/create', 4, 'ac route create', NULL, NULL, 1543224292, 1543224292),
@@ -259,7 +259,7 @@ CREATE TABLE IF NOT EXISTS `auth_item_child` (
   CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  geetask.auth_item_child 的数据：~329 rows (大约)
+-- 正在导出表  geetask.auth_item_child 的数据：~333 rows (大约)
 /*!40000 ALTER TABLE `auth_item_child` DISABLE KEYS */;
 INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
 	('ac-route', '/ac-route/create'),
@@ -606,7 +606,7 @@ CREATE TABLE IF NOT EXISTS `auth_rule` (
   PRIMARY KEY (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
--- 正在导出表  geetask.auth_rule 的数据：~0 rows (大约)
+-- 正在导出表  geetask.auth_rule 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `auth_rule` DISABLE KEYS */;
 INSERT INTO `auth_rule` (`name`, `data`, `created_at`, `updated_at`) VALUES
 	('\\app\\rules\\IsMyProject', _binary 0x4F3A32313A226170705C72756C65735C49734D7950726F6A656374223A333A7B733A343A226E616D65223B733A32323A225C6170705C72756C65735C49734D7950726F6A656374223B733A393A22637265617465644174223B693A313534333330393933353B733A393A22757064617465644174223B693A313534333330393933353B7D, 1543309935, 1543309935);
@@ -621,7 +621,7 @@ CREATE TABLE IF NOT EXISTS `gt_aliyun_log` (
   PRIMARY KEY (`project_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='阿里云日志';
 
--- 正在导出表  geetask.gt_aliyun_log 的数据：~0 rows (大约)
+-- 正在导出表  geetask.gt_aliyun_log 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `gt_aliyun_log` DISABLE KEYS */;
 INSERT INTO `gt_aliyun_log` (`project_id`, `endpoint`, `access_key`, `secret_key`) VALUES
 	(1, 'cn-hangzhou.log.aliyuncs.com', 'LTAI1alt8j7A1BNl', '4ErL4LRTaD8Kj1CFKtRNqWRVXyfgfE');
@@ -639,7 +639,6 @@ CREATE TABLE IF NOT EXISTS `gt_change` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COMMENT='变更';
 
-/*!40000 ALTER TABLE `gt_change` ENABLE KEYS */;
 
 -- 导出  表 geetask.gt_change_category 结构
 CREATE TABLE IF NOT EXISTS `gt_change_category` (
@@ -648,7 +647,7 @@ CREATE TABLE IF NOT EXISTS `gt_change_category` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='变更分类';
 
--- 正在导出表  geetask.gt_change_category 的数据：~0 rows (大约)
+-- 正在导出表  geetask.gt_change_category 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `gt_change_category` DISABLE KEYS */;
 INSERT INTO `gt_change_category` (`id`, `name`) VALUES
 	(1, 'SQL');
@@ -774,7 +773,7 @@ CREATE TABLE IF NOT EXISTS `gt_project` (
   KEY `fk_project_user_idx` (`creator_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='项目';
 
--- 正在导出表  geetask.gt_project 的数据：~0 rows (大约)
+-- 正在导出表  geetask.gt_project 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `gt_project` DISABLE KEYS */;
 INSERT INTO `gt_project` (`id`, `name`, `web_site`, `is_achived`, `creator_id`, `created_at`, `updated_at`, `is_del`) VALUES
 	(1, 'NDA', 'http://www.ndabooking.com', 0, 1, 1543371042, 1543371042, 0);
@@ -816,7 +815,7 @@ CREATE TABLE IF NOT EXISTS `gt_project_robot` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='项目机器人';
 
--- 正在导出表  geetask.gt_project_robot 的数据：~0 rows (大约)
+-- 正在导出表  geetask.gt_project_robot 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `gt_project_robot` DISABLE KEYS */;
 INSERT INTO `gt_project_robot` (`id`, `robot_id`, `project_id`, `created_at`, `updated_at`, `name`, `webhook`) VALUES
 	(1, 1, 1, 1543400237, 1543462342, '林志玲', 'https://oapi.dingtalk.com/robot/send?access_token=53aded3bc5471775c8527c898e0734cfedf4822a4396b066a5b495f73009a3e8');
@@ -832,7 +831,7 @@ CREATE TABLE IF NOT EXISTS `gt_robot` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='即时机器人';
 
--- 正在导出表  geetask.gt_robot 的数据：~0 rows (大约)
+-- 正在导出表  geetask.gt_robot 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `gt_robot` DISABLE KEYS */;
 INSERT INTO `gt_robot` (`id`, `created_at`, `updated_at`, `name`, `code_full_class`) VALUES
 	(1, 1543400079, 1543462291, '钉钉', '\\app\\robots\\DingTalkRobot');
@@ -854,7 +853,8 @@ CREATE TABLE IF NOT EXISTS `gt_robot_message` (
 -- 正在导出表  geetask.gt_robot_message 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `gt_robot_message` DISABLE KEYS */;
 INSERT INTO `gt_robot_message` (`id`, `code`, `name`, `msg_subject`, `subject_vars`, `msg_body`, `body_vars`) VALUES
-	(1, 'OnChangeStoryInSprint', '修改迭代中的用户故事的时候', '{user.nick_name} -> 才更新了用户故事#{story.id}🎉🎉🎉', '{user.nick_name},{story.id},{story.name},{story.status},{story.user}', '> **处理人:** {story.user}\r\n> **状态:** {story.old_status} -> {story.status}\r\n> **内容:** {story.name}\r\n> **备注:** {story.remark}\r\n> ❤❤❤\r\n\r\n\r\n', '{story.id},{story.name},{story.status},{story.user},{story.remark}');
+	(1, 'OnChangeStoryInSprint', '修改迭代中的用户故事的时候', '{user.nick_name} -> 才更新了用户故事#{story.id}🎉🎉🎉', '{user.nick_name},{story.id},{story.name},{story.status},{story.user}', '> **处理人:** {story.user}\r\n> **状态:** {story.old_status} -> {story.status}\r\n> **内容:** {story.name}\r\n> **备注:** {story.remark}\r\n> ❤❤❤\r\n\r\n\r\n', '{story.id},{story.name},{story.status},{story.user},{story.remark}'),
+	(2, 'OnCreateStoryInSprint', '添加迭代中的用户故事的时候', '{user.nick_name} -> 才添加了用户故事#{story.id}🎉🎉🎉', '{user.nick_name},{story.id},{story.name},{story.status},{story.user}', '> **处理人:** {story.user}\r\n> **内容:** {story.name}\r\n> ❤❤❤', '{story.id},{story.name},{story.status},{story.user}');
 /*!40000 ALTER TABLE `gt_robot_message` ENABLE KEYS */;
 
 -- 导出  表 geetask.gt_role 结构
