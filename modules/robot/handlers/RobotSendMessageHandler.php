@@ -51,11 +51,13 @@ abstract class RobotSendMessageHandler extends Model implements CustomEventHandl
             ->all();
         if (is_array($robots)) {
             list($title,$body) = $this->getMessage($data);
-            foreach ($robots as $robot) {
-                /* @var $rb \app\core\RobotSender */
-                $rb = \Yii::createObject($robot['code_full_class']);
-                $rb->webhook = $robot['webhook'];
-                $rb->sendMessage($title,$body);
+            if($title && $body) {
+                foreach ($robots as $robot) {
+                    /* @var $rb \app\core\RobotSender */
+                    $rb = \Yii::createObject($robot['code_full_class']);
+                    $rb->webhook = $robot['webhook'];
+                    $rb->sendMessage($title,$body);
+                }
             }
             
         }
