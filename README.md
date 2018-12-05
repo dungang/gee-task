@@ -111,12 +111,7 @@ composer install
 
 默认管理员及密码:admin，admin
 
-钉钉群
---
- - 体验消息机器人
-- 用钉钉扫描二维码，入群
 
-<img src="demo/dingding.jpg" alt="钉钉群" width="300" >
 
 效果图
 --
@@ -158,6 +153,12 @@ composer install
 
 ![钉钉效果](demo/robot-demo.png)
 
+机器人体验钉钉群
+--
+ - 体验消息机器人
+ - 用钉钉扫描二维码，入群
+
+<img src="demo/dingding.jpg" alt="钉钉群" width="300" >
 
 其他
 --
