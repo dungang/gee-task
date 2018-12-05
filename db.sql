@@ -930,8 +930,16 @@ INSERT INTO `gt_project` (`id`, `name`, `web_site`, `is_achived`, `creator_id`, 
 	(1, '我的第一个项目', 'http://www.my-first-project.com', 0, 1, 1543371042, 1543371042, 0);
 INSERT INTO `gt_project_member` (`project_id`, `user_id`, `position`) VALUES
 	(1, 1, '项目负责人');
+
 INSERT INTO `gt_robot` (`id`, `created_at`, `updated_at`, `name`, `code_full_class`) VALUES
 	(1, 1543400079, 1543462291, '钉钉', '\\app\\robots\\DingTalkRobot');
+INSERT INTO `gt_robot_message` (`id`, `code`, `name`, `msg_subject`, `subject_vars`, `msg_body`, `body_vars`) VALUES
+	(1, 'OnChangeStoryInSprint', '修改迭代中的用户故事的时候', '{user.nick_name} -> 才更新了用户故事#{story.id}🎉🎉🎉', '{user.nick_name},{story.id},{story.name},{story.status},{story.user}', '> **处理人:** {story.user}\r\n> **状态:** {story.old_status} -> {story.status}\r\n> **内容:** {story.name}\r\n> **备注:** {story.remark}\r\n> ❤❤❤\r\n\r\n\r\n', '{story.id},{story.name},{story.status},{story.user},{story.remark}'),
+	(2, 'OnCreateStoryInSprint', '添加迭代中的用户故事的时候', '{user.nick_name} -> 才添加了用户故事#{story.id}🎉🎉🎉', '{user.nick_name},{story.id},{story.name},{story.status},{story.user}', '> **处理人:** {story.user}\r\n> **内容:** {story.name}\r\n> ❤❤❤', '{story.id},{story.name},{story.status},{story.user}');
+INSERT INTO `gt_project_robot` (`id`, `robot_id`, `project_id`, `created_at`, `updated_at`, `name`, `webhook`) VALUES
+	(1, 1, 1, 1543400237, 1543462342, '项目鼓励师', 'https://oapi.dingtalk.com/robot/send?access_token=a5a2347f4524e93eb06f2a7aa806914c7202078ff07bc0395139325a24ed3262');
+
+	
 INSERT INTO `gt_role` (`id`, `name`, `scope`, `description`, `is_sys`) VALUES
 	(1, '管理员', 'ADMIN', '', 1),
 	(2, '项目负责人', 'POSITION', 'product owner', 1),

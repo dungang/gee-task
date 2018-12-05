@@ -110,16 +110,26 @@ composer install
 
 默认管理员及密码:admin，admin
 
+钉钉群
+--
+ - 体验消息机器人
+- 用钉钉扫描二维码，入群
+
+![钉钉群](demo/dingding.jpg)
+
 效果图
 --
 
 - 管理后台
+
 ![后台首页](demo/index.png)
 
 - 项目控制台
+
 ![控制台](demo/space.png)
 
 - 一次迭代中的故事或任务
+
 ![迭代故事任务](demo/story.png)
 
 其他

@@ -815,6 +815,12 @@ CREATE TABLE IF NOT EXISTS `gt_project_robot` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='项目机器人';
 
+-- 正在导出表  geetask.gt_project_robot 的数据：~1 rows (大约)
+/*!40000 ALTER TABLE `gt_project_robot` DISABLE KEYS */;
+INSERT INTO `gt_project_robot` (`id`, `robot_id`, `project_id`, `created_at`, `updated_at`, `name`, `webhook`) VALUES
+	(1, 1, 1, 1543400237, 1543462342, '项目鼓励师', 'https://oapi.dingtalk.com/robot/send?access_token=a5a2347f4524e93eb06f2a7aa806914c7202078ff07bc0395139325a24ed3262');
+/*!40000 ALTER TABLE `gt_project_robot` ENABLE KEYS */;
+
 -- 导出  表 geetask.gt_robot 结构
 CREATE TABLE IF NOT EXISTS `gt_robot` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
