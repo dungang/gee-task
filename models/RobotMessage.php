@@ -10,7 +10,10 @@ use Yii;
  * @property int $id
  * @property string $code 消息代号
  * @property string $name 消息名称
- * @property string $message 消息模板
+ * @property string $msg_subject 消息主题
+ * @property string $subject_vars 主题变量
+ * @property string $msg_body 消息内容
+ * @property string $body_vars 内容变量
  */
 class RobotMessage extends \app\core\BaseModel
 {
@@ -28,10 +31,9 @@ class RobotMessage extends \app\core\BaseModel
     public function rules()
     {
         return [
-            [['robot_id'], 'required'],
-            [['robot_id'], 'integer'],
+            [['msg_body'], 'string'],
             [['code', 'name'], 'string', 'max' => 64],
-            [['message'], 'string', 'max' => 255],
+            [['msg_subject', 'subject_vars', 'body_vars'], 'string', 'max' => 255],
         ];
     }
 
@@ -44,7 +46,10 @@ class RobotMessage extends \app\core\BaseModel
             'id' => 'ID',
             'code' => '消息代号',
             'name' => '消息名称',
-            'message' => '消息模板',
+            'msg_subject' => '消息主题',
+            'subject_vars' => '主题变量',
+            'msg_body' => '消息内容',
+            'body_vars' => '内容变量',
         ];
     }
 

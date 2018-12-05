@@ -3,6 +3,7 @@
 namespace modules\sprint\models;
 
 use Yii;
+use modules\robot\handlers\RobotSendMessageHandler;
 
 /**
  * This is the model class for table "gt_story_active".
@@ -62,6 +63,7 @@ class StoryActive extends \app\core\BaseModel
     
     public function init(){
         parent::init();
+        RobotSendMessageHandler::addModelChain('story-active', $this);
         $this->on(self::EVENT_AFTER_INSERT,function($event){
             if($story = Story::findOne(['id'=>$this->story_id])){
                 $story->status = $this->new_status;

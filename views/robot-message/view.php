@@ -23,7 +23,10 @@ $this->params['breadcrumbs'][] = $this->title;
             'id',
             'code',
             'name',
-            'message',
+            'msg_subject',
+            'subject_vars',
+            'msg_body:ntext',
+            'body_vars',
         ],
     ]) ?>
 

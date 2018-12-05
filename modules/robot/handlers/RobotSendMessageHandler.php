@@ -6,9 +6,26 @@ use yii\db\Query;
 use app\models\Robot;
 use modules\robot\models\ProjectRobot;
 use app\helpers\MiscHelper;
+use app\models\RobotMessage;
+use yii\base\Model;
 
-abstract class RobotSendMessageHandler implements CustomEventHandler
+abstract class RobotSendMessageHandler extends Model implements CustomEventHandler
 {
+    
+    public $msg_code;
+    
+    public static $models = [];
+    
+    public static function addModelChain($name,$model){
+        self::$models[$name] = $model;
+    }
+    
+    public function getMsgTmpl() {
+        if($tmpl = RobotMessage::findOne(['code'=>$this->msg_code])){
+            return $tmpl;
+        }
+        return false;
+    }
     
     /**
      * 获取本次要发送的消息

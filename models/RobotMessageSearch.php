@@ -19,7 +19,7 @@ class RobotMessageSearch extends RobotMessage
     {
         return [
             [['id'], 'integer'],
-            [['code', 'name', 'message'], 'safe'],
+            [['code', 'name', 'msg_subject', 'subject_vars', 'msg_body', 'body_vars'], 'safe'],
         ];
     }
 
@@ -64,7 +64,10 @@ class RobotMessageSearch extends RobotMessage
 
         $query->andFilterWhere(['like', 'code', $this->code])
             ->andFilterWhere(['like', 'name', $this->name])
-            ->andFilterWhere(['like', 'message', $this->message]);
+            ->andFilterWhere(['like', 'msg_subject', $this->msg_subject])
+            ->andFilterWhere(['like', 'subject_vars', $this->subject_vars])
+            ->andFilterWhere(['like', 'msg_body', $this->msg_body])
+            ->andFilterWhere(['like', 'body_vars', $this->body_vars]);
 
         return $dataProvider;
     }

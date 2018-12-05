@@ -242,8 +242,12 @@ CREATE TABLE `gt_robot_message` (
 	`id` INT(11) NOT NULL AUTO_INCREMENT,
 	`code` VARCHAR(64) NULL DEFAULT NULL COMMENT '消息代号',
 	`name` VARCHAR(64) NULL DEFAULT NULL COMMENT '消息名称',
-	`message` VARCHAR(255) NULL DEFAULT NULL COMMENT '消息模板',
-	PRIMARY KEY (`id`)
+	`msg_subject` VARCHAR(255) NULL DEFAULT NULL COMMENT '消息主题',
+	`subject_vars` VARCHAR(255) NULL DEFAULT NULL COMMENT '主题变量',
+	`msg_body` TEXT NULL COMMENT '消息内容',
+	`body_vars` VARCHAR(255) NULL DEFAULT NULL COMMENT '内容变量',
+	PRIMARY KEY (`id`),
+	UNIQUE INDEX `code` (`code`)
 )
 COMMENT='机器人消息'
 COLLATE='utf8mb4_general_ci'
