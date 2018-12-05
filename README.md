@@ -115,7 +115,7 @@ composer install
  - 体验消息机器人
 - 用钉钉扫描二维码，入群
 
-![钉钉群](demo/dingding.jpg)
+<img src="demo/dingding.jpg" alt="钉钉群" width="300" >
 
 效果图
 --
