@@ -193,13 +193,13 @@ class AuthItem extends BaseModel
         ]);
     }
     
-    public static function allIdToName($key = 'id', $val = 'name', $type=AuthItem::TYPE_ROLE)
+    public static function allIdToName($key = 'id', $val = 'name',$where=null,$orderBy=null)
     {
-        $models = self::find()->select("$key,$val")->where(['type'=>$type])->asArray()->all();
-        if (is_array($models)) {
-            return ArrayHelper::map($models, $key, $val);
+        if($where == null) {
+            $where = [];
         }
-        return $models;
+        $where['type']=AuthItem::TYPE_ROLE;
+        return parent::allIdToName($key,$val,$where,$orderBy);
     }
     
 }
