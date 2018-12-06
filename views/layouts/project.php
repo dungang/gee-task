@@ -33,7 +33,10 @@ var _hmt = _hmt || [];
   var hm = document.createElement("script");
   hm.src = "https://hm.baidu.com/hm.js?7532827431e9d717ecc9041e97edcdfe";
   var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
 </script>
+
 </head>
 <body>
 <?php $this->beginBody() ?>

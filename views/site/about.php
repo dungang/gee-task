@@ -1,5 +1,4 @@
 <?php
-use yii\helpers\Html;
 
 /* @var $this yii\web\View */
 $this->title = '欢迎您';
@@ -9,7 +8,7 @@ $this->title = '欢迎您';
 	<h1>
 		GeeTask<small style="vertical-align: top;">&reg;</small>
 	</h1>
-
+	<p style="font-size:40px;" class="text-muted">LESS IS MORE<p>
 	<p class="lead">一个极简的敏捷项目管理系统。</p>
 	<p class="lead">一个PMP和ACP的结合的产物，以敏捷为核心却有那么一丁点的传统。</p>
 	<p class="lead">只适合小团队，而且负责人可能身兼数职。</p>
