@@ -160,10 +160,22 @@ composer install
 
 <img src="demo/dingding.jpg" alt="钉钉群" width="300" >
 
+在线demo
+--
+
+应关注者的需求临时搭了一个demo
+
+http://geetask.weifutek.com
+
+ - 账号：admin
+ - 密码：admin
+
 其他
 --
 
 本系统也可以做学习Yii2框架的实例
+
+
 
 
 
