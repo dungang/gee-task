@@ -27,6 +27,13 @@ AppAsset::register($this);
     <?= Html::csrfMetaTags() ?>
     <title><?= Html::encode($this->title) ?></title>
     <?php $this->head() ?>
+<script>
+var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?7532827431e9d717ecc9041e97edcdfe";
+  var s = document.getElementsByTagName("script")[0]; 
+</script>
 </head>
 <body>
 <?php $this->beginBody() ?>
