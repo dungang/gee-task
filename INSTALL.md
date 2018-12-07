@@ -115,7 +115,7 @@ return [
 #只说明linux的使用方法，window用rar软件解压即可
 #上传到/var/www/gee-task/
 cd /var/www/gee-task/
-tar -xvf vendor.tar.gz
+tar -xzvf vendor.tar.gz
 ```
 
 配置
