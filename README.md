@@ -1,7 +1,4 @@
-GeeTask
--
-
-LESS IS MORE
+GeeTask - LESS IS MORE
 -
 
 一个极简的敏捷项目管理系统。
@@ -100,12 +97,19 @@ GeeTask不是完整的敏捷思想的实现，主要是根据自己的工作环�
 安装系统
 --
 
+> 喜欢自己折腾，或者属性Yii php环境的可以安装如下安装
+
 ```
 cd web服务器的doc目录，这里是什么就不再多讲。
 git clone https://github.com/dungang/gee-task.git
 cd gee-task
 composer install
 ```
+> 相对详细的安装说明
+
+[安装手册](INSTALL.md)
+
+
 创建数据库 geetask , 编码一定是 utf8mb4格式
 
 如果是直接生产，请导入数据脚本db.sql
