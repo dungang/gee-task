@@ -24,14 +24,14 @@ centos
 ----
 > mysql 安装
 
-```
+```sh
 yum install mariadb mariadb-server 
 
 ```
 
 > php5.6 环境准备
 
-```
+```sh
 #清除已安装的php,可选操作
 yum remove php*
 
@@ -43,20 +43,20 @@ yum install rpmforge
 
 > nginx 环境
  
- ```
+ ```sh
  yum install nginx
  ```
  
 
 > 或apache 环境
  
- ```
+ ```sh
  yum install httpd
 ```
  
 > php安装
 
-```
+```sh
 #安装php5.6
 yum install php56w php56-fpm php56w-mbstring php56w-opcache php56w-pdo php56w-pdo-mysql php56w-intl php56w-icu php56w-expose php56w-gd php56w-dom php56w-memcache
 
@@ -107,7 +107,7 @@ return [
 
 为方便部署，vendor文件我打包了，就不用composer install,直接解压即可
 
-```
+```sh
 #到项目的仓库，只能从gitee.com的仓库下载附件
 #linux环境下载 vendor.tar.gz
 #window环境下载 vendor.rar
@@ -123,7 +123,7 @@ tar -xvf vendor.tar.gz
 
 > nginx
 
-```
+```sh
 cd /etc/nginx
 vim nginx
 
@@ -173,7 +173,7 @@ vim nginx
 
 > apache
 
-```
+```sh
 cd /etc/httpd/conf.d/
 touch geetask.conf
 vim geetask.conf
@@ -192,7 +192,7 @@ vim geetask.conf
 
 > nginx
 
-```
+```sh
 systemctl start php-fpm
 systemctl start nginx
 ```
@@ -200,6 +200,6 @@ systemctl start nginx
 
 > apache
 
-```
+```sh
 systemctl start httpd
 ```

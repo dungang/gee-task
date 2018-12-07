@@ -105,10 +105,6 @@ git clone https://github.com/dungang/gee-task.git
 cd gee-task
 composer install
 ```
-> 相对详细的安装说明
-
-[安装手册](INSTALL.md)
-
 
 创建数据库 geetask , 编码一定是 utf8mb4格式
 
@@ -118,7 +114,9 @@ composer install
 
 默认管理员及密码:admin，admin
 
+> 相对详细的安装说明
 
+[安装手册](INSTALL.md)
 
 效果图
 --
