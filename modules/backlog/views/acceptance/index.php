@@ -18,7 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
 
 	<p>
 		<?= MiscHelper::goBackButton()?>
-        <?= Html::a('添加 Story Acceptance', ['create'], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
+        <?= Html::a('添加 Story Acceptance', ['create','StoryAcceptance[story_id]'=>$story->id], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
     </p>
 
     <?php

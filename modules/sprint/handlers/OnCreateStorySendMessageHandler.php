@@ -15,10 +15,7 @@ class OnCreateStorySendMessageHandler extends RobotSendMessageHandler
     protected function getMessage($data)
     {
         if ($tmpl = $this->getMsgTmpl()) {
-            /* @var $user \app\models\User */
-            $proccesor = User::findOne([
-                'id' => $data->user_id
-            ]);
+
             $vars = [];
             if (\Yii::$app->user && ($user = \Yii::$app->user->identity)) {
                 $vars['{user.nick_name}'] = $user->nick_name;
@@ -26,7 +23,16 @@ class OnCreateStorySendMessageHandler extends RobotSendMessageHandler
                 $vars['{user.nick_name}'] = '系统';
             }
             $vars['{story.id}'] = $data->id;
-            $vars['{story.user}'] = $proccesor->nick_name;
+            if ($data->user_id) {
+                /* @var $proccesor \app\models\User */
+                $proccesor = User::findOne([
+                    'id' => $data->user_id
+                ]);
+                if ($proccesor) {
+                    $vars['{story.user}'] = $proccesor->nick_name;
+                }
+            }
+
             $vars['{story.name}'] = $data->name;
             $title = strtr($tmpl->msg_subject, $vars);
             $body = strtr($tmpl->msg_body, $vars);

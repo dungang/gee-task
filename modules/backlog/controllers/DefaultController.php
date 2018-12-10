@@ -28,6 +28,7 @@ class DefaultController extends AppController
                     'class' => 'modules\sprint\models\Story',
                     'project_id'=>$project_id,
                     'sprint_id'=>0,
+                    'points'=>100,
                 ]
             ],
 		    'update' => [
