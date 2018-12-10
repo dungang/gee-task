@@ -14,10 +14,12 @@ class SiteController extends AdminController
     {
         $this->guestActions = [
             'login',
-            'error','about'
+            'error',
+            'about',
         ];
         $this->userActions = [
-            'logout','index'
+            'logout',
+            'index'
         ];
         $this->verbsActions = [
             'logout' => [
@@ -38,6 +40,7 @@ class SiteController extends AdminController
             ]
         ];
     }
+    
 
     /**
      * Displays homepage.
@@ -48,7 +51,7 @@ class SiteController extends AdminController
     {
         return $this->render('index');
     }
-    
+
     /**
      * Displays homepage.
      *
@@ -58,7 +61,6 @@ class SiteController extends AdminController
     {
         return $this->render('about');
     }
-    
 
     /**
      * Login action.

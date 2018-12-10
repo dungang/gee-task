@@ -4,8 +4,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\ChangeCategory */
 
-$this->title = '添加 Change Category';
-$this->params['breadcrumbs'][] = ['label' => 'Change Categories', 'url' => ['index']];
+$this->title = '添加变更类别';
+$this->params['breadcrumbs'][] = ['label' => '变更类别', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modal-header">

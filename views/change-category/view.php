@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\ChangeCategory */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Change Categories', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '变更类别', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modal-header">

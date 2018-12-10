@@ -1,21 +1,17 @@
 /**
- * 联动选择下拉框
- * data-parent-id //默认上级值
- * data-parent //上级对象，和 parent-id二选一
- * data-url //加载数据的地址
- * data-param //加载数据的参数
- * data-value //默认初始值，并不代表事最终逻辑值
- * data-queue //顺序执行的对象队列
+ * 联动选择下拉框 data-parent-id //默认上级值 data-parent //上级对象，和 parent-id二选一 data-url
+ * //加载数据的地址 data-param //加载数据的参数 data-value //默认初始值，并不代表事最终逻辑值 data-queue
+ * //顺序执行的对象队列
  */
 +function($) {
 
-	function isNotEmptyObject(e) {  
-	    var t;  
-	    for (t in e)  
-	        return true;  
-	    return false;
+	function isNotEmptyObject(e) {
+		var t;
+		for (t in e)
+			return true;
+		return false;
 	}
-	
+
 	function assembleOptions(data, value) {
 		var options = '';
 		for ( var p in data) {
@@ -31,15 +27,15 @@
 
 	function process(queue) {
 		var select = queue.shift();
-		if(select == null) return;
+		if (select == null)
+			return;
 		$self = $(select);
 		var data = $self.data();
-		$self.empty();//情况自己
+		$self.empty();// 情况自己
 		var param = {};
 		if (data.parentId != null && data.param) {
 			param[data.param] = data.parentId;
-		} 
-		else if (data.parent && data.param) {
+		} else if (data.parent && data.param) {
 			var parent = $(data.parent);
 			var parent2 = $(parent.data('parent'));
 			if (parent && data.url && parent.val() != null) {
@@ -48,9 +44,9 @@
 				param[data.param] = parent2.val();
 			}
 		} else {
-			alert('连级下拉框参数配置不正确:'+$self.attr('name'));
+			alert('连级下拉框参数配置不正确:' + $self.attr('name'));
 		}
-		if(isNotEmptyObject(param)) {
+		if (isNotEmptyObject(param)) {
 			$.getJSON(data.url, param, function(res) {
 				if (res.code == 0) {
 					$self.append(assembleOptions(res.data, data.value));
@@ -59,12 +55,12 @@
 			});
 		}
 	}
-	
-	function getQueue(){
+
+	function getQueue() {
 		return $('select[data-linkage]').toArray();
 	}
-	
-	function execute(){
+
+	function execute() {
 		var queue = getQueue();
 		process(queue);
 	}
@@ -72,7 +68,7 @@
 	$.fn.linkageSelect = function() {
 		$(document).off('change.site.linkage');
 		execute();
-		$(document).on('change.site.linkage', 'select[data-linkage]', function(){
+		$(document).on('change.site.linkage', 'select[data-linkage]', function() {
 			var queue = $($(this).data('queue')).toArray();
 			process(queue);
 		});
@@ -91,16 +87,20 @@
 			dataType : options.dataType,
 			error : function(xhr, textStatus, errorThrown) {
 				options.onTimeout.call(_this, options, xhr, textStatus, errorThrown);
-				setTimeout(function() {
-					process.call(_this, options)
-				}, options.interval);
+				if (options.repeat) {
+					setTimeout(function() {
+						process.call(_this, options)
+					}, options.interval);
+				}
 			},
 			success : function(data, textStatus) {
 				if (textStatus == "success") { // 请求成功
 					options.onSuccess.call(_this, data, textStatus, options);
-					setTimeout(function() {
-						process.call(_this, options)
-					}, options.interval);
+					if (options.repeat) {
+						setTimeout(function() {
+							process.call(_this, options)
+						}, options.interval);
+					}
 				}
 			}
 		});
@@ -122,6 +122,7 @@
 		dataType : 'text',
 		method : 'get',
 		data : {},
+		repeat : true,
 		onTimeout : $.noop,
 		onSuccess : $.noop
 	};
@@ -139,7 +140,7 @@
 					modeOpts.dataType = 'json';
 					break;
 				default:
-					
+
 			}
 			var opts = $.extend({}, $.fn.batchProcess.Default, modeOpts, options, _this.data());
 
@@ -177,7 +178,7 @@
 												var tr = $(this).parents(opts.row);
 												tr.fadeToggle('slow', function() {
 													tr.remove();
-													opts.onSuccess.call(_this,response,_chkboxs);
+													opts.onSuccess.call(_this, response, _chkboxs);
 												});
 											});
 										}
@@ -186,10 +187,10 @@
 										var modal = $(opts.modal);
 										modal.find('.modal-content').html(response);
 										modal.modal('show');
-										opts.onSuccess.call(_this,response,_chkboxs);
+										opts.onSuccess.call(_this, response, _chkboxs);
 										break;
 									default:
-										opts.onSuccess.call(_this,response,_chkboxs);
+										opts.onSuccess.call(_this, response, _chkboxs);
 								}
 							}
 						});
@@ -203,11 +204,11 @@
 		row : 'tr',
 		noSelectedMsg : '请选择条目，否则不能进行操作',
 		confirm : '确定删除？',
-		needConfirm: true,
+		needConfirm : true,
 		method : 'POST',
 		mode : 'delete',
 		modal : '#modal-dailog',
-		onSuccess:$.noop
+		onSuccess : $.noop
 	};
 }(jQuery);
 +function($) {

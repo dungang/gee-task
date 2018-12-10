@@ -28,7 +28,9 @@ class Story extends \app\core\BaseModel
 
     public static $types = [
         'bug' => 'Bug',
-        'requirement' => '需求'
+        'requirement' => '需求',
+        'spike' => '探针',
+        'maintenance'=>'运维'
     ];
 
     /**
