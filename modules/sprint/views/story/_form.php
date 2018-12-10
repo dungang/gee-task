@@ -24,7 +24,7 @@ use app\widgets\EmojiOneArea;
 		</div>
 		<div class="col-md-6">
     		<?= $form->field($model, 'project_version')->textInput(['maxlength' => true]) ?>
-    		<?php if($model->isNewRecord) echo $form->field($model, 'user_id')->dropDownList(ProjectMember::allIdToName('user_id','username')) ?>
+    		<?php if($model->isNewRecord) echo $form->field($model, 'user_id')->dropDownList(ProjectMember::allIdToName('user_id','nick_name')) ?>
 		</div>
 	</div>
 
