@@ -67,6 +67,10 @@ $form = ActiveForm::begin([
 	    <?php
 
     echo ListView::widget([
+        'options'=>[
+            'tag'=>'pre',
+            'style'=>'font-size:10px;'
+        ],
         'dataProvider' => $dataProvider,
         'summary' => false,
         'itemView' => function ($model, $key, $index, $widget) {
@@ -75,7 +79,7 @@ $form = ActiveForm::begin([
             $msgs[] = $model['ip'];
             $msgs[] = $model['thread'];
             $msgs[] = $model['location'];
-            $msgs[] = '<p  style="width:950px;overflow-x:hidden;">' . $model['message'] . '</p>';
+            $msgs[] = '<p>' . $model['message'] . '</p>';
             return implode(" ", $msgs);
         }
     ]);
