@@ -29,6 +29,7 @@ $this->params = false;
                 </div>
 
             <?php ActiveForm::end(); ?>
+
         </div>
 	</div>
 </div>

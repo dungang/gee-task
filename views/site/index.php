@@ -1,5 +1,6 @@
 <?php
 use yii\helpers\Html;
+use app\widgets\GiteeProjectCommits;
 
 /* @var $this yii\web\View */
 $this->title = '欢迎您';
@@ -17,4 +18,9 @@ $this->title = '欢迎您';
 	<h2>敏捷宣言</h2>
 	<p class="lead">个体和互动高于流程和工具 ，可工作软件高于详尽的文档</p>
 	<p class="lead">客户合作高于合同谈判 ， 响应变化高于遵循计划</p>
+</div>
+
+<div class="col-md-6 col-md-offset-3">
+	<h2 class="text-center">最近更新</h2>
+	<?php echo GiteeProjectCommits::widget()?>
 </div>
