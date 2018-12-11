@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $searchModel  app\models\EventSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Events';
+$this->title = '事件';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="event-index">
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<h1><?= Html::encode($this->title) ?></h1>
 
 	<p>
-        <?= Html::a('添加 Event', ['create'], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
+        <?= Html::a('添加事件', ['create'], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
     </p>
 
     <?php

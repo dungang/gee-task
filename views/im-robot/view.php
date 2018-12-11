@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Robot */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Robots', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '机器人', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modal-header">
@@ -21,10 +21,10 @@ $this->params['breadcrumbs'][] = $this->title;
         'model' => $model,
         'attributes' => [
             'id',
-            'created_at',
-            'updated_at',
             'name',
             'code_full_class',
+            'created_at:date',
+            'updated_at:date',
         ],
     ]) ?>
 

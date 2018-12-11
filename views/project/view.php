@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Project */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Projects', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '项目', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modal-header">

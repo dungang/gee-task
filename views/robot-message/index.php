@@ -7,7 +7,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\RobotMessageSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Robot Messages';
+$this->title = '机器人消息模板';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="robot-message-index">
@@ -15,7 +15,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('添加 Robot Message', ['create'], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
+        <?= Html::a('添加消息模板', ['create'], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
     </p>
 
     <?= GridView::widget([

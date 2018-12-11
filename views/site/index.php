@@ -21,6 +21,6 @@ $this->title = '欢迎您';
 </div>
 
 <div class="col-md-6 col-md-offset-3">
-	<h2 class="text-center">最近更新</h2>
+	<h2 class="text-center">GeeTask动态</h2>
 	<?php echo GiteeProjectCommits::widget()?>
 </div>

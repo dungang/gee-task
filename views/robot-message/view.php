@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\RobotMessage */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Robot Messages', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '机器人消息模板', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modal-header">
@@ -20,7 +20,6 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
             'code',
             'name',
             'msg_subject',

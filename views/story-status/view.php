@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\StoryStatus */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Story Statuses', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '故事状态', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modal-header">

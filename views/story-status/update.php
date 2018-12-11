@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\StoryStatus */
 
-$this->title = 'Update Story Status: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Story Statuses', 'url' => ['index']];
+$this->title = '编辑状态: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => '故事状态', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = '更新';
 ?>

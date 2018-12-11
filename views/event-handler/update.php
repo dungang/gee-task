@@ -5,8 +5,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\EventHandler */
 
-$this->title = 'Update Event Handler: ' . $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Event Handlers', 'url' => ['index']];
+$this->title = '编辑处理器: ' . $model->name;
+$this->params['breadcrumbs'][] = ['label' => '事件处理器', 'url' => ['index']];
 $this->params['breadcrumbs'][] = ['label' => $model->name, 'url' => ['view', 'id' => $model->id]];
 $this->params['breadcrumbs'][] = '更新';
 ?>

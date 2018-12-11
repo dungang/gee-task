@@ -4,7 +4,7 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\EventHandler */
 
-$this->title = '添加 Event Handler';
+$this->title = '添加事件处理器';
 $this->params['breadcrumbs'][] = ['label' => 'Event Handlers', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>

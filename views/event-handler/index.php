@@ -8,7 +8,7 @@ use app\models\Event;
 /* @var $searchModel app\models\EventHandlerSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Event Handlers';
+$this->title = '事件处理器';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="event-handler-index">
@@ -16,7 +16,7 @@ $this->params['breadcrumbs'][] = $this->title;
     <h1><?= Html::encode($this->title) ?></h1>
 
     <p>
-        <?= Html::a('添加 Event Handler', ['create','EventHandler[event_id]'=>$searchModel->event_id], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
+        <?= Html::a('添加处理器', ['create','EventHandler[event_id]'=>$searchModel->event_id], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
     </p>
 
     <?= GridView::widget([

@@ -6,7 +6,7 @@ use yii\grid\GridView;
 /* @var $searchModel app\models\StoryStatusSearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
 
-$this->title = 'Story Statuses';
+$this->title = '故事状态';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="story-status-index">
@@ -14,7 +14,7 @@ $this->params['breadcrumbs'][] = $this->title;
 	<h1><?= Html::encode($this->title) ?></h1>
 
 	<p>
-        <?= Html::a('添加 Story Status', ['create'], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
+        <?= Html::a('添加状态', ['create'], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
     </p>
 
     <?php

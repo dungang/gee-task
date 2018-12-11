@@ -4,8 +4,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\RobotMessage */
 
-$this->title = '添加 Robot Message';
-$this->params['breadcrumbs'][] = ['label' => 'Robot Messages', 'url' => ['index']];
+$this->title = '添加消息模板';
+$this->params['breadcrumbs'][] = ['label' => '机器人消息模板', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modal-header">

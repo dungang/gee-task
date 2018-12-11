@@ -7,7 +7,7 @@ use yii\widgets\DetailView;
 /* @var $model app\models\Event */
 
 $this->title = $model->name;
-$this->params['breadcrumbs'][] = ['label' => 'Events', 'url' => ['index']];
+$this->params['breadcrumbs'][] = ['label' => '事件', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modal-header">

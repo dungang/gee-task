@@ -4,8 +4,8 @@ use yii\helpers\Html;
 /* @var $this yii\web\View */
 /* @var $model app\models\StoryStatus */
 
-$this->title = '添加 Story Status';
-$this->params['breadcrumbs'][] = ['label' => 'Story Statuses', 'url' => ['index']];
+$this->title = '添加状态';
+$this->params['breadcrumbs'][] = ['label' => '故事状态', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="modal-header">
