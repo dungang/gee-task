@@ -7,7 +7,6 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
-use app\widgets\Alert;
 use app\widgets\Notify;
 use app\widgets\SimpleModal;
 use app\helpers\MiscHelper;
@@ -204,7 +203,6 @@ var _hmt = _hmt || [];
 
     <div class="container">
         <?=Breadcrumbs::widget(['links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : []])?>
-        <?= Alert::widget() ?>
         <?= Notify::widget() ?>
         <?= $content ?>
         <?php

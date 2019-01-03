@@ -8,7 +8,6 @@ use yii\helpers\Html;
 use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use app\assets\AppAsset;
-use app\widgets\Alert;
 use app\widgets\Notify;
 use app\widgets\SimpleModal;
 use app\helpers\MiscHelper;
@@ -121,6 +120,12 @@ var _hmt = _hmt || [];
                         'url' => [
                             '/robot/default/index'
                         ]
+                    ],
+                    [
+                        'label' => '<i class="glyphicon glyphicon-link"></i> 常用链接',
+                        'url' => [
+                            '/link/default/index'
+                        ]
                     ]
                 ]
             ],
@@ -204,7 +209,6 @@ var _hmt = _hmt || [];
 			</div>
 		</div>
 		<div class="container">
-        <?= Alert::widget() ?>
         <?= Notify::widget() ?>
         
 		<div class="jumbotron">

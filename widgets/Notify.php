@@ -7,24 +7,26 @@ use yii\helpers\Json;
 
 class Notify extends Widget
 {
+    
     public $msg;
     
     /**
      * success,info,error,warning
+     *
      * @var string
      */
     public $type = 'success';
     
     /**
-     * center left right 
+     * center left right
+     *
      * @var string
      */
     public $position = 'center';
     
-//     public $width;
+    // public $width;
     
-//     public $height;
-    
+    // public $height;
     public $autohide = true;
     
     public $opacity = 1;
@@ -35,29 +37,49 @@ class Notify extends Widget
     
     public $timeout = 2000;
     
+    public $alertTypes = [
+        'error' => 'alert-danger',
+        'danger' => 'alert-danger',
+        'success' => 'alert-success',
+        'info' => 'alert-info',
+        'warning' => 'alert-warning'
+    ];
     
-    public function run(){
+    
+    public function run()
+    {
         NotifyAsset::register($this->view);
-        if(empty($this->msg)) {
-            $this->msg = \Yii::$app->session->getFlash("notify",null,true);
+        $session = \Yii::$app->session;
+        $flashes = $session->getAllFlashes();
+        foreach ($flashes as $type => $flash) {
+            if (! isset($this->alertTypes[$type])) {
+                continue;
+            }
+            
+            foreach ((array) $flash as $i => $message) {
+                $this->renderNotify($message);
+            }
+            
+            $session->removeFlash($type);
         }
-        if(empty($this->msg)) {
-            return false;
-        }
+        
+    }
+    
+    public function renderNotify($msg){
         $options = [
-            'msg'=>$this->msg,
-            'type'=>$this->type,
-            'position'=>$this->position,
-//             'width'=>$this->width,
-//             'height'=>$this->height,
-            'autohide'=>$this->autohide,
-            'opacity'=>$this->opacity,
-            'multiline'=>$this->multiline,
-            'clickable'=>$this->clickable,
-            'timeout'=>$this->timeout
+            'msg' => $msg,
+            'type' => $this->type,
+            'position' => $this->position,
+            // 'width'=>$this->width,
+            // 'height'=>$this->height,
+            'autohide' => $this->autohide,
+            'opacity' => $this->opacity,
+            'multiline' => $this->multiline,
+            'clickable' => $this->clickable,
+            'timeout' => $this->timeout
         ];
         
-        $js = "notif(".Json::htmlEncode($options).")";
+        $js = "notif(" . Json::htmlEncode($options) . ")";
         $this->view->registerJs($js);
     }
 }

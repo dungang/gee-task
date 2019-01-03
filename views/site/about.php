@@ -1,5 +1,7 @@
 <?php
 
+use app\widgets\GiteeProjectCommits;
+
 /* @var $this yii\web\View */
 $this->title = '欢迎您';
 ?>
@@ -57,4 +59,8 @@ $this->title = '欢迎您';
 	<p class="lead">
 		<strong>自省</strong> 团队定期反思如何能提高成效，并相应地调整自身的行为
 	</p>
+</div>
+<div class="col-md-6 col-md-offset-3">
+	<h2 class="text-center">GeeTask 最新动态</h2>
+	<?php echo GiteeProjectCommits::widget()?>
 </div>
