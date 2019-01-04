@@ -15,14 +15,7 @@ $this->params['breadcrumbs'][] = [
         'index'
     ]
 ];
-$this->params['breadcrumbs'][] = [
-    'label' => $model->name,
-    'url' => [
-        'view',
-        'id' => $model->name
-    ]
-];
-$this->params['breadcrumbs'][] = '授权';
+$this->params['breadcrumbs'][] = $model->name . '授权';
 ?>
 <div class="auth-role-permissions">
 

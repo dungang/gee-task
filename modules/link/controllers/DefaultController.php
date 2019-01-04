@@ -1,5 +1,4 @@
 <?php
-
 namespace modules\link\controllers;
 
 use app\controllers\AppController;
@@ -11,6 +10,12 @@ use app\helpers\MiscHelper;
  */
 class DefaultController extends AppController
 {
+    public function init(){
+        parent::init();
+        $this->userActions = [
+            'index'
+        ];
+    }
     public function actions(){
         $project_id = MiscHelper::getProjectId();
 		return [
