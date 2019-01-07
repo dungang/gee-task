@@ -15,7 +15,7 @@ use app\models\User;
 $sprint = Sprint::findOne([
     'id' => $searchModel->sprint_id
 ]);
-$this->title = '#' . $searchModel->sprint_id . $sprint->name . '用户故事';
+$this->title = '{#' . $searchModel->sprint_id .'}'. $sprint->name . '用户故事';
 $this->params['breadcrumbs'][] = $this->title;
 $storyStatuses = StoryStatus::allIdToName('id', 'name', [
     'is_backlog' => 0

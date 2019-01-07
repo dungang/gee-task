@@ -13,7 +13,7 @@ use app\widgets\EmojiOneArea;
 
     <?php $form = ActiveForm::begin(['id'=>'timeline-form','enableAjaxValidation' => true]); ?>
 
-    <?= $form->field($model, 'title')->widget(DatePicker::class) ?>
+    <?= $form->field($model, 'title')->widget(DatePicker::className()) ?>
 
     <?= $form->field($model, 'description')->textInput(['maxlength' => true,'id'=>'timeline-description']) ?>
 
