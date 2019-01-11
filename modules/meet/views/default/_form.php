@@ -3,6 +3,7 @@ use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 use app\widgets\DatePicker;
 use app\widgets\EmojiOneArea;
+use yii\helpers\Url;
 
 /* @var $this yii\web\View */
 /* @var $model modules\meet\models\Meet */
@@ -22,6 +23,7 @@ use app\widgets\EmojiOneArea;
 
     <?= $form->field($model, 'content')->widget('app\widgets\WangEditor',[
         'clientOptions'=>[
+            'uploadImgServer'=>Url::to(['/attachment/wang-editor']),
             'menus'=>[
                 'head',  // 标题
                 'bold',  // 粗体
