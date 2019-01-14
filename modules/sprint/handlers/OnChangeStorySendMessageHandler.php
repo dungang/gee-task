@@ -30,7 +30,8 @@ class OnChangeStorySendMessageHandler extends RobotSendMessageHandler
             }
             $vars['{story.id}'] = $data->id;
             $vars['{story.user}'] = $proccesor->nick_name;
-            if ($active = self::$models['story-active']) {
+           
+            if ($active = isset(self::$models['story-active'])?self::$models['story-active']:false) {
                 $vars['{story.old_status}'] = $status[$active->old_status];
                 $vars['{story.remark}'] = $active->remark;
             } else {

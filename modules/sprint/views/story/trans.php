@@ -38,7 +38,7 @@ $this->params['breadcrumbs'][] = '转移';
 	<div class="story-form">
 
     <?php $form = ActiveForm::begin(['id'=>'backlog-story-form','enableAjaxValidation' => true]); ?>
-	<?= Html::activeHiddenInput($model,'spring_id',array('value'=>0)) ?>
+	<?= Html::activeHiddenInput($model,'sprint_id',array('value'=>0)) ?>
     <?= $form->field($model, 'status')->dropDownList(StoryStatus::allIdToName('id','name',['is_backlog'=>1])) ?>
 
     <div class="form-group">

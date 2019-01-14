@@ -30,7 +30,7 @@ class Story extends \app\core\BaseModel
         'bug' => 'Bug',
         'requirement' => '需求',
         'spike' => '探针',
-        'maintenance'=>'运维'
+        'maintenance' => '运维'
     ];
 
     /**
@@ -53,9 +53,12 @@ class Story extends \app\core\BaseModel
                 [
                     'sprint_id',
                     'status',
-                    'project_id'
+                    'project_id',
                 ],
                 'required'
+            ],
+            [
+                ['important'],'required','on'=>'backlog'
             ],
             [
                 [

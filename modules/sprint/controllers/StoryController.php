@@ -25,14 +25,14 @@ class StoryController extends AppController
                 'class' => 'app\core\CreateModelAction',
                 'modelClass' => [
                     'class' => 'modules\sprint\models\Story',
-                    'project_id' => $project_id
+                    'project_id' => $project_id,
                 ]
             ],
             'update' => [
                 'class' => 'app\core\UpdateModelAction',
                 'modelClass' => [
                     'class' => 'modules\sprint\models\Story',
-                    'project_id' => $project_id
+                    'project_id' => $project_id,
                 ]
             ],
             'trans' => [
@@ -46,14 +46,14 @@ class StoryController extends AppController
                 'class' => 'app\core\ViewModelAction',
                 'modelClass' => [
                     'class' => 'modules\sprint\models\Story',
-                    'project_id' => $project_id
+                    'project_id' => $project_id,
                 ]
             ],
             'delete' => [
                 'class' => 'app\core\DeleteModelAction',
                 'modelClass' => [
                     'class' => 'modules\sprint\models\Story',
-                    'project_id' => $project_id
+                    'project_id' => $project_id,
                 ]
             ]
         ];

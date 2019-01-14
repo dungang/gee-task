@@ -4,6 +4,7 @@ namespace app\core;
 use yii\base\Action;
 use yii\web\NotFoundHttpException;
 use yii\base\InvalidConfigException;
+use yii\base\Model;
 
 /**
  * 
@@ -14,6 +15,8 @@ use yii\base\InvalidConfigException;
 class BaseAction extends Action
 {
     const EVENT_BEFORE_RUN = 'beforeRun';
+    const CREATE_ONE_ON_NOT_FOUND_YES = true;
+    const CREATE_ONE_ON_NOT_FOUND_NO = false;
     
     public $modelBehaviors = [];
     
@@ -61,6 +64,7 @@ class BaseAction extends Action
     protected function findModel($createOneOnNotFound=false)
     {
         $model = null;
+        $scenario = Model::SCENARIO_DEFAULT;
         if ($this->modelClass) {
             if (is_string($this->modelClass)) {
                 $class = $this->modelClass;
@@ -68,6 +72,10 @@ class BaseAction extends Action
             } else if (is_array($this->modelClass) && isset($this->modelClass['class'])) {
                 $args = $this->modelClass;
                 $class = array_shift($args);
+            }
+            if(isset($args['scenario'])) {
+                $scenario = $args['scenario'];
+                unset($args['scenario']);
             }
             if($class) {
                 
@@ -79,9 +87,10 @@ class BaseAction extends Action
             }
         }
         if ($model !== null) {
+            $model->scenario = $scenario;
             return $model;
         } else  if($createOneOnNotFound) {
-            return \Yii::createObject($this->modelClass);
+            return \Yii::createObject($this->modelClass,['scenario'=>$scenario]);
         }
         
         throw new NotFoundHttpException('The requested page does not exist.');

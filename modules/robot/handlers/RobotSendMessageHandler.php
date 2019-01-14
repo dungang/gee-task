@@ -14,6 +14,10 @@ abstract class RobotSendMessageHandler extends Model implements CustomEventHandl
     
     public $msg_code;
     
+    /**
+     * 传递对象实例
+     * @var array
+     */
     public static $models = [];
     
     public static function addModelChain($name,$model){
