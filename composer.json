@@ -19,18 +19,11 @@
 		"yiisoft/yii2" : "~2.0.14",
 		"yiisoft/yii2-bootstrap" : "~2.0.0",
 		"yiisoft/yii2-swiftmailer" : "~2.0.0",
-		"yiisoft/yii2-httpclient" : "^2.0",
-		"dungang/yii2-ueditor" : "*",
-		"dungang/yii2-fex-webuploader" : "dev-master",
-		"phpspec/php-diff" : "^1.0@dev"
+		"yiisoft/yii2-httpclient" : "^2.0"
 	},
 	"require-dev" : {
 		"yiisoft/yii2-debug" : "~2.0.0",
-		"yiisoft/yii2-gii" : "~2.0.0",
-		"yiisoft/yii2-faker" : "~2.0.0",
-		"codeception/base" : "^2.2.3",
-		"codeception/verify" : "~0.3.1",
-		"codeception/specify" : "~0.4.3"
+		"yiisoft/yii2-gii" : "~2.0.0"
 	},
 	"config" : {
 		"process-timeout" : 1800,

@@ -11,7 +11,7 @@ use yii\widgets\ActiveForm;
 
     <?php $form = ActiveForm::begin(['id'=>'story-status-form','enableAjaxValidation' => true]); ?>
 
-    <?= $form->field($model, 'is_backlog')->dropDownList(['0'=>'否','1'=>'是']) ?>
+    <?= $form->field($model, 'is_backlog')->radioList(['0'=>'否','1'=>'是']) ?>
 
     <?= $form->field($model, 'name')->textInput(['maxlength' => true]) ?>
 

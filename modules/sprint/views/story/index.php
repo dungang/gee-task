@@ -47,7 +47,7 @@ $storyStatuses = StoryStatus::allIdToName('id', 'name', [
     }
     if (empty($storyStatuses)) {
 
-        $colWidth['taskName'] += $statusWidth;
+        $colWidth['name'] += $statusWidth;
     }
 
     $dataProvider->pagination = false;
