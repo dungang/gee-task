@@ -17,6 +17,9 @@ class Timeline extends Widget
 
     public function run()
     {
+        if($this->size == 0) {
+            return '';
+        }
         TimelineAsset::register($this->view);
         $this->clientOptions['forceVerticalMode'] = $this->forceVerticalMode;
         $this->clientOptions['mode'] = $this->mode;
