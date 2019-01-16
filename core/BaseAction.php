@@ -18,6 +18,8 @@ class BaseAction extends Action
     const CREATE_ONE_ON_NOT_FOUND_YES = true;
     const CREATE_ONE_ON_NOT_FOUND_NO = false;
     
+    public $defaultView = null;
+    
     public $modelBehaviors = [];
     
     /**
@@ -39,6 +41,12 @@ class BaseAction extends Action
      * @var string
      */
     public $successRediretUrl = false;
+    
+    public function init(){
+        if(\is_null($this->defaultView)) {
+            $this->defaultView = $this->id;
+        }
+    }
     
     
     /**

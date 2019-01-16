@@ -9,7 +9,7 @@ class ListModelsAction extends BaseAction
         
         $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
         
-        return $this->controller->render($this->id, [
+        return $this->controller->render($this->defaultView, [
             'searchModel' => $searchModel,
             'dataProvider' => $dataProvider,
         ]);

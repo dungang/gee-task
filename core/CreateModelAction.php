@@ -38,7 +38,7 @@ class CreateModelAction extends BaseAction
             return $this->controller->renderOnFail($this->id, $data, $model->firstErrors);
         }
 
-        return $this->controller->render($this->id, $data);
+        return $this->controller->render($this->defaultView, $data);
     }
 }
 

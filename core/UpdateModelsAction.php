@@ -26,11 +26,11 @@ class UpdateModelsAction extends BaseAction
             });
         } catch (\Exception $e) {  
             Yii::warning($e->getTraceAsString());
-            return $this->controller->renderOnException($this->id,$data);
+            return $this->controller->renderOnException($this->defaultView,$data);
             
         }
 
-        return $this->controller->renderOnSuccess($this->id,$data);
+        return $this->controller->renderOnSuccess($this->defaultView,$data);
     }
 }
 

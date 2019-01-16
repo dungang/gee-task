@@ -31,18 +31,18 @@ class UpdateMultipleModelsAction extends BaseAction
             } catch (\Exception $e) {
 
                 Yii::warning($e->getTraceAsString());
-                return $this->controller->renderOnException($this->id, $data);
+                return $this->controller->renderOnException($this->defaultView, $data);
             }
         }
 
         if (\Yii::$app->request->isPost) {
             if ($loaded === false) {
-                return $this->controller->renderOnFail($this->id, $data, '可能表达的字段更服务端不一致');
+                return $this->controller->renderOnFail($this->defaultView, $data, '可能表达的字段更服务端不一致');
             }
-            return $this->controller->renderOnFail($this->id, $data);
+            return $this->controller->renderOnFail($this->defaultView, $data);
         }
 
-        return $this->controller->render($this->id, $data);
+        return $this->controller->render($this->defaultView, $data);
     }
 }
 

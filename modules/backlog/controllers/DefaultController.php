@@ -54,7 +54,8 @@ class DefaultController extends AppController
                     'class' => 'modules\sprint\models\Story',
                     'project_id'=>$project_id,
                     'sprint_id'=>0,
-                ]
+                ],
+                'defaultView'=>'@modules/sprint/views/story/view'
             ],
             'delete' => [
                 'class' => 'app\core\DeleteModelAction',

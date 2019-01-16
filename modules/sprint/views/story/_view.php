@@ -1,49 +1,20 @@
 <?php
-use yii\helpers\Html;
 use yii\widgets\DetailView;
-use modules\sprint\models\StoryAcceptance;
 use modules\sprint\models\Story;
 use app\models\StoryStatus;
-use app\models\User;
 
-/* @var $this yii\web\View */
-/* @var $model modules\sprint\models\Story */
+/* @var $model \modules\sprint\models\Story */
+/* @var $users []|\app\models\User[] */
 
-$this->title = $model->name;
-$this->params['breadcrumbs'][] = [
-    'label' => 'Stories',
-    'url' => [
-        'index'
-    ]
-];
-$this->params['breadcrumbs'][] = $this->title;
-$users = User::allIdToName('id', 'nick_name');
 ?>
-<div class="modal-header">
-	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-	<h4 class="modal-title">#<?= Html::encode($model->id) ?></h4>
-</div>
-<div class="modal-body row">
-
-	<div class="col-md-12">
-		<blockquote>
-		<?php echo $model->name?>
-	</blockquote>
-	<?php
-$acceptances = StoryAcceptance::find()->where([
-    'story_id' => $model->id
-])->all();
-foreach($acceptances as $acceptance){
-    echo "<p>".$acceptance->acceptance."</p>";
-}
-?>
-	</div>
-
+<br />
+<div class="row">
 	<div class="col-md-6">
 	<?php
 
 echo DetailView::widget([
     'model' => $model,
+    'options'=>['class' => 'table table-bordered detail-view'],
     'attributes' => [
         'id',
         'project_version',
@@ -70,7 +41,14 @@ echo DetailView::widget([
 
 echo DetailView::widget([
     'model' => $model,
+    'options'=>['class' => 'table table-bordered detail-view'],
     'attributes' => [
+        [
+            'attribute' => 'user_id',
+            'value' => function ($model) use ($users) {
+                return isset($users[$model->user_id]) ? $users[$model->user_id] : '未指定';
+            }
+        ],
         [
             'attribute' => 'last_user_id',
             'value' => function ($model) use ($users) {
@@ -89,5 +67,4 @@ echo DetailView::widget([
     ]
 ])?>
 	</div>
-
 </div>

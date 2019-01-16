@@ -5,6 +5,8 @@ use modules\sprint\models\StoryAcceptance;
 use modules\sprint\models\Story;
 use app\models\StoryStatus;
 use app\models\User;
+use modules\sprint\models\StoryActive;
+use yii\bootstrap\Tabs;
 
 /* @var $this yii\web\View */
 /* @var $model modules\sprint\models\Story */
@@ -23,77 +25,34 @@ $users = User::allIdToName('id', 'nick_name');
 	<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
 	<h4 class="modal-title">#<?= Html::encode($model->id) ?></h4>
 </div>
-<div class="modal-body row">
-
-	<div class="col-md-12">
-		<blockquote>
-		<?php echo $model->name?>
-	</blockquote>
+<div class="modal-body">
+	<blockquote> <?php echo $model->name?> </blockquote>
 	<?php
-$acceptances = StoryAcceptance::find()->where([
-    'story_id' => $model->id
-])->all();
-foreach($acceptances as $acceptance){
-    echo "<p>".$acceptance->acceptance."</p>";
-}
+echo Tabs::widget([
+    'items' => [
+        [
+            'label' => '信息',
+            'content' => $this->render('_view', [
+                'model' => $model,
+                'users' => $users
+            ]),
+            'active' => true
+        ],
+        [
+            'label' => '验收',
+            'content' => $this->render('_acceptance', [
+                'model' => $model,
+            ]),
+        ],
+        [
+            'label' => '记录',
+            'content' => $this->render('_activity', [
+                'model' => $model,
+                'users' => $users
+            ]),
+        ]
+    ]
+]);
 ?>
-	</div>
-
-	<div class="col-md-6">
-	<?php
-
-echo DetailView::widget([
-    'model' => $model,
-    'attributes' => [
-        'id',
-        'project_version',
-        [
-            'attribute' => 'story_type',
-            'value' => function ($model) {
-                return Story::$types[$model->story_type];
-            }
-        ],
-        [
-            'attribute' => 'status',
-            'value' => function ($model) {
-                $status = StoryStatus::allIdToName();
-                return $status[$model->status];
-            }
-        ],
-        'important',
-        'points'
-    ]
-])?>
-	</div>
-	<div class="col-md-6">
-	<?php
-
-echo DetailView::widget([
-    'model' => $model,
-    'attributes' => [
-        [
-            'attribute' => 'user_id',
-            'value' => function ($model) use ($users) {
-                return $users[$model->user_id];
-            }
-        ],
-        [
-            'attribute' => 'last_user_id',
-            'value' => function ($model) use ($users) {
-                return $model->last_user_id ? $users[$model->last_user_id] : $model->last_user_id;
-            }
-        ],
-        [
-            'attribute' => 'creator_id',
-            'value' => function ($model) use ($users) {
-                return $model->creator_id ? $users[$model->creator_id] : $model->creator_id;
-            }
-        ],
-        'created_at:date',
-        'updated_at:date',
-        'is_del'
-    ]
-])?>
-	</div>
 
 </div>
