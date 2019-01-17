@@ -98,6 +98,11 @@ class Event extends \app\core\BaseModel
         return isset($handlersMap[$eventName])?$handlersMap[$eventName]:null;
     }
     
+    /**
+     * 触发自定义事件
+     * @param string $eventName
+     * @param array $params
+     */
     public static function triggerCustomEvent($eventName,$params=[]){
         $handlers = self::getEventHandlers($eventName);
         if(is_array($handlers)) {

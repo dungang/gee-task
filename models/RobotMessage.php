@@ -17,12 +17,22 @@ use Yii;
  */
 class RobotMessage extends \app\core\BaseModel
 {
+    const CacheKey = "robot.message.templates";
     /**
      * {@inheritdoc}
      */
     public static function tableName()
     {
         return 'gt_robot_message';
+    }
+    
+    public function behaviors(){
+        $b = parent::behaviors();
+        $b['cleanCache'] = [
+            'class'=>'app\behaviors\CleanCacheBehavior',
+            'cacheKey'=>self::CacheKey
+        ];
+        return $b;
     }
 
     /**
@@ -60,5 +70,18 @@ class RobotMessage extends \app\core\BaseModel
     public static function find()
     {
         return new RobotMessageQuery(get_called_class());
+    }
+    
+    /**
+     * 获取消息的所有模板，并缓存
+     * @param string $msg_code 模板编号
+     * @return NULL|array|object
+     */
+    public static function getMessageTempateByCode($msg_code) {
+        if(!($handlersMap = Yii::$app->cache->get(self::CacheKey))){
+            $handlersMap = self::find()->indexBy('code')->all();
+            Yii::$app->cache->add(self::CacheKey, $handlersMap);
+        }
+        return isset($handlersMap[$msg_code])?$handlersMap[$msg_code]:null;
     }
 }

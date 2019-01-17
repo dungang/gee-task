@@ -36,7 +36,8 @@ class SiteController extends AdminController
     {
         return [
             'error' => [
-                'class' => 'yii\web\ErrorAction'
+                'class' => 'yii\web\ErrorAction',
+                'layout'=>'error'
             ]
         ];
     }

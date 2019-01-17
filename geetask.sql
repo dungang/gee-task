@@ -2,7 +2,7 @@
 -- 主机:                           127.0.0.1
 -- 服务器版本:                        10.1.19-MariaDB - mariadb.org binary distribution
 -- 服务器操作系统:                      Win32
--- HeidiSQL 版本:                  9.5.0.5338
+-- HeidiSQL 版本:                  9.5.0.5453
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
@@ -11,855 +11,733 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
-
-
--- 导出  表 geetask.auth_assignment 结构
-CREATE TABLE IF NOT EXISTS `auth_assignment` (
-  `item_name` varchar(64) NOT NULL,
-  `user_id` varchar(64) NOT NULL,
-  `created_at` int(11) DEFAULT NULL,
-  PRIMARY KEY (`item_name`,`user_id`),
-  KEY `auth_assignment_user_id_idx` (`user_id`),
-  CONSTRAINT `auth_assignment_ibfk_1` FOREIGN KEY (`item_name`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
 -- 正在导出表  geetask.auth_assignment 的数据：~0 rows (大约)
 /*!40000 ALTER TABLE `auth_assignment` DISABLE KEYS */;
 /*!40000 ALTER TABLE `auth_assignment` ENABLE KEYS */;
 
--- 导出  表 geetask.auth_item 结构
-CREATE TABLE IF NOT EXISTS `auth_item` (
-  `name` varchar(64) NOT NULL,
-  `type` smallint(6) NOT NULL,
-  `description` text,
-  `rule_name` varchar(64) DEFAULT NULL,
-  `data` blob,
-  `created_at` int(11) DEFAULT NULL,
-  `updated_at` int(11) DEFAULT NULL,
-  PRIMARY KEY (`name`),
-  KEY `rule_name` (`rule_name`),
-  KEY `idx-auth_item-type` (`type`),
-  CONSTRAINT `auth_item_ibfk_1` FOREIGN KEY (`rule_name`) REFERENCES `auth_rule` (`name`) ON DELETE SET NULL ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- 正在导出表  geetask.auth_item 的数据：~191 rows (大约)
+-- 正在导出表  geetask.auth_item 的数据：~227 rows (大约)
 /*!40000 ALTER TABLE `auth_item` DISABLE KEYS */;
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/ac-route/create', 4, 'ac route create', NULL, NULL, 1543224292, 1543224292);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/ac-route/index', 4, 'ac route index', NULL, NULL, 1543224289, 1543224289);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/ac-route/update', 4, 'ac route update', NULL, NULL, 1544087957, 1544087957);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/ac-route/view', 4, 'ac route view', NULL, NULL, 1543224304, 1543224304);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/aliyun-log/default/setting', 4, 'aliyun log default setting', NULL, NULL, 1543812158, 1543812158);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/app-module/index', 4, 'app module index', NULL, NULL, 1543222003, 1543222003);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/app-module/update', 4, 'app module update', NULL, NULL, 1544087093, 1544087093);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/app-module/view', 4, 'app module view', NULL, NULL, 1544087941, 1544087941);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/auth-permission/create', 4, 'auth permission create', NULL, NULL, 1543225416, 1543225416);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/auth-permission/index', 4, 'auth permission index', NULL, NULL, 1543225066, 1543225066);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/auth-permission/update', 4, 'auth permission update', NULL, NULL, 1543310118, 1543310118);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/auth-role/create', 4, 'auth role create', NULL, NULL, 1543387986, 1543387986);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/auth-role/index', 4, 'auth role index', NULL, NULL, 1543225064, 1543225064);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/auth-role/permission', 4, 'auth role permission', NULL, NULL, 1543570277, 1543570277);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/auth-role/update', 4, 'auth role update', NULL, NULL, 1543288315, 1543288315);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/auth-rule/create', 4, 'auth rule create', NULL, NULL, 1543225072, 1543225072);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/auth-rule/index', 4, 'auth rule index', NULL, NULL, 1543225069, 1543225069);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/auth-rule/update', 4, 'auth rule update', NULL, NULL, 1543309941, 1543309941);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/auth-rule/view', 4, 'auth rule view', NULL, NULL, 1543309946, 1543309946);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/backlog/acceptance/create', 4, 'backlog acceptance create', NULL, NULL, 1543457417, 1543457417);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/backlog/acceptance/index', 4, 'backlog acceptance index', NULL, NULL, 1543457223, 1543457223);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/backlog/default/create', 4, 'backlog default create', NULL, NULL, 1543397576, 1543397576);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/backlog/default/index', 4, 'backlog default index', NULL, NULL, 1543397160, 1543397160);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/backlog/default/trans', 4, 'backlog default trans', NULL, NULL, 1544435556, 1544435556);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/backlog/default/view', 4, 'backlog default view', NULL, NULL, 1544435473, 1544435473);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/change/default/create', 4, 'change default create', NULL, NULL, 1543389913, 1543389913);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/change/default/index', 4, 'change default index', NULL, NULL, 1543388974, 1543388974);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/event-handler/create', 4, 'event handler create', NULL, NULL, 1543392895, 1543392895);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/event-handler/index', 4, 'event handler index', NULL, NULL, 1543392890, 1543392890);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/event-handler/update', 4, 'event handler update', NULL, NULL, 1543549693, 1543549693);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/event/create', 4, 'event create', NULL, NULL, 1543370011, 1543370011);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/event/index', 4, 'event index', NULL, NULL, 1543370008, 1543370008);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/event/update', 4, 'event update', NULL, NULL, 1543548211, 1543548211);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/im-robot/create', 4, 'im robot create', NULL, NULL, 1543400043, 1543400043);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/im-robot/index', 4, 'im robot index', NULL, NULL, 1543392062, 1543392062);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/im-robot/update', 4, 'im robot update', NULL, NULL, 1543462272, 1543462272);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/link/default/create', 4, 'link default create', NULL, NULL, 1546506744, 1546506744);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/link/default/index', 4, 'link default index', NULL, NULL, 1546506685, 1546506685);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/link/default/view', 4, 'link default view', NULL, NULL, 1546507350, 1546507350);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/meet/default/create', 4, 'meet default create', NULL, NULL, 1543388471, 1543388471);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/meet/default/delete', 4, 'meet default delete', NULL, NULL, 1543562135, 1543562135);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/meet/default/index', 4, 'meet default index', NULL, NULL, 1543388350, 1543388350);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/meet/default/update', 4, 'meet default update', NULL, NULL, 1543567793, 1543567793);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/meet/default/view', 4, 'meet default view', NULL, NULL, 1543561947, 1543561947);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/member/default/create', 4, 'member default create', NULL, NULL, 1543387712, 1543387712);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/member/default/delete', 4, 'member default delete', NULL, NULL, 1543569831, 1543569831);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/member/default/index', 4, 'member default index', NULL, NULL, 1543387160, 1543387160);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/member/default/update', 4, 'member default update', NULL, NULL, 1543399855, 1543399855);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/member/default/view', 4, 'member default view', NULL, NULL, 1543563100, 1543563100);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/myproject/default/create', 4, 'myproject default create', NULL, NULL, 1543455548, 1543455548);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/myproject/default/index', 4, 'myproject default index', NULL, NULL, 1543455189, 1543455189);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/plan/default/index', 4, 'plan default index', NULL, NULL, 1543237893, 1543237893);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/project/create', 4, 'project create', NULL, NULL, 1543239722, 1543239722);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/project/index', 4, 'project index', NULL, NULL, 1543239549, 1543239549);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/project/space', 4, 'project space', NULL, NULL, 1543371051, 1543371051);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/project/update', 4, 'project update', NULL, NULL, 1543310102, 1543310102);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/project/view', 4, 'project view', NULL, NULL, 1543310095, 1543310095);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/robot-message/create', 4, 'robot message create', NULL, NULL, 1543975504, 1543975504);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/robot-message/index', 4, 'robot message index', NULL, NULL, 1543392356, 1543392356);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/robot-message/update', 4, 'robot message update', NULL, NULL, 1543976189, 1543976189);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/robot-message/view', 4, 'robot message view', NULL, NULL, 1543976876, 1543976876);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/robot/default/create', 4, 'robot default create', NULL, NULL, 1543391518, 1543391518);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/robot/default/index', 4, 'robot default index', NULL, NULL, 1543391351, 1543391351);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/robot/default/update', 4, 'robot default update', NULL, NULL, 1543462308, 1543462308);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/role/create', 4, 'role create', NULL, NULL, 1543288176, 1543288176);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/role/index', 4, 'role index', NULL, NULL, 1543288172, 1543288172);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/role/permission', 4, 'role permission', NULL, NULL, 1543288992, 1543288992);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/role/update', 4, 'role update', NULL, NULL, 1543288233, 1543288233);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/site/index', 4, 'site index', NULL, NULL, 1543207656, 1543207656);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/space/default/create', 4, 'space default create', NULL, NULL, 1543377197, 1543377197);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/space/default/index', 4, 'space default index', NULL, NULL, 1543375474, 1543375474);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/space/default/update', 4, 'space default update', NULL, NULL, 1543477938, 1543477938);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/sprint/default/create', 4, 'sprint default create', NULL, NULL, 1543242482, 1543242482);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/sprint/default/delete', 4, 'sprint default delete', NULL, NULL, 1543459132, 1543459132);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/sprint/default/index', 4, 'sprint default index', NULL, NULL, 1543242478, 1543242478);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/sprint/default/update', 4, 'sprint default update', NULL, NULL, 1543415054, 1543415054);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/sprint/default/view', 4, 'sprint default view', NULL, NULL, 1543458272, 1543458272);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/sprint/story-active/create', 4, 'sprint story active create', NULL, NULL, 1543416108, 1543416108);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/sprint/story/create', 4, 'sprint story create', NULL, NULL, 1543399496, 1543399496);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/sprint/story/index', 4, 'sprint story index', NULL, NULL, 1543398611, 1543398611);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/sprint/story/trans', 4, 'sprint story trans', NULL, NULL, 1543985858, 1543985858);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/sprint/story/update', 4, 'sprint story update', NULL, NULL, 1543462511, 1543462511);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/sprint/story/view', 4, 'sprint story view', NULL, NULL, 1543415664, 1543415664);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/story-status/create', 4, 'story status create', NULL, NULL, 1543394955, 1543394955);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/story-status/index', 4, 'story status index', NULL, NULL, 1543394875, 1543394875);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/switch-project/index', 4, 'switch project index', NULL, NULL, 1543370113, 1543370113);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/user/create', 4, 'user create', NULL, NULL, 1543208720, 1543208720);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/user/index', 4, 'user index', NULL, NULL, 1543207762, 1543207762);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/user/role', 4, 'user role', NULL, NULL, 1543207775, 1543207775);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/user/update', 4, 'user update', NULL, NULL, 1543207796, 1543207796);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('/user/view', 4, 'user view', NULL, NULL, 1543209419, 1543209419);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('ac-route', 3, 'ac route', NULL, NULL, 1543224289, 1543224289);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('ac-route-create', 2, 'ac route create', NULL, NULL, 1543224292, 1543224292);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('ac-route-index', 2, 'ac route index', NULL, NULL, 1543224289, 1543224289);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('ac-route-update', 2, 'ac route update', NULL, NULL, 1544087957, 1544087957);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('ac-route-view', 2, 'ac route view', NULL, NULL, 1543224304, 1543224304);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('aliyun-log-default', 3, 'aliyun log default', NULL, NULL, 1543812156, 1543812156);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('aliyun-log-default-setting', 2, 'aliyun log default setting', NULL, NULL, 1543812158, 1543812158);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('aliyun-log-store', 3, 'aliyun log store', NULL, NULL, 1543813263, 1543813263);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('app-module', 3, 'app module', NULL, NULL, 1543222002, 1543222002);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('app-module-index', 2, 'app module index', NULL, NULL, 1543222003, 1543222003);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('app-module-update', 2, 'app module update', NULL, NULL, 1544087093, 1544087093);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('app-module-view', 2, 'app module view', NULL, NULL, 1544087941, 1544087941);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('auth-permission', 3, 'auth permission', NULL, NULL, 1543225066, 1543225066);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('auth-permission-create', 2, 'auth permission create', NULL, NULL, 1543225416, 1543225416);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('auth-permission-index', 2, 'auth permission index', NULL, NULL, 1543225066, 1543225066);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('auth-permission-update', 2, 'auth permission update', NULL, NULL, 1543310118, 1543310118);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('auth-role', 3, 'auth role', NULL, NULL, 1543225064, 1543225064);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('auth-role-create', 2, 'auth role create', NULL, NULL, 1543387986, 1543387986);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('auth-role-index', 2, 'auth role index', NULL, NULL, 1543225064, 1543225064);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('auth-role-permission', 2, 'auth role permission', NULL, NULL, 1543570277, 1543570277);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('auth-role-update', 2, 'auth role update', NULL, NULL, 1543288315, 1543288315);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('auth-rule', 3, 'auth rule', NULL, NULL, 1543225069, 1543225069);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('auth-rule-create', 2, 'auth rule create', NULL, NULL, 1543225072, 1543225072);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('auth-rule-index', 2, 'auth rule index', NULL, NULL, 1543225069, 1543225069);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('auth-rule-update', 2, 'auth rule update', NULL, NULL, 1543309942, 1543309942);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('auth-rule-view', 2, 'auth rule view', NULL, NULL, 1543309946, 1543309946);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('backlog-acceptance', 3, 'backlog acceptance', NULL, NULL, 1543457223, 1543457223);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('backlog-acceptance-create', 2, 'backlog acceptance create', NULL, NULL, 1543457417, 1543457417);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('backlog-acceptance-index', 2, 'backlog acceptance index', NULL, NULL, 1543457223, 1543457223);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('backlog-default', 3, 'backlog default', NULL, NULL, 1543397160, 1543397160);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('backlog-default-create', 2, 'backlog default create', NULL, NULL, 1543397576, 1543397576);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('backlog-default-index', 2, 'backlog default index', NULL, NULL, 1543397160, 1543397160);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('backlog-default-trans', 2, 'backlog default trans', NULL, NULL, 1544435556, 1544435556);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('backlog-default-view', 2, 'backlog default view', NULL, NULL, 1544435473, 1544435473);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('change-default', 3, 'change default', NULL, NULL, 1543388974, 1543388974);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('change-default-create', 2, 'change default create', NULL, NULL, 1543389914, 1543389914);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('change-default-index', 2, 'change default index', NULL, NULL, 1543388974, 1543388974);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('event', 3, 'event', NULL, NULL, 1543370008, 1543370008);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('event-create', 2, 'event create', NULL, NULL, 1543370011, 1543370011);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('event-handler', 3, 'event handler', NULL, NULL, 1543392890, 1543392890);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('event-handler-create', 2, 'event handler create', NULL, NULL, 1543392895, 1543392895);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('event-handler-index', 2, 'event handler index', NULL, NULL, 1543392890, 1543392890);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('event-handler-update', 2, 'event handler update', NULL, NULL, 1543549693, 1543549693);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('event-index', 2, 'event index', NULL, NULL, 1543370008, 1543370008);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('event-update', 2, 'event update', NULL, NULL, 1543548211, 1543548211);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('im-robot', 3, 'im robot', NULL, NULL, 1543392062, 1543392062);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('im-robot-create', 2, 'im robot create', NULL, NULL, 1543400044, 1543400044);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('im-robot-index', 2, 'im robot index', NULL, NULL, 1543392062, 1543392062);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('im-robot-update', 2, 'im robot update', NULL, NULL, 1543462272, 1543462272);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('link-default', 3, 'link default', NULL, NULL, 1546506685, 1546506685);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('link-default-create', 2, 'link default create', NULL, NULL, 1546506744, 1546506744);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('link-default-index', 2, 'link default index', NULL, NULL, 1546506685, 1546506685);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('link-default-view', 2, 'link default view', NULL, NULL, 1546507350, 1546507350);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('meet-default', 3, 'meet default', NULL, NULL, 1543388350, 1543388350);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('meet-default-create', 2, 'meet default create', NULL, NULL, 1543388471, 1543388471);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('meet-default-delete', 2, 'meet default delete', NULL, NULL, 1543562135, 1543562135);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('meet-default-index', 2, 'meet default index', NULL, NULL, 1543388350, 1543388350);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('meet-default-update', 2, 'meet default update', NULL, NULL, 1543567793, 1543567793);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('meet-default-view', 2, 'meet default view', NULL, NULL, 1543561947, 1543561947);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('member-default', 3, 'member default', NULL, NULL, 1543387160, 1543387160);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('member-default-create', 2, 'member default create', NULL, NULL, 1543387712, 1543387712);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('member-default-delete', 2, 'member default delete', NULL, NULL, 1543569831, 1543569831);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('member-default-index', 2, 'member default index', NULL, NULL, 1543387160, 1543387160);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('member-default-update', 2, 'member default update', NULL, NULL, 1543399855, 1543399855);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('member-default-view', 2, 'member default view', NULL, NULL, 1543563100, 1543563100);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('myproject-default', 3, 'myproject default', NULL, NULL, 1543455189, 1543455189);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('myproject-default-create', 2, 'myproject default create', NULL, NULL, 1543455548, 1543455548);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('myproject-default-index', 2, 'myproject default index', NULL, NULL, 1543455189, 1543455189);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('plan-default', 3, 'plan default', NULL, NULL, 1543237893, 1543237893);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('plan-default-index', 2, 'plan default index', NULL, NULL, 1543237893, 1543237893);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('project', 3, 'project', NULL, NULL, 1543239549, 1543239549);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('project-create', 2, 'project create', NULL, NULL, 1543239722, 1543239722);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('project-index', 2, 'project index', NULL, NULL, 1543239549, 1543239549);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('project-space', 2, 'project space', NULL, NULL, 1543371051, 1543371051);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('project-update', 2, 'project update', NULL, NULL, 1543310102, 1543310102);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('project-view', 2, 'project view', NULL, NULL, 1543310095, 1543310095);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('robot-default', 3, 'robot default', NULL, NULL, 1543391351, 1543391351);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('robot-default-create', 2, 'robot default create', NULL, NULL, 1543391518, 1543391518);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('robot-default-index', 2, 'robot default index', NULL, NULL, 1543391351, 1543391351);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('robot-default-update', 2, 'robot default update', NULL, NULL, 1543462308, 1543462308);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('robot-message', 3, 'robot message', NULL, NULL, 1543392356, 1543392356);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('robot-message-create', 2, 'robot message create', NULL, NULL, 1543975504, 1543975504);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('robot-message-index', 2, 'robot message index', NULL, NULL, 1543392356, 1543392356);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('robot-message-update', 2, 'robot message update', NULL, NULL, 1543976189, 1543976189);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('robot-message-view', 2, 'robot message view', NULL, NULL, 1543976876, 1543976876);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('role', 3, 'role', NULL, NULL, 1543288172, 1543288172);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('role-create', 2, 'role create', NULL, NULL, 1543288176, 1543288176);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('role-index', 2, 'role index', NULL, NULL, 1543288172, 1543288172);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('role-permission', 2, 'role permission', NULL, NULL, 1543288992, 1543288992);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('role-update', 2, 'role update', NULL, NULL, 1543288233, 1543288233);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('site', 3, 'site', NULL, NULL, 1543207654, 1543207654);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('site-index', 2, 'site index', NULL, NULL, 1543207656, 1543207656);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('space-default', 3, 'space default', NULL, NULL, 1543375474, 1543375474);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('space-default-create', 2, 'space default create', NULL, NULL, 1543377197, 1543377197);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('space-default-index', 2, 'space default index', NULL, NULL, 1543375474, 1543375474);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('space-default-update', 2, 'space default update', NULL, NULL, 1543477938, 1543477938);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('sprint-default', 3, 'sprint default', NULL, NULL, 1543242478, 1543242478);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('sprint-default-create', 2, 'sprint default create', NULL, NULL, 1543242482, 1543242482);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('sprint-default-delete', 2, 'sprint default delete', NULL, NULL, 1543459132, 1543459132);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('sprint-default-index', 2, 'sprint default index', NULL, NULL, 1543242478, 1543242478);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('sprint-default-update', 2, 'sprint default update', NULL, NULL, 1543415054, 1543415054);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('sprint-default-view', 2, 'sprint default view', NULL, NULL, 1543458272, 1543458272);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('sprint-story', 3, 'sprint story', NULL, NULL, 1543398611, 1543398611);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('sprint-story-active', 3, 'sprint story active', NULL, NULL, 1543416108, 1543416108);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('sprint-story-active-create', 2, 'sprint story active create', NULL, NULL, 1543416108, 1543416108);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('sprint-story-create', 2, 'sprint story create', NULL, NULL, 1543399496, 1543399496);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('sprint-story-index', 2, 'sprint story index', NULL, NULL, 1543398611, 1543398611);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('sprint-story-trans', 2, 'sprint story trans', NULL, NULL, 1543985858, 1543985858);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('sprint-story-update', 2, 'sprint story update', NULL, NULL, 1543462511, 1543462511);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('sprint-story-view', 2, 'sprint story view', NULL, NULL, 1543415664, 1543415664);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('story-status', 3, 'story status', NULL, NULL, 1543394875, 1543394875);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('story-status-create', 2, 'story status create', NULL, NULL, 1543394956, 1543394956);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('story-status-index', 2, 'story status index', NULL, NULL, 1543394875, 1543394875);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('switch-project', 3, 'switch project', NULL, NULL, 1543370113, 1543370113);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('switch-project-index', 2, 'switch project index', NULL, NULL, 1543370113, 1543370113);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('update-my-project', 2, '更新自己的项目', '\\app\\rules\\IsMyProject', NULL, 1543312748, 1543312748);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('user', 3, 'user', NULL, NULL, 1543207753, 1543207753);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('user-create', 2, 'user create', NULL, NULL, 1543208720, 1543208720);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('user-index', 2, 'user index', NULL, NULL, 1543207762, 1543207762);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('user-role', 2, 'user role', NULL, NULL, 1543207775, 1543207775);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('user-update', 2, 'user update', NULL, NULL, 1543207796, 1543207796);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('user-view', 2, 'user view', NULL, NULL, 1543209419, 1543209419);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('开发人员', 1, NULL, NULL, NULL, 1543562615, 1543562615);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('敏捷教练', 1, NULL, NULL, NULL, 1543562548, 1543562548);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('管理员1', 1, '', NULL, NULL, 1543288187, 1543288472);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('部门负责人', 1, 'deparment charge', NULL, NULL, 1543218870, 1543218975);
-INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES ('项目负责人', 1, NULL, NULL, NULL, 1543388020, 1543388020);
-
+INSERT INTO `auth_item` (`name`, `type`, `description`, `rule_name`, `data`, `created_at`, `updated_at`) VALUES
+	('/ac-route/create', 4, 'ac route create', NULL, NULL, 1543224292, 1543224292),
+	('/ac-route/index', 4, 'ac route index', NULL, NULL, 1543224289, 1543224289),
+	('/ac-route/update', 4, 'ac route update', NULL, NULL, 1544087957, 1544087957),
+	('/ac-route/view', 4, 'ac route view', NULL, NULL, 1543224304, 1543224304),
+	('/aliyun-log/default/setting', 4, 'aliyun log default setting', NULL, NULL, 1543812158, 1543812158),
+	('/app-module/index', 4, 'app module index', NULL, NULL, 1543222003, 1543222003),
+	('/app-module/update', 4, 'app module update', NULL, NULL, 1544087093, 1544087093),
+	('/app-module/view', 4, 'app module view', NULL, NULL, 1544087941, 1544087941),
+	('/auth-permission/create', 4, 'auth permission create', NULL, NULL, 1543225416, 1543225416),
+	('/auth-permission/index', 4, 'auth permission index', NULL, NULL, 1543225066, 1543225066),
+	('/auth-permission/update', 4, 'auth permission update', NULL, NULL, 1543310118, 1543310118),
+	('/auth-role/create', 4, 'auth role create', NULL, NULL, 1543387986, 1543387986),
+	('/auth-role/index', 4, 'auth role index', NULL, NULL, 1543225064, 1543225064),
+	('/auth-role/permission', 4, 'auth role permission', NULL, NULL, 1543570277, 1543570277),
+	('/auth-role/update', 4, 'auth role update', NULL, NULL, 1543288315, 1543288315),
+	('/auth-rule/create', 4, 'auth rule create', NULL, NULL, 1543225072, 1543225072),
+	('/auth-rule/index', 4, 'auth rule index', NULL, NULL, 1543225069, 1543225069),
+	('/auth-rule/update', 4, 'auth rule update', NULL, NULL, 1543309941, 1543309941),
+	('/auth-rule/view', 4, 'auth rule view', NULL, NULL, 1543309946, 1543309946),
+	('/backlog/acceptance/create', 4, 'backlog acceptance create', NULL, NULL, 1543457417, 1543457417),
+	('/backlog/acceptance/index', 4, 'backlog acceptance index', NULL, NULL, 1543457223, 1543457223),
+	('/backlog/default/create', 4, 'backlog default create', NULL, NULL, 1543397576, 1543397576),
+	('/backlog/default/index', 4, 'backlog default index', NULL, NULL, 1543397160, 1543397160),
+	('/backlog/default/trans', 4, 'backlog default trans', NULL, NULL, 1544435556, 1544435556),
+	('/backlog/default/update', 4, 'backlog default update', NULL, NULL, 1547446324, 1547446324),
+	('/backlog/default/view', 4, 'backlog default view', NULL, NULL, 1544435473, 1544435473),
+	('/change/default/create', 4, 'change default create', NULL, NULL, 1543389913, 1543389913),
+	('/change/default/index', 4, 'change default index', NULL, NULL, 1543388974, 1543388974),
+	('/event-handler/create', 4, 'event handler create', NULL, NULL, 1543392895, 1543392895),
+	('/event-handler/index', 4, 'event handler index', NULL, NULL, 1543392890, 1543392890),
+	('/event-handler/update', 4, 'event handler update', NULL, NULL, 1543549693, 1543549693),
+	('/event/create', 4, 'event create', NULL, NULL, 1543370011, 1543370011),
+	('/event/index', 4, 'event index', NULL, NULL, 1543370008, 1543370008),
+	('/event/update', 4, 'event update', NULL, NULL, 1543548211, 1543548211),
+	('/im-robot/create', 4, 'im robot create', NULL, NULL, 1543400043, 1543400043),
+	('/im-robot/index', 4, 'im robot index', NULL, NULL, 1543392062, 1543392062),
+	('/im-robot/update', 4, 'im robot update', NULL, NULL, 1543462272, 1543462272),
+	('/link/default/create', 4, 'link default create', NULL, NULL, 1546506744, 1546506744),
+	('/link/default/index', 4, 'link default index', NULL, NULL, 1546506685, 1546506685),
+	('/link/default/view', 4, 'link default view', NULL, NULL, 1546507350, 1546507350),
+	('/meet/default/create', 4, 'meet default create', NULL, NULL, 1543388471, 1543388471),
+	('/meet/default/delete', 4, 'meet default delete', NULL, NULL, 1543562135, 1543562135),
+	('/meet/default/index', 4, 'meet default index', NULL, NULL, 1543388350, 1543388350),
+	('/meet/default/update', 4, 'meet default update', NULL, NULL, 1543567793, 1543567793),
+	('/meet/default/view', 4, 'meet default view', NULL, NULL, 1543561947, 1543561947),
+	('/member/default/create', 4, 'member default create', NULL, NULL, 1543387712, 1543387712),
+	('/member/default/delete', 4, 'member default delete', NULL, NULL, 1543569831, 1543569831),
+	('/member/default/index', 4, 'member default index', NULL, NULL, 1543387160, 1543387160),
+	('/member/default/update', 4, 'member default update', NULL, NULL, 1543399855, 1543399855),
+	('/member/default/view', 4, 'member default view', NULL, NULL, 1543563100, 1543563100),
+	('/myproject/default/create', 4, 'myproject default create', NULL, NULL, 1543455548, 1543455548),
+	('/myproject/default/index', 4, 'myproject default index', NULL, NULL, 1543455189, 1543455189),
+	('/plan/default/index', 4, 'plan default index', NULL, NULL, 1543237893, 1543237893),
+	('/project/create', 4, 'project create', NULL, NULL, 1543239722, 1543239722),
+	('/project/index', 4, 'project index', NULL, NULL, 1543239549, 1543239549),
+	('/project/space', 4, 'project space', NULL, NULL, 1543371051, 1543371051),
+	('/project/update', 4, 'project update', NULL, NULL, 1543310102, 1543310102),
+	('/project/view', 4, 'project view', NULL, NULL, 1543310095, 1543310095),
+	('/robot-message/create', 4, 'robot message create', NULL, NULL, 1543975504, 1543975504),
+	('/robot-message/index', 4, 'robot message index', NULL, NULL, 1543392356, 1543392356),
+	('/robot-message/update', 4, 'robot message update', NULL, NULL, 1543976189, 1543976189),
+	('/robot-message/view', 4, 'robot message view', NULL, NULL, 1543976876, 1543976876),
+	('/robot/default/create', 4, 'robot default create', NULL, NULL, 1543391518, 1543391518),
+	('/robot/default/index', 4, 'robot default index', NULL, NULL, 1543391351, 1543391351),
+	('/robot/default/update', 4, 'robot default update', NULL, NULL, 1543462308, 1543462308),
+	('/role/create', 4, 'role create', NULL, NULL, 1543288176, 1543288176),
+	('/role/index', 4, 'role index', NULL, NULL, 1543288172, 1543288172),
+	('/role/permission', 4, 'role permission', NULL, NULL, 1543288992, 1543288992),
+	('/role/update', 4, 'role update', NULL, NULL, 1543288233, 1543288233),
+	('/setting/create', 4, 'setting create', NULL, NULL, 1547621358, 1547621358),
+	('/setting/index', 4, 'setting index', NULL, NULL, 1547621354, 1547621354),
+	('/setting/update', 4, 'setting update', NULL, NULL, 1547714528, 1547714528),
+	('/site/index', 4, 'site index', NULL, NULL, 1543207656, 1543207656),
+	('/space/default/create', 4, 'space default create', NULL, NULL, 1543377197, 1543377197),
+	('/space/default/index', 4, 'space default index', NULL, NULL, 1543375474, 1543375474),
+	('/space/default/update', 4, 'space default update', NULL, NULL, 1543477938, 1543477938),
+	('/sprint/default/create', 4, 'sprint default create', NULL, NULL, 1543242482, 1543242482),
+	('/sprint/default/delete', 4, 'sprint default delete', NULL, NULL, 1543459132, 1543459132),
+	('/sprint/default/index', 4, 'sprint default index', NULL, NULL, 1543242478, 1543242478),
+	('/sprint/default/update', 4, 'sprint default update', NULL, NULL, 1543415054, 1543415054),
+	('/sprint/default/view', 4, 'sprint default view', NULL, NULL, 1543458272, 1543458272),
+	('/sprint/story-active/create', 4, 'sprint story active create', NULL, NULL, 1543416108, 1543416108),
+	('/sprint/story/create', 4, 'sprint story create', NULL, NULL, 1543399496, 1543399496),
+	('/sprint/story/index', 4, 'sprint story index', NULL, NULL, 1543398611, 1543398611),
+	('/sprint/story/trans', 4, 'sprint story trans', NULL, NULL, 1543985858, 1543985858),
+	('/sprint/story/update', 4, 'sprint story update', NULL, NULL, 1543462511, 1543462511),
+	('/sprint/story/view', 4, 'sprint story view', NULL, NULL, 1543415664, 1543415664),
+	('/story-status/create', 4, 'story status create', NULL, NULL, 1543394955, 1543394955),
+	('/story-status/index', 4, 'story status index', NULL, NULL, 1543394875, 1543394875),
+	('/switch-project/index', 4, 'switch project index', NULL, NULL, 1543370113, 1543370113),
+	('/user/create', 4, 'user create', NULL, NULL, 1543208720, 1543208720),
+	('/user/index', 4, 'user index', NULL, NULL, 1543207762, 1543207762),
+	('/user/role', 4, 'user role', NULL, NULL, 1543207775, 1543207775),
+	('/user/update', 4, 'user update', NULL, NULL, 1543207796, 1543207796),
+	('/user/view', 4, 'user view', NULL, NULL, 1543209419, 1543209419),
+	('ac-route', 3, 'ac route', NULL, NULL, 1543224289, 1543224289),
+	('ac-route-create', 2, 'ac route create', NULL, NULL, 1543224292, 1543224292),
+	('ac-route-index', 2, 'ac route index', NULL, NULL, 1543224289, 1543224289),
+	('ac-route-update', 2, 'ac route update', NULL, NULL, 1544087957, 1544087957),
+	('ac-route-view', 2, 'ac route view', NULL, NULL, 1543224304, 1543224304),
+	('aliyun-log-default', 3, 'aliyun log default', NULL, NULL, 1543812156, 1543812156),
+	('aliyun-log-default-setting', 2, 'aliyun log default setting', NULL, NULL, 1543812158, 1543812158),
+	('aliyun-log-store', 3, 'aliyun log store', NULL, NULL, 1543813263, 1543813263),
+	('app-module', 3, 'app module', NULL, NULL, 1543222002, 1543222002),
+	('app-module-index', 2, 'app module index', NULL, NULL, 1543222003, 1543222003),
+	('app-module-update', 2, 'app module update', NULL, NULL, 1544087093, 1544087093),
+	('app-module-view', 2, 'app module view', NULL, NULL, 1544087941, 1544087941),
+	('auth-permission', 3, 'auth permission', NULL, NULL, 1543225066, 1543225066),
+	('auth-permission-create', 2, 'auth permission create', NULL, NULL, 1543225416, 1543225416),
+	('auth-permission-index', 2, 'auth permission index', NULL, NULL, 1543225066, 1543225066),
+	('auth-permission-update', 2, 'auth permission update', NULL, NULL, 1543310118, 1543310118),
+	('auth-role', 3, 'auth role', NULL, NULL, 1543225064, 1543225064),
+	('auth-role-create', 2, 'auth role create', NULL, NULL, 1543387986, 1543387986),
+	('auth-role-index', 2, 'auth role index', NULL, NULL, 1543225064, 1543225064),
+	('auth-role-permission', 2, 'auth role permission', NULL, NULL, 1543570277, 1543570277),
+	('auth-role-update', 2, 'auth role update', NULL, NULL, 1543288315, 1543288315),
+	('auth-rule', 3, 'auth rule', NULL, NULL, 1543225069, 1543225069),
+	('auth-rule-create', 2, 'auth rule create', NULL, NULL, 1543225072, 1543225072),
+	('auth-rule-index', 2, 'auth rule index', NULL, NULL, 1543225069, 1543225069),
+	('auth-rule-update', 2, 'auth rule update', NULL, NULL, 1543309942, 1543309942),
+	('auth-rule-view', 2, 'auth rule view', NULL, NULL, 1543309946, 1543309946),
+	('backlog-acceptance', 3, 'backlog acceptance', NULL, NULL, 1543457223, 1543457223),
+	('backlog-acceptance-create', 2, 'backlog acceptance create', NULL, NULL, 1543457417, 1543457417),
+	('backlog-acceptance-index', 2, 'backlog acceptance index', NULL, NULL, 1543457223, 1543457223),
+	('backlog-default', 3, 'backlog default', NULL, NULL, 1543397160, 1543397160),
+	('backlog-default-create', 2, 'backlog default create', NULL, NULL, 1543397576, 1543397576),
+	('backlog-default-index', 2, 'backlog default index', NULL, NULL, 1543397160, 1543397160),
+	('backlog-default-trans', 2, 'backlog default trans', NULL, NULL, 1544435556, 1544435556),
+	('backlog-default-update', 2, 'backlog default update', NULL, NULL, 1547446324, 1547446324),
+	('backlog-default-view', 2, 'backlog default view', NULL, NULL, 1544435473, 1544435473),
+	('change-default', 3, 'change default', NULL, NULL, 1543388974, 1543388974),
+	('change-default-create', 2, 'change default create', NULL, NULL, 1543389914, 1543389914),
+	('change-default-index', 2, 'change default index', NULL, NULL, 1543388974, 1543388974),
+	('event', 3, 'event', NULL, NULL, 1543370008, 1543370008),
+	('event-create', 2, 'event create', NULL, NULL, 1543370011, 1543370011),
+	('event-handler', 3, 'event handler', NULL, NULL, 1543392890, 1543392890),
+	('event-handler-create', 2, 'event handler create', NULL, NULL, 1543392895, 1543392895),
+	('event-handler-index', 2, 'event handler index', NULL, NULL, 1543392890, 1543392890),
+	('event-handler-update', 2, 'event handler update', NULL, NULL, 1543549693, 1543549693),
+	('event-index', 2, 'event index', NULL, NULL, 1543370008, 1543370008),
+	('event-update', 2, 'event update', NULL, NULL, 1543548211, 1543548211),
+	('im-robot', 3, 'im robot', NULL, NULL, 1543392062, 1543392062),
+	('im-robot-create', 2, 'im robot create', NULL, NULL, 1543400044, 1543400044),
+	('im-robot-index', 2, 'im robot index', NULL, NULL, 1543392062, 1543392062),
+	('im-robot-update', 2, 'im robot update', NULL, NULL, 1543462272, 1543462272),
+	('link-default', 3, 'link default', NULL, NULL, 1546506685, 1546506685),
+	('link-default-create', 2, 'link default create', NULL, NULL, 1546506744, 1546506744),
+	('link-default-index', 2, 'link default index', NULL, NULL, 1546506685, 1546506685),
+	('link-default-view', 2, 'link default view', NULL, NULL, 1546507350, 1546507350),
+	('meet-default', 3, 'meet default', NULL, NULL, 1543388350, 1543388350),
+	('meet-default-create', 2, 'meet default create', NULL, NULL, 1543388471, 1543388471),
+	('meet-default-delete', 2, 'meet default delete', NULL, NULL, 1543562135, 1543562135),
+	('meet-default-index', 2, 'meet default index', NULL, NULL, 1543388350, 1543388350),
+	('meet-default-update', 2, 'meet default update', NULL, NULL, 1543567793, 1543567793),
+	('meet-default-view', 2, 'meet default view', NULL, NULL, 1543561947, 1543561947),
+	('member-default', 3, 'member default', NULL, NULL, 1543387160, 1543387160),
+	('member-default-create', 2, 'member default create', NULL, NULL, 1543387712, 1543387712),
+	('member-default-delete', 2, 'member default delete', NULL, NULL, 1543569831, 1543569831),
+	('member-default-index', 2, 'member default index', NULL, NULL, 1543387160, 1543387160),
+	('member-default-update', 2, 'member default update', NULL, NULL, 1543399855, 1543399855),
+	('member-default-view', 2, 'member default view', NULL, NULL, 1543563100, 1543563100),
+	('myproject-default', 3, 'myproject default', NULL, NULL, 1543455189, 1543455189),
+	('myproject-default-create', 2, 'myproject default create', NULL, NULL, 1543455548, 1543455548),
+	('myproject-default-index', 2, 'myproject default index', NULL, NULL, 1543455189, 1543455189),
+	('plan-default', 3, 'plan default', NULL, NULL, 1543237893, 1543237893),
+	('plan-default-index', 2, 'plan default index', NULL, NULL, 1543237893, 1543237893),
+	('project', 3, 'project', NULL, NULL, 1543239549, 1543239549),
+	('project-create', 2, 'project create', NULL, NULL, 1543239722, 1543239722),
+	('project-index', 2, 'project index', NULL, NULL, 1543239549, 1543239549),
+	('project-space', 2, 'project space', NULL, NULL, 1543371051, 1543371051),
+	('project-update', 2, 'project update', NULL, NULL, 1543310102, 1543310102),
+	('project-view', 2, 'project view', NULL, NULL, 1543310095, 1543310095),
+	('robot-default', 3, 'robot default', NULL, NULL, 1543391351, 1543391351),
+	('robot-default-create', 2, 'robot default create', NULL, NULL, 1543391518, 1543391518),
+	('robot-default-index', 2, 'robot default index', NULL, NULL, 1543391351, 1543391351),
+	('robot-default-update', 2, 'robot default update', NULL, NULL, 1543462308, 1543462308),
+	('robot-message', 3, 'robot message', NULL, NULL, 1543392356, 1543392356),
+	('robot-message-create', 2, 'robot message create', NULL, NULL, 1543975504, 1543975504),
+	('robot-message-index', 2, 'robot message index', NULL, NULL, 1543392356, 1543392356),
+	('robot-message-update', 2, 'robot message update', NULL, NULL, 1543976189, 1543976189),
+	('robot-message-view', 2, 'robot message view', NULL, NULL, 1543976876, 1543976876),
+	('role', 3, 'role', NULL, NULL, 1543288172, 1543288172),
+	('role-create', 2, 'role create', NULL, NULL, 1543288176, 1543288176),
+	('role-index', 2, 'role index', NULL, NULL, 1543288172, 1543288172),
+	('role-permission', 2, 'role permission', NULL, NULL, 1543288992, 1543288992),
+	('role-update', 2, 'role update', NULL, NULL, 1543288233, 1543288233),
+	('setting', 3, 'setting', NULL, NULL, 1547621354, 1547621354),
+	('setting-create', 2, 'setting create', NULL, NULL, 1547621358, 1547621358),
+	('setting-index', 2, 'setting index', NULL, NULL, 1547621354, 1547621354),
+	('setting-update', 2, 'setting update', NULL, NULL, 1547714528, 1547714528),
+	('site', 3, 'site', NULL, NULL, 1543207654, 1543207654),
+	('site-index', 2, 'site index', NULL, NULL, 1543207656, 1543207656),
+	('space-default', 3, 'space default', NULL, NULL, 1543375474, 1543375474),
+	('space-default-create', 2, 'space default create', NULL, NULL, 1543377197, 1543377197),
+	('space-default-index', 2, 'space default index', NULL, NULL, 1543375474, 1543375474),
+	('space-default-update', 2, 'space default update', NULL, NULL, 1543477938, 1543477938),
+	('sprint-default', 3, 'sprint default', NULL, NULL, 1543242478, 1543242478),
+	('sprint-default-create', 2, 'sprint default create', NULL, NULL, 1543242482, 1543242482),
+	('sprint-default-delete', 2, 'sprint default delete', NULL, NULL, 1543459132, 1543459132),
+	('sprint-default-index', 2, 'sprint default index', NULL, NULL, 1543242478, 1543242478),
+	('sprint-default-update', 2, 'sprint default update', NULL, NULL, 1543415054, 1543415054),
+	('sprint-default-view', 2, 'sprint default view', NULL, NULL, 1543458272, 1543458272),
+	('sprint-story', 3, 'sprint story', NULL, NULL, 1543398611, 1543398611),
+	('sprint-story-active', 3, 'sprint story active', NULL, NULL, 1543416108, 1543416108),
+	('sprint-story-active-create', 2, 'sprint story active create', NULL, NULL, 1543416108, 1543416108),
+	('sprint-story-create', 2, 'sprint story create', NULL, NULL, 1543399496, 1543399496),
+	('sprint-story-index', 2, 'sprint story index', NULL, NULL, 1543398611, 1543398611),
+	('sprint-story-trans', 2, 'sprint story trans', NULL, NULL, 1543985858, 1543985858),
+	('sprint-story-update', 2, 'sprint story update', NULL, NULL, 1543462511, 1543462511),
+	('sprint-story-view', 2, 'sprint story view', NULL, NULL, 1543415664, 1543415664),
+	('story-status', 3, 'story status', NULL, NULL, 1543394875, 1543394875),
+	('story-status-create', 2, 'story status create', NULL, NULL, 1543394956, 1543394956),
+	('story-status-index', 2, 'story status index', NULL, NULL, 1543394875, 1543394875),
+	('switch-project', 3, 'switch project', NULL, NULL, 1543370113, 1543370113),
+	('switch-project-index', 2, 'switch project index', NULL, NULL, 1543370113, 1543370113),
+	('update-my-project', 2, '更新自己的项目', '\\app\\rules\\IsMyProject', NULL, 1543312748, 1543312748),
+	('user', 3, 'user', NULL, NULL, 1543207753, 1543207753),
+	('user-create', 2, 'user create', NULL, NULL, 1543208720, 1543208720),
+	('user-index', 2, 'user index', NULL, NULL, 1543207762, 1543207762),
+	('user-role', 2, 'user role', NULL, NULL, 1543207775, 1543207775),
+	('user-update', 2, 'user update', NULL, NULL, 1543207796, 1543207796),
+	('user-view', 2, 'user view', NULL, NULL, 1543209419, 1543209419),
+	('开发人员', 1, NULL, NULL, NULL, 1543562615, 1543562615),
+	('敏捷教练', 1, NULL, NULL, NULL, 1543562548, 1543562548),
+	('管理员1', 1, '', NULL, NULL, 1543288187, 1543288472),
+	('部门负责人', 1, 'deparment charge', NULL, NULL, 1543218870, 1543218975),
+	('项目负责人', 1, NULL, NULL, NULL, 1543388020, 1543388020);
 /*!40000 ALTER TABLE `auth_item` ENABLE KEYS */;
 
--- 导出  表 geetask.auth_item_child 结构
-CREATE TABLE IF NOT EXISTS `auth_item_child` (
-  `parent` varchar(64) NOT NULL,
-  `child` varchar(64) NOT NULL,
-  PRIMARY KEY (`parent`,`child`),
-  KEY `child` (`child`),
-  CONSTRAINT `auth_item_child_ibfk_1` FOREIGN KEY (`parent`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE,
-  CONSTRAINT `auth_item_child_ibfk_2` FOREIGN KEY (`child`) REFERENCES `auth_item` (`name`) ON DELETE CASCADE ON UPDATE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- 正在导出表  geetask.auth_item_child 的数据：~323 rows (大约)
+-- 正在导出表  geetask.auth_item_child 的数据：~372 rows (大约)
 /*!40000 ALTER TABLE `auth_item_child` DISABLE KEYS */;
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('ac-route', '/ac-route/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('ac-route', '/ac-route/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('ac-route', '/ac-route/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('ac-route', '/ac-route/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('ac-route', 'ac-route-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('ac-route', 'ac-route-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('ac-route', 'ac-route-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('ac-route', 'ac-route-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('ac-route-create', '/ac-route/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('ac-route-index', '/ac-route/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('ac-route-update', '/ac-route/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('ac-route-view', '/ac-route/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('aliyun-log-default', '/aliyun-log/default/setting');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('aliyun-log-default', 'aliyun-log-default-setting');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('aliyun-log-default-setting', '/aliyun-log/default/setting');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('app-module', '/app-module/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('app-module', '/app-module/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('app-module', '/app-module/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('app-module', 'app-module-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('app-module', 'app-module-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('app-module', 'app-module-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('app-module-index', '/app-module/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('app-module-update', '/app-module/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('app-module-view', '/app-module/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-permission', '/auth-permission/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-permission', '/auth-permission/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-permission', '/auth-permission/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-permission', 'auth-permission-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-permission', 'auth-permission-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-permission', 'auth-permission-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-permission-create', '/auth-permission/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-permission-index', '/auth-permission/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-permission-update', '/auth-permission/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-role', '/auth-role/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-role', '/auth-role/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-role', '/auth-role/permission');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-role', '/auth-role/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-role', 'auth-role-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-role', 'auth-role-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-role', 'auth-role-permission');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-role', 'auth-role-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-role-create', '/auth-role/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-role-index', '/auth-role/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-role-permission', '/auth-role/permission');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-role-update', '/auth-role/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-rule', '/auth-rule/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-rule', '/auth-rule/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-rule', '/auth-rule/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-rule', '/auth-rule/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-rule', 'auth-rule-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-rule', 'auth-rule-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-rule', 'auth-rule-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-rule', 'auth-rule-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-rule-create', '/auth-rule/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-rule-index', '/auth-rule/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-rule-update', '/auth-rule/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('auth-rule-view', '/auth-rule/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-acceptance', '/backlog/acceptance/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-acceptance', '/backlog/acceptance/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-acceptance', 'backlog-acceptance-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-acceptance', 'backlog-acceptance-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-acceptance-create', '/backlog/acceptance/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-acceptance-index', '/backlog/acceptance/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-default', '/backlog/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-default', '/backlog/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-default', '/backlog/default/trans');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-default', '/backlog/default/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-default', 'backlog-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-default', 'backlog-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-default', 'backlog-default-trans');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-default', 'backlog-default-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-default-create', '/backlog/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-default-index', '/backlog/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-default-trans', '/backlog/default/trans');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('backlog-default-view', '/backlog/default/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('change-default', '/change/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('change-default', '/change/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('change-default', 'change-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('change-default', 'change-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('change-default-create', '/change/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('change-default-index', '/change/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event', '/event/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event', '/event/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event', '/event/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event', 'event-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event', 'event-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event', 'event-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event-create', '/event/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event-handler', '/event-handler/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event-handler', '/event-handler/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event-handler', '/event-handler/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event-handler', 'event-handler-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event-handler', 'event-handler-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event-handler', 'event-handler-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event-handler-create', '/event-handler/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event-handler-index', '/event-handler/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event-handler-update', '/event-handler/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event-index', '/event/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('event-update', '/event/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('im-robot', '/im-robot/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('im-robot', '/im-robot/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('im-robot', '/im-robot/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('im-robot', 'im-robot-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('im-robot', 'im-robot-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('im-robot', 'im-robot-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('im-robot-create', '/im-robot/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('im-robot-index', '/im-robot/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('im-robot-update', '/im-robot/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('link-default', '/link/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('link-default', '/link/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('link-default', '/link/default/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('link-default', 'link-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('link-default', 'link-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('link-default', 'link-default-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('link-default-create', '/link/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('link-default-index', '/link/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('link-default-view', '/link/default/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('meet-default', '/meet/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('meet-default', '/meet/default/delete');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('meet-default', '/meet/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('meet-default', '/meet/default/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('meet-default', '/meet/default/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('meet-default', 'meet-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('meet-default', 'meet-default-delete');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('meet-default', 'meet-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('meet-default', 'meet-default-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('meet-default', 'meet-default-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('meet-default-create', '/meet/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('meet-default-delete', '/meet/default/delete');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('meet-default-index', '/meet/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('meet-default-update', '/meet/default/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('meet-default-view', '/meet/default/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('member-default', '/member/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('member-default', '/member/default/delete');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('member-default', '/member/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('member-default', '/member/default/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('member-default', '/member/default/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('member-default', 'member-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('member-default', 'member-default-delete');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('member-default', 'member-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('member-default', 'member-default-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('member-default', 'member-default-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('member-default-create', '/member/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('member-default-delete', '/member/default/delete');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('member-default-index', '/member/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('member-default-update', '/member/default/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('member-default-view', '/member/default/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('myproject-default', '/myproject/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('myproject-default', '/myproject/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('myproject-default', 'myproject-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('myproject-default', 'myproject-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('myproject-default-create', '/myproject/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('myproject-default-index', '/myproject/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('plan-default', '/plan/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('plan-default', 'plan-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('plan-default-index', '/plan/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('project', '/project/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('project', '/project/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('project', '/project/space');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('project', '/project/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('project', '/project/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('project', 'project-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('project', 'project-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('project', 'project-space');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('project', 'project-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('project', 'project-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('project-create', '/project/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('project-index', '/project/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('project-space', '/project/space');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('project-update', '/project/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('project-view', '/project/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-default', '/robot/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-default', '/robot/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-default', '/robot/default/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-default', 'robot-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-default', 'robot-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-default', 'robot-default-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-default-create', '/robot/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-default-index', '/robot/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-default-update', '/robot/default/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-message', '/robot-message/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-message', '/robot-message/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-message', '/robot-message/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-message', '/robot-message/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-message', 'robot-message-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-message', 'robot-message-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-message', 'robot-message-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-message', 'robot-message-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-message-create', '/robot-message/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-message-index', '/robot-message/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-message-update', '/robot-message/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('robot-message-view', '/robot-message/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('role', '/role/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('role', '/role/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('role', '/role/permission');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('role', '/role/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('role', 'role-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('role', 'role-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('role', 'role-permission');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('role', 'role-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('role-create', '/role/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('role-index', '/role/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('role-permission', '/role/permission');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('role-update', '/role/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('site', '/site/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('site', 'site-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('site-index', '/site/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('space-default', '/space/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('space-default', '/space/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('space-default', '/space/default/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('space-default', 'space-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('space-default', 'space-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('space-default', 'space-default-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('space-default-create', '/space/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('space-default-index', '/space/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('space-default-update', '/space/default/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-default', '/sprint/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-default', '/sprint/default/delete');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-default', '/sprint/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-default', '/sprint/default/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-default', '/sprint/default/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-default', 'sprint-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-default', 'sprint-default-delete');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-default', 'sprint-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-default', 'sprint-default-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-default', 'sprint-default-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-default-create', '/sprint/default/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-default-delete', '/sprint/default/delete');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-default-index', '/sprint/default/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-default-update', '/sprint/default/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-default-view', '/sprint/default/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story', '/sprint/story/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story', '/sprint/story/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story', '/sprint/story/trans');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story', '/sprint/story/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story', '/sprint/story/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story', 'sprint-story-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story', 'sprint-story-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story', 'sprint-story-trans');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story', 'sprint-story-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story', 'sprint-story-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story-active', '/sprint/story-active/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story-active', 'sprint-story-active-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story-active-create', '/sprint/story-active/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story-create', '/sprint/story/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story-index', '/sprint/story/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story-trans', '/sprint/story/trans');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story-update', '/sprint/story/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('sprint-story-view', '/sprint/story/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('story-status', '/story-status/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('story-status', '/story-status/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('story-status', 'story-status-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('story-status', 'story-status-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('story-status-create', '/story-status/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('story-status-index', '/story-status/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('switch-project', '/switch-project/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('switch-project', 'switch-project-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('switch-project-index', '/switch-project/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('update-my-project', 'project-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('user', '/user/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('user', '/user/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('user', '/user/role');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('user', '/user/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('user', '/user/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('user', 'user-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('user', 'user-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('user', 'user-role');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('user', 'user-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('user', 'user-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('user-create', '/user/create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('user-index', '/user/index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('user-role', '/user/role');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('user-update', '/user/update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('user-view', '/user/view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'meet-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'meet-default-delete');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'meet-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'meet-default-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'meet-default-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'myproject-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'myproject-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'space-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'sprint-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'sprint-default-delete');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'sprint-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'sprint-default-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'sprint-default-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'sprint-story-active-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'sprint-story-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'sprint-story-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'sprint-story-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('开发人员', 'sprint-story-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'backlog-acceptance-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'backlog-acceptance-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'backlog-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'backlog-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'change-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'change-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'meet-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'meet-default-delete');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'meet-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'meet-default-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'meet-default-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'member-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'member-default-delete');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'member-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'member-default-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'member-default-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'myproject-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'myproject-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'robot-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'robot-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'robot-default-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'space-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'space-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'space-default-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'sprint-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'sprint-default-delete');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'sprint-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'sprint-default-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'sprint-default-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'sprint-story-active-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'sprint-story-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'sprint-story-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'sprint-story-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('敏捷教练', 'sprint-story-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'backlog-acceptance-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'backlog-acceptance-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'backlog-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'backlog-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'change-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'change-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'meet-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'meet-default-delete');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'meet-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'meet-default-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'meet-default-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'member-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'member-default-delete');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'member-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'member-default-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'member-default-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'myproject-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'myproject-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'robot-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'robot-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'robot-default-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'space-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'space-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'space-default-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'sprint-default-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'sprint-default-delete');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'sprint-default-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'sprint-default-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'sprint-default-view');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'sprint-story-active-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'sprint-story-create');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'sprint-story-index');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'sprint-story-update');
-INSERT INTO `auth_item_child` (`parent`, `child`) VALUES ('项目负责人', 'sprint-story-view');
-
+INSERT INTO `auth_item_child` (`parent`, `child`) VALUES
+	('ac-route', '/ac-route/create'),
+	('ac-route', '/ac-route/index'),
+	('ac-route', '/ac-route/update'),
+	('ac-route', '/ac-route/view'),
+	('ac-route', 'ac-route-create'),
+	('ac-route', 'ac-route-index'),
+	('ac-route', 'ac-route-update'),
+	('ac-route', 'ac-route-view'),
+	('ac-route-create', '/ac-route/create'),
+	('ac-route-index', '/ac-route/index'),
+	('ac-route-update', '/ac-route/update'),
+	('ac-route-view', '/ac-route/view'),
+	('aliyun-log-default', '/aliyun-log/default/setting'),
+	('aliyun-log-default', 'aliyun-log-default-setting'),
+	('aliyun-log-default-setting', '/aliyun-log/default/setting'),
+	('app-module', '/app-module/index'),
+	('app-module', '/app-module/update'),
+	('app-module', '/app-module/view'),
+	('app-module', 'app-module-index'),
+	('app-module', 'app-module-update'),
+	('app-module', 'app-module-view'),
+	('app-module-index', '/app-module/index'),
+	('app-module-update', '/app-module/update'),
+	('app-module-view', '/app-module/view'),
+	('auth-permission', '/auth-permission/create'),
+	('auth-permission', '/auth-permission/index'),
+	('auth-permission', '/auth-permission/update'),
+	('auth-permission', 'auth-permission-create'),
+	('auth-permission', 'auth-permission-index'),
+	('auth-permission', 'auth-permission-update'),
+	('auth-permission-create', '/auth-permission/create'),
+	('auth-permission-index', '/auth-permission/index'),
+	('auth-permission-update', '/auth-permission/update'),
+	('auth-role', '/auth-role/create'),
+	('auth-role', '/auth-role/index'),
+	('auth-role', '/auth-role/permission'),
+	('auth-role', '/auth-role/update'),
+	('auth-role', 'auth-role-create'),
+	('auth-role', 'auth-role-index'),
+	('auth-role', 'auth-role-permission'),
+	('auth-role', 'auth-role-update'),
+	('auth-role-create', '/auth-role/create'),
+	('auth-role-index', '/auth-role/index'),
+	('auth-role-permission', '/auth-role/permission'),
+	('auth-role-update', '/auth-role/update'),
+	('auth-rule', '/auth-rule/create'),
+	('auth-rule', '/auth-rule/index'),
+	('auth-rule', '/auth-rule/update'),
+	('auth-rule', '/auth-rule/view'),
+	('auth-rule', 'auth-rule-create'),
+	('auth-rule', 'auth-rule-index'),
+	('auth-rule', 'auth-rule-update'),
+	('auth-rule', 'auth-rule-view'),
+	('auth-rule-create', '/auth-rule/create'),
+	('auth-rule-index', '/auth-rule/index'),
+	('auth-rule-update', '/auth-rule/update'),
+	('auth-rule-view', '/auth-rule/view'),
+	('backlog-acceptance', '/backlog/acceptance/create'),
+	('backlog-acceptance', '/backlog/acceptance/index'),
+	('backlog-acceptance', 'backlog-acceptance-create'),
+	('backlog-acceptance', 'backlog-acceptance-index'),
+	('backlog-acceptance-create', '/backlog/acceptance/create'),
+	('backlog-acceptance-index', '/backlog/acceptance/index'),
+	('backlog-default', '/backlog/default/create'),
+	('backlog-default', '/backlog/default/index'),
+	('backlog-default', '/backlog/default/trans'),
+	('backlog-default', '/backlog/default/update'),
+	('backlog-default', '/backlog/default/view'),
+	('backlog-default', 'backlog-default-create'),
+	('backlog-default', 'backlog-default-index'),
+	('backlog-default', 'backlog-default-trans'),
+	('backlog-default', 'backlog-default-update'),
+	('backlog-default', 'backlog-default-view'),
+	('backlog-default-create', '/backlog/default/create'),
+	('backlog-default-index', '/backlog/default/index'),
+	('backlog-default-trans', '/backlog/default/trans'),
+	('backlog-default-update', '/backlog/default/update'),
+	('backlog-default-view', '/backlog/default/view'),
+	('change-default', '/change/default/create'),
+	('change-default', '/change/default/index'),
+	('change-default', 'change-default-create'),
+	('change-default', 'change-default-index'),
+	('change-default-create', '/change/default/create'),
+	('change-default-index', '/change/default/index'),
+	('event', '/event/create'),
+	('event', '/event/index'),
+	('event', '/event/update'),
+	('event', 'event-create'),
+	('event', 'event-index'),
+	('event', 'event-update'),
+	('event-create', '/event/create'),
+	('event-handler', '/event-handler/create'),
+	('event-handler', '/event-handler/index'),
+	('event-handler', '/event-handler/update'),
+	('event-handler', 'event-handler-create'),
+	('event-handler', 'event-handler-index'),
+	('event-handler', 'event-handler-update'),
+	('event-handler-create', '/event-handler/create'),
+	('event-handler-index', '/event-handler/index'),
+	('event-handler-update', '/event-handler/update'),
+	('event-index', '/event/index'),
+	('event-update', '/event/update'),
+	('im-robot', '/im-robot/create'),
+	('im-robot', '/im-robot/index'),
+	('im-robot', '/im-robot/update'),
+	('im-robot', 'im-robot-create'),
+	('im-robot', 'im-robot-index'),
+	('im-robot', 'im-robot-update'),
+	('im-robot-create', '/im-robot/create'),
+	('im-robot-index', '/im-robot/index'),
+	('im-robot-update', '/im-robot/update'),
+	('link-default', '/link/default/create'),
+	('link-default', '/link/default/index'),
+	('link-default', '/link/default/view'),
+	('link-default', 'link-default-create'),
+	('link-default', 'link-default-index'),
+	('link-default', 'link-default-view'),
+	('link-default-create', '/link/default/create'),
+	('link-default-index', '/link/default/index'),
+	('link-default-view', '/link/default/view'),
+	('meet-default', '/meet/default/create'),
+	('meet-default', '/meet/default/delete'),
+	('meet-default', '/meet/default/index'),
+	('meet-default', '/meet/default/update'),
+	('meet-default', '/meet/default/view'),
+	('meet-default', 'meet-default-create'),
+	('meet-default', 'meet-default-delete'),
+	('meet-default', 'meet-default-index'),
+	('meet-default', 'meet-default-update'),
+	('meet-default', 'meet-default-view'),
+	('meet-default-create', '/meet/default/create'),
+	('meet-default-delete', '/meet/default/delete'),
+	('meet-default-index', '/meet/default/index'),
+	('meet-default-update', '/meet/default/update'),
+	('meet-default-view', '/meet/default/view'),
+	('member-default', '/member/default/create'),
+	('member-default', '/member/default/delete'),
+	('member-default', '/member/default/index'),
+	('member-default', '/member/default/update'),
+	('member-default', '/member/default/view'),
+	('member-default', 'member-default-create'),
+	('member-default', 'member-default-delete'),
+	('member-default', 'member-default-index'),
+	('member-default', 'member-default-update'),
+	('member-default', 'member-default-view'),
+	('member-default-create', '/member/default/create'),
+	('member-default-delete', '/member/default/delete'),
+	('member-default-index', '/member/default/index'),
+	('member-default-update', '/member/default/update'),
+	('member-default-view', '/member/default/view'),
+	('myproject-default', '/myproject/default/create'),
+	('myproject-default', '/myproject/default/index'),
+	('myproject-default', 'myproject-default-create'),
+	('myproject-default', 'myproject-default-index'),
+	('myproject-default-create', '/myproject/default/create'),
+	('myproject-default-index', '/myproject/default/index'),
+	('plan-default', '/plan/default/index'),
+	('plan-default', 'plan-default-index'),
+	('plan-default-index', '/plan/default/index'),
+	('project', '/project/create'),
+	('project', '/project/index'),
+	('project', '/project/space'),
+	('project', '/project/update'),
+	('project', '/project/view'),
+	('project', 'project-create'),
+	('project', 'project-index'),
+	('project', 'project-space'),
+	('project', 'project-update'),
+	('project', 'project-view'),
+	('project-create', '/project/create'),
+	('project-index', '/project/index'),
+	('project-space', '/project/space'),
+	('project-update', '/project/update'),
+	('project-view', '/project/view'),
+	('robot-default', '/robot/default/create'),
+	('robot-default', '/robot/default/index'),
+	('robot-default', '/robot/default/update'),
+	('robot-default', 'robot-default-create'),
+	('robot-default', 'robot-default-index'),
+	('robot-default', 'robot-default-update'),
+	('robot-default-create', '/robot/default/create'),
+	('robot-default-index', '/robot/default/index'),
+	('robot-default-update', '/robot/default/update'),
+	('robot-message', '/robot-message/create'),
+	('robot-message', '/robot-message/index'),
+	('robot-message', '/robot-message/update'),
+	('robot-message', '/robot-message/view'),
+	('robot-message', 'robot-message-create'),
+	('robot-message', 'robot-message-index'),
+	('robot-message', 'robot-message-update'),
+	('robot-message', 'robot-message-view'),
+	('robot-message-create', '/robot-message/create'),
+	('robot-message-index', '/robot-message/index'),
+	('robot-message-update', '/robot-message/update'),
+	('robot-message-view', '/robot-message/view'),
+	('role', '/role/create'),
+	('role', '/role/index'),
+	('role', '/role/permission'),
+	('role', '/role/update'),
+	('role', 'role-create'),
+	('role', 'role-index'),
+	('role', 'role-permission'),
+	('role', 'role-update'),
+	('role-create', '/role/create'),
+	('role-index', '/role/index'),
+	('role-permission', '/role/permission'),
+	('role-update', '/role/update'),
+	('setting', '/setting/create'),
+	('setting', '/setting/index'),
+	('setting', '/setting/update'),
+	('setting', 'setting-create'),
+	('setting', 'setting-index'),
+	('setting', 'setting-update'),
+	('setting-create', '/setting/create'),
+	('setting-index', '/setting/index'),
+	('setting-update', '/setting/update'),
+	('site', '/site/index'),
+	('site', 'site-index'),
+	('site-index', '/site/index'),
+	('space-default', '/space/default/create'),
+	('space-default', '/space/default/index'),
+	('space-default', '/space/default/update'),
+	('space-default', 'space-default-create'),
+	('space-default', 'space-default-index'),
+	('space-default', 'space-default-update'),
+	('space-default-create', '/space/default/create'),
+	('space-default-index', '/space/default/index'),
+	('space-default-update', '/space/default/update'),
+	('sprint-default', '/sprint/default/create'),
+	('sprint-default', '/sprint/default/delete'),
+	('sprint-default', '/sprint/default/index'),
+	('sprint-default', '/sprint/default/update'),
+	('sprint-default', '/sprint/default/view'),
+	('sprint-default', 'sprint-default-create'),
+	('sprint-default', 'sprint-default-delete'),
+	('sprint-default', 'sprint-default-index'),
+	('sprint-default', 'sprint-default-update'),
+	('sprint-default', 'sprint-default-view'),
+	('sprint-default-create', '/sprint/default/create'),
+	('sprint-default-delete', '/sprint/default/delete'),
+	('sprint-default-index', '/sprint/default/index'),
+	('sprint-default-update', '/sprint/default/update'),
+	('sprint-default-view', '/sprint/default/view'),
+	('sprint-story', '/sprint/story/create'),
+	('sprint-story', '/sprint/story/index'),
+	('sprint-story', '/sprint/story/trans'),
+	('sprint-story', '/sprint/story/update'),
+	('sprint-story', '/sprint/story/view'),
+	('sprint-story', 'sprint-story-create'),
+	('sprint-story', 'sprint-story-index'),
+	('sprint-story', 'sprint-story-trans'),
+	('sprint-story', 'sprint-story-update'),
+	('sprint-story', 'sprint-story-view'),
+	('sprint-story-active', '/sprint/story-active/create'),
+	('sprint-story-active', 'sprint-story-active-create'),
+	('sprint-story-active-create', '/sprint/story-active/create'),
+	('sprint-story-create', '/sprint/story/create'),
+	('sprint-story-index', '/sprint/story/index'),
+	('sprint-story-trans', '/sprint/story/trans'),
+	('sprint-story-update', '/sprint/story/update'),
+	('sprint-story-view', '/sprint/story/view'),
+	('story-status', '/story-status/create'),
+	('story-status', '/story-status/index'),
+	('story-status', 'story-status-create'),
+	('story-status', 'story-status-index'),
+	('story-status-create', '/story-status/create'),
+	('story-status-index', '/story-status/index'),
+	('switch-project', '/switch-project/index'),
+	('switch-project', 'switch-project-index'),
+	('switch-project-index', '/switch-project/index'),
+	('update-my-project', 'project-update'),
+	('user', '/user/create'),
+	('user', '/user/index'),
+	('user', '/user/role'),
+	('user', '/user/update'),
+	('user', '/user/view'),
+	('user', 'user-create'),
+	('user', 'user-index'),
+	('user', 'user-role'),
+	('user', 'user-update'),
+	('user', 'user-view'),
+	('user-create', '/user/create'),
+	('user-index', '/user/index'),
+	('user-role', '/user/role'),
+	('user-update', '/user/update'),
+	('user-view', '/user/view'),
+	('开发人员', 'meet-default-create'),
+	('开发人员', 'meet-default-delete'),
+	('开发人员', 'meet-default-index'),
+	('开发人员', 'meet-default-update'),
+	('开发人员', 'meet-default-view'),
+	('开发人员', 'myproject-default-create'),
+	('开发人员', 'myproject-default-index'),
+	('开发人员', 'space-default-index'),
+	('开发人员', 'sprint-default-create'),
+	('开发人员', 'sprint-default-delete'),
+	('开发人员', 'sprint-default-index'),
+	('开发人员', 'sprint-default-update'),
+	('开发人员', 'sprint-default-view'),
+	('开发人员', 'sprint-story-active-create'),
+	('开发人员', 'sprint-story-create'),
+	('开发人员', 'sprint-story-index'),
+	('开发人员', 'sprint-story-update'),
+	('开发人员', 'sprint-story-view'),
+	('敏捷教练', 'backlog-acceptance-create'),
+	('敏捷教练', 'backlog-acceptance-index'),
+	('敏捷教练', 'backlog-default-create'),
+	('敏捷教练', 'backlog-default-index'),
+	('敏捷教练', 'change-default-create'),
+	('敏捷教练', 'change-default-index'),
+	('敏捷教练', 'meet-default-create'),
+	('敏捷教练', 'meet-default-delete'),
+	('敏捷教练', 'meet-default-index'),
+	('敏捷教练', 'meet-default-update'),
+	('敏捷教练', 'meet-default-view'),
+	('敏捷教练', 'member-default-create'),
+	('敏捷教练', 'member-default-delete'),
+	('敏捷教练', 'member-default-index'),
+	('敏捷教练', 'member-default-update'),
+	('敏捷教练', 'member-default-view'),
+	('敏捷教练', 'myproject-default-create'),
+	('敏捷教练', 'myproject-default-index'),
+	('敏捷教练', 'robot-default-create'),
+	('敏捷教练', 'robot-default-index'),
+	('敏捷教练', 'robot-default-update'),
+	('敏捷教练', 'space-default-create'),
+	('敏捷教练', 'space-default-index'),
+	('敏捷教练', 'space-default-update'),
+	('敏捷教练', 'sprint-default-create'),
+	('敏捷教练', 'sprint-default-delete'),
+	('敏捷教练', 'sprint-default-index'),
+	('敏捷教练', 'sprint-default-update'),
+	('敏捷教练', 'sprint-default-view'),
+	('敏捷教练', 'sprint-story-active-create'),
+	('敏捷教练', 'sprint-story-create'),
+	('敏捷教练', 'sprint-story-index'),
+	('敏捷教练', 'sprint-story-update'),
+	('敏捷教练', 'sprint-story-view'),
+	('项目负责人', 'backlog-acceptance-create'),
+	('项目负责人', 'backlog-acceptance-index'),
+	('项目负责人', 'backlog-default-create'),
+	('项目负责人', 'backlog-default-index'),
+	('项目负责人', 'change-default-create'),
+	('项目负责人', 'change-default-index'),
+	('项目负责人', 'meet-default-create'),
+	('项目负责人', 'meet-default-delete'),
+	('项目负责人', 'meet-default-index'),
+	('项目负责人', 'meet-default-update'),
+	('项目负责人', 'meet-default-view'),
+	('项目负责人', 'member-default-create'),
+	('项目负责人', 'member-default-delete'),
+	('项目负责人', 'member-default-index'),
+	('项目负责人', 'member-default-update'),
+	('项目负责人', 'member-default-view'),
+	('项目负责人', 'myproject-default-create'),
+	('项目负责人', 'myproject-default-index'),
+	('项目负责人', 'robot-default-create'),
+	('项目负责人', 'robot-default-index'),
+	('项目负责人', 'robot-default-update'),
+	('项目负责人', 'space-default-create'),
+	('项目负责人', 'space-default-index'),
+	('项目负责人', 'space-default-update'),
+	('项目负责人', 'sprint-default-create'),
+	('项目负责人', 'sprint-default-delete'),
+	('项目负责人', 'sprint-default-index'),
+	('项目负责人', 'sprint-default-update'),
+	('项目负责人', 'sprint-default-view'),
+	('项目负责人', 'sprint-story-active-create'),
+	('项目负责人', 'sprint-story-create'),
+	('项目负责人', 'sprint-story-index'),
+	('项目负责人', 'sprint-story-update'),
+	('项目负责人', 'sprint-story-view');
 /*!40000 ALTER TABLE `auth_item_child` ENABLE KEYS */;
 
--- 导出  表 geetask.auth_rule 结构
-CREATE TABLE IF NOT EXISTS `auth_rule` (
-  `name` varchar(64) NOT NULL,
-  `data` blob,
-  `created_at` int(11) DEFAULT NULL,
-  `updated_at` int(11) DEFAULT NULL,
-  PRIMARY KEY (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- 正在导出表  geetask.auth_rule 的数据：~0 rows (大约)
+-- 正在导出表  geetask.auth_rule 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `auth_rule` DISABLE KEYS */;
 INSERT INTO `auth_rule` (`name`, `data`, `created_at`, `updated_at`) VALUES
 	('\\app\\rules\\IsMyProject', _binary 0x4F3A32313A226170705C72756C65735C49734D7950726F6A656374223A333A7B733A343A226E616D65223B733A32323A225C6170705C72756C65735C49734D7950726F6A656374223B733A393A22637265617465644174223B693A313534333330393933353B733A393A22757064617465644174223B693A313534333330393933353B7D, 1543309935, 1543309935);
 /*!40000 ALTER TABLE `auth_rule` ENABLE KEYS */;
 
--- 导出  表 geetask.gt_aliyun_log 结构
-CREATE TABLE IF NOT EXISTS `gt_aliyun_log` (
-  `project_id` int(11) NOT NULL COMMENT '项目',
-  `endpoint` varchar(64) NOT NULL,
-  `access_key` varchar(64) NOT NULL,
-  `secret_key` varchar(64) NOT NULL,
-  PRIMARY KEY (`project_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='阿里云日志';
+-- 正在导出表  geetask.gt_aliyun_log 的数据：~1 rows (大约)
+/*!40000 ALTER TABLE `gt_aliyun_log` DISABLE KEYS */;
+INSERT INTO `gt_aliyun_log` (`project_id`, `endpoint`, `access_key`, `secret_key`) VALUES
+	(1, 'cn-hangzhou.log.aliyuncs.com', 'LTAI1alt8j7A1BNl', '4ErL4LRTaD8Kj1CFKtRNqWRVXyfgfE');
+/*!40000 ALTER TABLE `gt_aliyun_log` ENABLE KEYS */;
 
+-- 正在导出表  geetask.gt_change 的数据：~33 rows (大约)
+/*!40000 ALTER TABLE `gt_change` DISABLE KEYS */;
+INSERT INTO `gt_change` (`id`, `project_id`, `category_id`, `creator_id`, `content`, `created_at`, `updated_at`) VALUES
+	(1, 1, 1, 5, 'delete from sys_permission where id =  "31"\r\nupdate sys_permission SET name = "查看管理员" where id = "35"\r\nupdate sys_permission SET pid = "30", permission = "ebk-user:admin-add", name = "开通账号" where id = "36"\r\ndelete from sys_permission where id = "215"\r\nupdate sys_permission SET pid = "214", permission = "ta-user:admin-add", name = "开通账号" where id = "220"\r\nupdate sys_permission SET pid = "0", permission = "hotel-photo:*", name = "酒店信息管理-酒店图片" where id = "57" \r\ninsert into sys_permission (id, pid, permission, name ) values ("null", "209", "ta-settled:follow", "跟进权限" ) \r\ninsert into sys_permission (id, pid, permission, name ) values ("null", "209", "ta-settled:assign", "指派权限" ) \r\ninsert into sys_permission (id, pid, permission, name ) values ("null", "77", "hotel-settled:assign", "指派权限" )\r\ninsert into sys_permission (id, pid, permission, name ) values ("null", "77", "hotel-settled:follow", "跟进权限" )\r\nupdate sys_permission SET pid = "0", permission = "hotel-policy:*", name = "酒店业务-酒店信息管理-政策" where id = "62"\r\nupdate sys_permission SET pid = "0", permission = "hotel-audit:*", name = "审核中心-酒店信息审核" where id = "37"\r\nupdate sys_permission SET pid = "41", permission = "hotel-brokerage:check-cash", name = "充值确认" where id = "43"\r\nupdate sys_permission SET pid = "41", permission = "hotel-brokerage:check-invoice", name = "发票申请" where id = "230"\r\nupdate sys_permission SET pid = "77", permission = "hotel-settled:update-progress", name = "更新进度" where id = "81"\r\ninsert into sys_permission (id, pid, permission, name ) values (null, "30", "ebk-user:enabled", "酒店账号启用禁用" ) \r\nupdate sys_permission SET pid = "0", permission = "hotel-service:*", name = "酒店设施" where id = "78"\r\ndelete from sys_permission where id = "45" \r\ndelete from sys_permission where id = "50"\r\ndelete from sys_permission where id = "53"\r\nupdate sys_permission SET pid = "65", permission = "hotel-room:editStatus", name = "房型恢复" where id = "69"\r\nupdate sys_permission SET pid = "0", permission = "hotel-ask:*", name = "内容管理-评论系统" where id = "83" \r\ninsert into sys_permission (id, pid, permission, name ) values (null, "140", "sys-adv:edit", "广告编辑" )\r\ndelete from sys_permission where id = "179"\r\ndelete from sys_permission where id = "178" \r\nupdate sys_permission SET pid = "0", permission = "ta-brokerage-receipt:*", name = "财务管理-分销商发票管理" where id = "180"\r\nupdate sys_permission SET pid = "183", permission = "ta-brokerage-verify:edit", name = "拒绝提现审核" where id = "186"\r\ninsert into sys_permission (id, pid, permission, name ) values (null, "214", "ta-user:enabled", "分销商账号启用禁用" )\r\nupdate sys_permission SET pid = "214", permission = "ta-user:admin-add", name = "账号开通" where id = "220"\r\nupdate sys_permission SET pid = "214", permission = "ta-user:company-account", name = "管理员查看" where id = "219"\r\nupdate sys_permission SET pid = "209", permission = "ta-settled:view", name = "查看分销商详情" where id = "212"\r\ndelete from sys_permission where id = "221"\r\ndelete from sys_permission where id = "263"\r\ndelete from sys_permission where id = "274"\r\ndelete from sys_permission where id = "275"\r\nupdate sys_permission SET  name = "房型作废与恢复" where id = "69" \r\nupdate sys_permission SET pid = 86 where id = "286"\r\n\r\n\r\n\r\n\r\n\r\n\r\n\r\n', 1528280986, 1528786339),
+	(2, 1, 1, 3, 'ALTER TABLE `hotel`\r\nADD COLUMN `is_supplier` tinyint(1) NOT NULL DEFAULT \'0\' COMMENT \'是否是供应商\' AFTER `is_group`,\r\nADD COLUMN  `api_type`  varchar(50)  NOT NULL DEFAULT \'NDA\' COMMENT \'合作类型： NDA,XIAOYI\' AFTER `account_status`;\r\n\r\nupdate hotel set code = id where code is null or code = \'\';\r\n\r\nALTER TABLE `hotel`\r\nMODIFY COLUMN `code`  varchar(16) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL AFTER `id`,\r\nADD UNIQUE INDEX `uniquecode` (`code`) USING BTREE ;\r\n\r\nCREATE TABLE `hotel_supplier` (\r\n  `id` int(11) NOT NULL,\r\n  `hotel_id` char(18)  NOT NULL DEFAULT \'0\' COMMENT \'酒店\',\r\n  `supplier_id` char(18)  NOT NULL DEFAULT \'0\' COMMENT \'供应商id\',\r\n  PRIMARY KEY (`id`)\r\n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT=\'酒店供应商关联表\';\r\n\r\nALTER TABLE `hotel_supplier`\r\nADD COLUMN `status` tinyint(1) DEFAULT NULL COMMENT \'0未关联 1 关联\' AFTER `hotel_id`;\r\n\r\n\r\nALTER TABLE `hotel_sale_room`\r\nADD COLUMN `supplier_id`  char(18) NULL COMMENT \'供应商id\' AFTER `hotel_id`;\r\n\r\nALTER TABLE `order_`\r\nADD COLUMN `supplier_id`  char(18) NULL COMMENT \'供应商id\' AFTER `hotel_id`;\r\n\r\nALTER TABLE `order_`\r\nADD COLUMN `api_time_out`  smallint(8) NULL DEFAULT 0 COMMENT \'调用API接口是超时的次数\' AFTER `creator_phone`;\r\n\r\nupdate order_ set supplier_id = hotel_id where supplier_id is null;\r\nupdate hotel_sale_room set supplier_id = hotel_id where supplier_id is null;\r\n\r\nalter table hotel_channel_credit modify column tmp_expired datetime;\r\n\r\nALTER TABLE `order_`\r\nADD COLUMN `btn_limit_time`  datetime NULL COMMENT \'按钮出现限制的时间\' AFTER `api_time_out`;\r\nupdate order_ set btn_limit_time =  DATE_ADD(check_in_date,INTERVAL 1 DAY);\r\n\r\nalter table ebk_role add column type varchar(18);', 1528425935, 1528425935),
+	(3, 1, 1, 3, '\r\nALTER TABLE `sys_payment_deal_detail`\r\nMODIFY COLUMN `orderId`  char(40) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL COMMENT \'订单ID，或者是充值的订单Id\' AFTER `api_name`;\r\n', 1528426237, 1528426237),
+	(4, 1, 1, 3, 'alter table ta_company add invoice_content varchar(256) comment \'发票：开票内容\';', 1528881477, 1528956494),
+	(5, 1, 1, 8, '	<select id="searchOrderMessage" parameterType="java.util.Map" resultMap="BaseResultMap">\r\n		SELECT\r\n			<include refid="Base_Column_List" />\r\n		FROM\r\n			order_snapshot_task \r\n		WHERE\r\n			target_order_id IN (\r\n				SELECT\r\n					id\r\n				FROM\r\n					order_\r\n				WHERE 1=1\r\n				<if test="supplierId != null and supplierId !=  \'\' ">\r\n					AND supplier_id = #{supplierId}\r\n				</if>\r\n				<if test="companyId != null and companyId != \'\' ">\r\n					AND company_id = #{companyId}\r\n				</if>\r\n				<if test="needConfirm != null and needConfirm !=  \'\' ">\r\n					AND need_confirm = #{needConfirm}\r\n				</if>\r\n			)\r\n\r\n		<if test="taskStatus != null and taskStatus != \'\'">\r\n			AND task_status = #{task_status,jdbcType=CHAR}\r\n		</if>\r\n		<if test="taskType != null and taskType != \'\' and taskType == \'HotelMsgAndHotelTask\'">\r\n			AND task_type IN ("HotelMsg","HotelTask")\r\n		</if>\r\n		<if test="taskType != null and taskType != \'\' and taskType != \'HotelMsgAndHotelTask\'">\r\n			AND task_type = #{taskType,jdbcType=CHAR}\r\n		</if>\r\n		<if test="orderStatus == \'refusedAndconfirmPass\' ">\r\n			AND order_status IN ("refused","confirmPass")\r\n		</if>\r\n		<if test="orderStatus == \'toConfirmAndconfirmPass\'">\r\n			AND order_status IN ("toConfirm","confirmPass")\r\n		</if>\r\n		<if test="orderStatus != null and orderStatus != \'\' and orderStatus != \'toConfirmAndconfirmPass\' and orderStatus != \'refusedAndconfirmPass\'">\r\n			AND order_status = #{orderStatus,jdbcType=CHAR}\r\n		</if>\r\n		<if test="flagOther !=null and flagOther != \'\'">\r\n			AND flag_other = #{flagOther,jdbcType=CHAR}\r\n		</if>\r\n		<if test="forceCancelFree != null and forceCancelFree != \'\' ">\r\n			AND force_cancel_free = #{forceCancelFree,jdbcType=CHAR}\r\n		</if>\r\n		<if test="startTime != null and startTime != \'\' and endTime != null and endTime != \'\'">\r\n			AND create_time_4_sst between #{startTime} AND #{endTime} \r\n		</if>\r\n		GROUP BY target_order_id\r\n	</select>', 1528943138, 1529393928),
+	(6, 1, 1, 5, 'alter table hotel modify column code char(18);', 1528959350, 1528959350),
+	(7, 1, 1, 3, 'ALTER TABLE `sys_payment_deal_detail`\r\nADD COLUMN `order_type`  varchar(10) NULL AFTER `dependency_api_name`;\r\n\r\n', 1529045110, 1529045110),
+	(8, 1, 1, 3, 'ALTER TABLE `order_snapshot_task`\r\nADD COLUMN `create_time_4_sst`  datetime NULL COMMENT \'当前对象的创建时间\' AFTER `update_time`;\r\n\r\n', 1529375495, 1529375495),
+	(9, 1, 1, 8, '	<select id="searchOrderMessage" parameterType="java.util.Map" resultMap="BaseResultMap">\r\n		SELECT\r\n			<include refid="Base_Column_List" />\r\n		FROM\r\n			order_snapshot_task \r\n		WHERE\r\n			target_order_id IN (\r\n				SELECT\r\n					id\r\n				FROM\r\n					order_\r\n				WHERE 1=1\r\n				<if test="supplierId != null and supplierId !=  \'\' ">\r\n					AND supplier_id = #{supplierId}\r\n				</if>\r\n				<if test="companyId != null and companyId != \'\' ">\r\n					AND company_id = #{companyId}\r\n				</if>\r\n				<if test="needConfirm != null and needConfirm !=  \'\' ">\r\n					AND need_confirm = #{needConfirm}\r\n				</if>\r\n			)\r\n\r\n		<if test="taskStatus != null and taskStatus != \'\'">\r\n			AND task_status = #{task_status,jdbcType=CHAR}\r\n		</if>\r\n		<if test="taskType != null and taskType != \'\' and taskType == \'HotelMsgAndHotelTask\'">\r\n			AND task_type IN ("HotelMsg","HotelTask")\r\n		</if>\r\n		<if test="taskType != null and taskType != \'\' and taskType != \'HotelMsgAndHotelTask\'">\r\n			AND task_type = #{taskType,jdbcType=CHAR}\r\n		</if>\r\n		<if test="orderStatus == \'refusedAndconfirmPass\' ">\r\n			AND order_status IN ("refused","confirmPass")\r\n		</if>\r\n		<if test="orderStatus == \'toConfirmAndconfirmPass\'">\r\n			AND order_status IN ("toConfirm","confirmPass")\r\n		</if>\r\n		<if test="orderStatus != null and orderStatus != \'\' and orderStatus != \'toConfirmAndconfirmPass\' and orderStatus != \'refusedAndconfirmPass\'">\r\n			AND order_status = #{orderStatus,jdbcType=CHAR}\r\n		</if>\r\n		<if test="flagOther !=null and flagOther != \'\'">\r\n			AND flag_other = #{flagOther,jdbcType=CHAR}\r\n		</if>\r\n		<if test="forceCancelFree != null and forceCancelFree != \'\' ">\r\n			AND force_cancel_free = #{forceCancelFree,jdbcType=CHAR}\r\n		</if>\r\n		<if test="startTime != null and startTime != \'\' and endTime != null and endTime != \'\'">\r\n			AND create_time_4_sst between #{startTime} AND #{endTime} \r\n		</if>\r\n		GROUP BY target_order_id\r\n	</select>', 1529393943, 1529393943),
+	(10, 1, 1, 3, 'ALTER TABLE `hotel_supplier`\r\nADD COLUMN `is_binding`  tinyint(1) NULL COMMENT \'是否绑定\' AFTER `supplier_id`,\r\nADD COLUMN `is_sync`  tinyint(1) NULL COMMENT \'是否同步\' AFTER `is_binding`;\r\n\r\nCREATE TABLE `hotel_room_api` (\r\n  `id` int(11) NOT NULL AUTO_INCREMENT,\r\n  `hotel_id` char(18) NOT NULL DEFAULT \'0\' COMMENT \'酒店\',\r\n  `supplier_id` char(18) NOT NULL DEFAULT \'0\' COMMENT \'供应商id\',\r\n  `api_type` varchar(50) NOT NULL COMMENT \'合作类型：XIAOYI\',\r\n  `hotel_room_id` char(18) NOT NULL DEFAULT \'0\' COMMENT \'物理房型ID\',\r\n  `hotel_room_api_code` char(18) NOT NULL DEFAULT \'0\' COMMENT \'物理房型在渠道中的code\',\r\n  PRIMARY KEY (`id`)\r\n) ENGINE=InnoDB AUTO_INCREMENT=142 DEFAULT CHARSET=utf8mb4 COMMENT=\'物理房型对应各个渠道的编码\';\r\n\r\n\r\n\r\nCREATE TABLE `supplier_blacklist_for_ta` (\r\n  `supplier_id` char(18) CHARACTER SET utf8 NOT NULL COMMENT \'供应商id\',\r\n  `company_id` char(18) CHARACTER SET utf8 NOT NULL COMMENT \'分销商id\',\r\n  `is_shielded` tinyint(1) DEFAULT NULL COMMENT \'是否屏蔽\',\r\n  `create_time` datetime DEFAULT CURRENT_TIMESTAMP,\r\n  `update_time` datetime DEFAULT NULL,\r\n  PRIMARY KEY (`supplier_id`,`company_id`)\r\n) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT=\'供应商的分销商黑名单\';', 1529394946, 1529394946),
+	(11, 1, 1, 4, 'DROP TABLE IF EXISTS `hotel_channel_ud`;\r\nCREATE TABLE `hotel_channel_ud` (\r\n  `id` char(18) CHARACTER SET utf8 NOT NULL,\r\n  `name` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT \'自定义渠道名称\',\r\n  `hotel_id` char(18) CHARACTER SET utf8 DEFAULT NULL COMMENT \'渠道所属酒店\',\r\n  `create_time` datetime DEFAULT NULL,\r\n  `update_time` datetime DEFAULT NULL,\r\n  PRIMARY KEY (`id`)\r\n) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT=\'自定义渠道表\';\r\n\r\nDROP TABLE IF EXISTS `hotel_channel_ud_ta`;\r\nCREATE TABLE `hotel_channel_ud_ta` (\r\n  `hotel_id` char(18) CHARACTER SET utf8 NOT NULL COMMENT \'酒店ID\',\r\n  `company_id` char(18) CHARACTER SET utf8 NOT NULL COMMENT \'分销商ID\',\r\n  `hcu_id` char(18) CHARACTER SET utf8 NOT NULL COMMENT \'自定义渠道ID\',\r\n  `handler` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT \'处理人\',\r\n  `handler_id` char(18) CHARACTER SET utf8 DEFAULT NULL COMMENT \'处理人ID\',\r\n  `create_time` datetime DEFAULT NULL\r\n) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT=\'酒店自建自定义渠道与分销商关联中间表\';\r\n\r\nDROP TABLE IF EXISTS `hotel_sale_room_ud`;\r\nCREATE TABLE `hotel_sale_room_ud` (\r\n  `sale_room_id` char(18) CHARACTER SET utf8 NOT NULL COMMENT \'售卖房型ID\',\r\n  `ud_id` char(18) CHARACTER SET utf8 NOT NULL COMMENT \'自定义渠道ID\',\r\n  `hotel_id` char(18) CHARACTER SET utf8 NOT NULL COMMENT \'酒店ID\',\r\n  `is_oneline` tinyint(2) NOT NULL DEFAULT \'0\' COMMENT \'0下线，1上线\',\r\n  UNIQUE KEY `unique_channel` (`sale_room_id`,`ud_id`)\r\n) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT=\'售卖房型与自定义渠道表关联\';\r\n\r\nDROP TABLE IF EXISTS `hotel_channel_ud_plan`;\r\nCREATE TABLE `hotel_channel_ud_plan` (\r\n  `id` char(18) CHARACTER SET utf32 NOT NULL COMMENT \'ID\',\r\n  `hcu_id` char(18) CHARACTER SET utf8 NOT NULL COMMENT \'渠道ID\',\r\n  `sale_room_id` char(18) CHARACTER SET utf8 NOT NULL COMMENT \'售卖房型ID\',\r\n  `plan_id` char(18) CHARACTER SET utf8 NOT NULL COMMENT \'库存ID\',\r\n  `scope` float DEFAULT NULL COMMENT \'加幅的值（可以为负数表示减，正数表示加，0，表示不变）\',\r\n  `room_status` tinyint(4) DEFAULT \'-1\' COMMENT \'房态：0:关房，1：开房，-1无效\',\r\n  `cancel_type` tinyint(4) DEFAULT \'-2\' COMMENT \'-1 不可取消，0 免费取消，1限时取消，-2表示无效\',\r\n  `cancel_fee_policy` tinyint(4) DEFAULT NULL COMMENT \'预期取消扣款政策：1 首晚，2全款\',\r\n  `cancel_last_datetime` datetime DEFAULT NULL COMMENT \'最晚取消时间（在预定的日期前）\',\r\n  `create_time` datetime DEFAULT NULL,\r\n  `update_time` datetime DEFAULT NULL,\r\n  PRIMARY KEY (`id`)\r\n) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT=\'自定义渠道价格计划\';\r\n\r\nDROP TABLE IF EXISTS `hotel_channel_ud_ta`;\r\nCREATE TABLE `hotel_channel_ud_ta` (\r\n  `hotel_id` char(18) CHARACTER SET utf8 NOT NULL COMMENT \'酒店ID\',\r\n  `company_id` char(18) CHARACTER SET utf8 NOT NULL COMMENT \'分销商ID\',\r\n  `hcu_id` char(18) CHARACTER SET utf8 NOT NULL COMMENT \'自定义渠道ID\',\r\n  `company_name` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT \'分销商名称\',\r\n  `handler` varchar(128) CHARACTER SET utf8 DEFAULT NULL COMMENT \'处理人\',\r\n  `handler_id` char(18) CHARACTER SET utf8 DEFAULT NULL COMMENT \'处理人ID\',\r\n  `create_time` datetime DEFAULT NULL\r\n) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT=\'酒店自建自定义渠道与分销商关联中间表\';', 1529919946, 1530086445),
+	(12, 1, 1, 8, '	<select id="searchOrderMessage" parameterType="java.util.Map" resultMap="BaseResultMap">\r\n		SELECT\r\n		<include refid="Base_Column_List" />\r\n		FROM order_\r\n		<where>\r\n			<if test="supplierId != null and supplierId != \'\' ">\r\n				AND supplier_id = #{supplierId}\r\n			</if>\r\n			<if test="companyId != null and companyId != \'\' ">\r\n				AND company_id = #{companyId}\r\n			</if>\r\n			<if test="orderStatus != null and orderStatus != \'\' and orderStatus != \'refusedAndconfirmPass\' and orderStatus != \'toConfirmAndconfirmPass\' ">\r\n				AND order_status = #{orderStatus,jdbcType=VARCHAR}\r\n			</if>\r\n			<if test="orderStatus != null and orderStatus != \'\' and orderStatus == \'refusedAndconfirmPass\' and orderStatus != \'toConfirmAndconfirmPass\' ">\r\n				AND order_status IN (\'refused\',\'confirmPass\')\r\n			</if>\r\n			<if test="orderStatus == \'toConfirmAndconfirmPass\'">\r\n				AND order_status IN (\'toConfirm\',\'confirmPass\')\r\n			</if>\r\n			<if test="isNormal != null ">\r\n				AND is_normal = #{isNormal,jdbcType=BIT}\r\n			</if>\r\n			<if test="taskStatus != null and taskStatus != \'\' ">\r\n				AND task_status = #{taskStatus,jdbcType=CHAR}\r\n			</if>\r\n			<if test="flagOther != null and flagOther != \'\' ">\r\n				AND flag_other = #{flagOther,jdbcType=CHAR}\r\n			</if>\r\n			<if test="flagOther == null ">\r\n				AND flag_other IS NULL\r\n			</if>\r\n			<if test="buyType != null and buyType != \'\' ">\r\n				AND buy_type = #{buyType,jdbcType=TINYINT}\r\n			</if>\r\n			<if test="checkInDate != null and checkInDate != \'\'  ">\r\n				AND check_in_date = #{checkInDate}\r\n			</if>\r\n			<if test="orderStatusAudited != null ">\r\n				AND order_status IN (\'auditedToConfirm\' ,\'confirmPass\')\r\n				AND confirmor_id IS NOT NULL\r\n			</if>\r\n			<if test="startTime != null and startTime != \'\' and endTime != null and endTime != \'\'">\r\n				AND create_time between #{startTime} AND #{endTime} \r\n			</if>\r\n			<if test="isNormalOrderStatus != null and isNormalOrderStatus != \'\' ">\r\n				AND order_status != #{isNormalOrderStatus,jdbcType=VARCHAR}\r\n			</if>\r\n			<if test="lockerId == null and lockerId ==\'\'">\r\n				AND locker_id IS NULL\r\n			</if>\r\n		</where>\r\n	</select>', 1530187505, 1530187505),
+	(13, 1, 1, 8, '	<!-- 查询未付款的有效订单  -->\r\n	<select id="searchNormalToPayOrder" resultMap="BaseResultMap">\r\n		SELECT\r\n		<include refid="Base_Column_List" />\r\n		FROM order_\r\n		<where>\r\n			order_status = \'toPay\' AND close_time >= #{nowTime}\r\n			AND buy_type = true\r\n		</where>\r\n	</select>', 1530187515, 1530187515),
+	(14, 1, 1, 14, 'alter table hotel_ask add hotel_name varchar(128);\r\nalter table hotel_ask add company_name varchar(128);', 1530773233, 1530773233),
+	(15, 1, 1, 5, 'CREATE TABLE `hotel_proceeds_log` (\r\n  `id` char(18) NOT NULL,\r\n  `sale_room_id` char(18) NOT NULL,\r\n  `channel_type_id` char(18) NOT NULL,\r\n  `type` varchar(32) DEFAULT NULL COMMENT \'HotelSaleRoomSum 总的日志 HotelSaleRoomDay每天日志\',\r\n  `hotel_id` varchar(18) NOT NULL,\r\n  `begin_date` date DEFAULT NULL,\r\n  `end_date` date DEFAULT NULL,\r\n  `mark` text NOT NULL,\r\n  `week` tinyint(8) DEFAULT NULL,\r\n  `hander_id` char(18) DEFAULT NULL,\r\n  `hander` varchar(32) DEFAULT NULL,\r\n  `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP\r\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;', 1530857822, 1530857822),
+	(16, 1, 1, 5, 'INSERT INTO `ebk_menu` VALUES (64, 4, \'hotel\', \'酒店政策编辑页面\', \'/hotel-policy/edit\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (65, 6, \'hotel\', \'酒店房型编辑页\', \'/hotel-room/edit\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (66, 6, \'hotel\', \'酒店房型新增页面\', \'/hotel-room/add\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (67, 0, \'hotel\', \'首页\', \'/\', \'#\', 12);\r\nINSERT INTO `ebk_menu` VALUES (68, 3, \'hotel\', \'审核后基础信息页面\', \'/hotel-info/info\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (69, 3, \'hotel\', \'审核之前基础信息\', \'/hotel-info/edit\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (70, 7, \'hotel\', \'图片外观\', \'/photo/manager/wj\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (71, 7, \'hotel\', \'图片内景\', \'/photo/manager/nj\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (72, 7, \'hotel\', \'房型\', \'/photo/manager-room\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (73, 7, \'hotel\', \'设施\', \'/photo/manager/ss\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (74, 11, \'hotel\', \'订单详情\', \'/order-manage/order-info\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (75, 20, \'hotel\', \'分销商日志\', \'/ta-channel/personal-log\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (76, 20, \'hotel\', \'分销商预付个性化\', \'/ta-channel/personal-setting/personal-prepay\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (77, 20, \'hotel\', \'现付个性化\', \'/ta-channel/personal-setting/personal-cashpay\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (78, 20, \'hotel\', \'添加分销商\', \'/ta-channel/add-company\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (79, 21, \'hotel\', \'查询额度\', \'/hotel-credit-balance/view\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (80, 25, \'hotel\', \'发票编辑\', \'/invoice-info/edit\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (81, 27, \'hotel\', \'账单结算\', \'/bill/accounts\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (82, 13, \'hotel\', \'已完成订单\', \'/check-verify/index-actived\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (93, 39, \'supplier\', \'订单详情\', \'/order-manage/order-info\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (94, 48, \'supplier\', \'分销商日志\', \'/ta-channel/personal-log\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (95, 48, \'supplier\', \'分销商预付个性化\', \'/ta-channel/personal-setting/personal-prepay\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (96, 48, \'supplier\', \'现付个性化\', \'/ta-channel/personal-setting/personal-cashpay\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (97, 48, \'supplier\', \'添加分销商\', \'/ta-channel/add-company\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (98, 49, \'supplier\', \'查询额度\', \'/hotel-credit-balance/view\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (99, 53, \'supplier\', \'发票编辑\', \'/invoice-info/edit\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (100, 55, \'supplier\', \'账单结算\', \'/bill/accounts\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (101, 41, \'supplier\', \'已完成订单\', \'/check-verify/index-actived\', \'\', 12);\r\nINSERT INTO `ebk_menu` VALUES (102, 17, ‘hotel’, \'自定义渠道\', \'/user-defined/index\', \'\', 18);\r\nINSERT INTO `ebk_menu` VALUES (103, 102, ‘hotel’, \'个性化设置\', \'/user-defined-plan/index\', \'\', 1);\r\nINSERT INTO `ebk_menu` VALUES (104, 102, ‘hotel’, \'维护分销商\', \'/user-defined/add-company\', \'\', 2);\r\n', 1531739139, 1531739139),
+	(17, 1, 1, 4, 'ALTER TABLE hotel_channel_plan ADD room_status\r\n TINYINT(4) NOT NULL DEFAULT \'-2\'', 1531745409, 1531745447),
+	(18, 1, 1, 14, 'ALTER TABLE hotel_channels\r\nDROP PRIMARY KEY,\r\nADD PRIMARY KEY USING BTREE (`hotel_id`, `company_id`, `channel_type_id`);', 1531809466, 1531809566),
+	(19, 1, 1, 4, 'DROP TABLE IF EXISTS `ta_licence_audit`;\r\nCREATE TABLE `ta_licence_audit` (\r\n  `company_id` char(255) NOT NULL COMMENT \'分销商ID\',\r\n  `company_name` varchar(128) DEFAULT NULL COMMENT \'分销商名称\',\r\n  `primary_photo` varchar(128) DEFAULT NULL COMMENT \'原营业执照图片\',\r\n  `present_photo` varchar(128) DEFAULT NULL COMMENT \'现营业执照图片\',\r\n  `status` tinyint(2) DEFAULT \'0\' COMMENT \'审核状态:0：未审核，-1审核失败，1审核成功\',\r\n  `licence_cause` varchar(128) DEFAULT NULL COMMENT \'原因\',\r\n  `create_time` datetime DEFAULT NULL,\r\n  `update_time` datetime DEFAULT NULL,\r\n  PRIMARY KEY (`company_id`)\r\n) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT=\'分销商审核表\';\r\n\r\nDROP TABLE IF EXISTS `ta_licence_audit_log`;\r\nCREATE TABLE `ta_licence_audit_log` (\r\n  `id` char(18) NOT NULL,\r\n  `status` tinyint(2) NOT NULL COMMENT \'审核状态:0：未审核，-1审核失败，1审核成功\',\r\n  `company_id` char(18) NOT NULL COMMENT \'销商分ID\',\r\n  `fail_cause` varchar(128) DEFAULT NULL COMMENT \'审核失败原因\',\r\n  `operation_id` char(18) DEFAULT NULL COMMENT \'审核人ID\',\r\n  `operation_name` varchar(32) NOT NULL COMMENT \'操作人\',\r\n  `create_time` datetime DEFAULT NULL,\r\n  PRIMARY KEY (`id`)\r\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;', 1532050091, 1532050091),
+	(20, 1, 1, 4, 'ALTER TABLE hotel ADD is_test TINYINT(1) NOT NULL DEFAULT \'0\';\r\nALTER TABLE ta_company ADD is_test TINYINT(1) NOT NULL DEFAULT \'0\';\r\nupdate hotel set is_test = \'0\' where 1=1;\r\nupdate ta_company set is_test = \'0\' where 1=1;', 1532342003, 1532342003),
+	(21, 1, 1, 14, 'CREATE TABLE `ta_ebk_user` (\r\n  `id` char(18) NOT NULL,\r\n  `company_id` char(18) NOT NULL DEFAULT \'0\' COMMENT \'企业id\',\r\n  `department_id` char(18) NOT NULL,\r\n  `is_admin` int(1) NOT NULL DEFAULT \'0\',\r\n  `username` varchar(20) NOT NULL DEFAULT \'\' COMMENT \'用户昵称\',\r\n  `real_name` varchar(64) DEFAULT NULL,\r\n  `email` varchar(64) DEFAULT \'\' COMMENT \'邮箱|登录帐号\',\r\n  `is_email_certified` tinyint(1) DEFAULT \'0\' COMMENT \'邮箱是否认证\',\r\n  `mobile` varchar(16) DEFAULT \'\' COMMENT \'邮箱|登录帐号\',\r\n  `is_mobile_certified` tinyint(1) DEFAULT \'0\',\r\n  `phone` varchar(64) DEFAULT NULL,\r\n  `password` char(60) NOT NULL DEFAULT \'\' COMMENT \'密码\',\r\n  `sex` tinyint(4) DEFAULT \'0\' COMMENT \'性别：0 保密，1女，2男\',\r\n  `position` varchar(64) DEFAULT NULL COMMENT \'职位\',\r\n  `auth_token` varchar(32) NOT NULL DEFAULT \'\' COMMENT \'验证token\',\r\n  `reset_password_token` varchar(32) NOT NULL DEFAULT \'\' COMMENT \'密码重置token\',\r\n  `last_login_time` datetime DEFAULT NULL COMMENT \'最后登录时间\',\r\n  `status` tinyint(1) DEFAULT \'1\' COMMENT \'1:有效，0:禁止登录\',\r\n  `roles` text COMMENT \'用户被分配的角色列表\',\r\n  `create_time` datetime NOT NULL COMMENT \'创建时间\',\r\n  `update_time` datetime DEFAULT NULL COMMENT \'更新时间\',\r\n  PRIMARY KEY (`id`),\r\n  UNIQUE KEY `username_UNIQUE` (`username`)\r\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;\r\n\r\ninsert into `ta_ebk_user` select *\r\nfrom ta_user;\r\n\r\ninsert into `ta_ebk_user` select *\r\nfrom ebk_user\r\nwhere not exists (select * from `ta_ebk_user`\r\nwhere `ta_ebk_user`.id=ebk_user.id or `ta_ebk_user`.username=ebk_user.username);', 1532395714, 1533189597),
+	(22, 1, 1, 3, '	DROP TABLE IF EXISTS `ta_licence_audit`;\r\nCREATE TABLE `ta_licence_audit` (\r\n`company_id` char(255) NOT NULL COMMENT \'分销商ID\',\r\n`company_name` varchar(128) DEFAULT NULL COMMENT \'分销商名称\',\r\n`primary_photo` varchar(128) DEFAULT NULL COMMENT \'原营业执照图片\',\r\n`present_photo` varchar(128) DEFAULT NULL COMMENT \'现营业执照图片\',\r\n`status` tinyint(2) DEFAULT \'0\' COMMENT \'审核状态:0：未审核，-1审核失败，1审核成功\',\r\n`licence_cause` varchar(128) DEFAULT NULL COMMENT \'原因\',\r\n`create_time` datetime DEFAULT NULL,\r\n`update_time` datetime DEFAULT NULL,\r\nPRIMARY KEY (`company_id`)\r\n) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT=\'分销商审核表\';\r\n\r\nDROP TABLE IF EXISTS `ta_licence_audit_log`;\r\nCREATE TABLE `ta_licence_audit_log` (\r\n`id` char(18) NOT NULL,\r\n`status` tinyint(2) NOT NULL COMMENT \'审核状态:0：未审核，-1审核失败，1审核成功\',\r\n`company_id` char(18) NOT NULL COMMENT \'销商分ID\',\r\n`fail_cause` varchar(128) DEFAULT NULL COMMENT \'审核失败原因\',\r\n`operation_id` char(18) DEFAULT NULL COMMENT \'审核人ID\',\r\n`operation_name` varchar(32) NOT NULL COMMENT \'操作人\',\r\n`create_time` datetime DEFAULT NULL,\r\nPRIMARY KEY (`id`)\r\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;', 1532420408, 1532420408),
+	(23, 1, 1, 14, 'CREATE TABLE `id_storage` (\r\n  `id` char(18) NOT NULL COMMENT \'酒店和分销商id\',\r\n  `open_ta` tinyint(1) DEFAULT \'0\',\r\n  PRIMARY KEY (`id`)\r\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;\r\n\r\ninsert into id_storage(id)\r\nselect id\r\nfrom hotel\r\nwhere not exists (select * from id_storage\r\nwhere id_storage.id=hotel.id);\r\n\r\ninsert into id_storage(id)\r\nselect id\r\nfrom ta_company\r\nwhere not exists (select * from id_storage\r\nwhere id_storage.id=ta_company.id);', 1532480608, 1532480608),
+	(24, 1, 1, 5, 'ALTER TABLE ta_company update status tinyint(1) default \'0\' comment \'状态 是否已上线：1上线，0未上线\'\r\n\r\n\r\nCREATE TABLE `hotel_channel_client` (\r\n  `id` char(18) NOT NULL,\r\n  `channel_type_id` char(18) NOT NULL,\r\n  `company_id` char(18) NOT NULL,\r\n  `hotel_id` char(18) NOT NULL,\r\n  `status` varchar(32) DEFAULT \'Check_Pending\' COMMENT \'Check_Pending，待审核，In_Cooperation,合作中,Stop_Follow停止更进，Ignore忽略\',\r\n  `company_name` varchar(255) DEFAULT NULL,\r\n  `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP,\r\n  PRIMARY KEY (`id`)\r\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;\r\n\r\n\r\nCREATE TABLE `hotel_channel_client_log` (\r\n  `id` char(18) NOT NULL,\r\n  `client_id` char(18) DEFAULT NULL,\r\n  `mark` text,\r\n  `handler` varchar(32) DEFAULT NULL,\r\n  `handler_id` char(18) DEFAULT NULL,\r\n  `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP\r\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;\r\n\r\n\r\nupdate  ta_company  set `status`="1";\r\n\r\nINSERT INTO ebk_menu (`id`, `pid`, `type`, `name`, `url`, `permission`, `sort`) VALUES (\'105\', \'19\', \'hotel\', \'客户管理\', \'/hotel-channel-client/index\', \'hotel-channel-client:index\', \'100\');\r\n', 1532587803, 1532941066),
+	(25, 1, 1, 14, 'ALTER TABLE `hotel_photo`\r\nADD COLUMN `create_time`  timestamp NULL DEFAULT CURRENT_TIMESTAMP AFTER `cate`;\r\n\r\nALTER TABLE `hotel_room`\r\nADD COLUMN `create_time`  timestamp NULL DEFAULT CURRENT_TIMESTAMP AFTER `photo`;', 1532670622, 1532680589),
+	(26, 1, 1, 8, 'CREATE TABLE `nda_message` (\r\n  `id` bigint(20) NOT NULL AUTO_INCREMENT,\r\n  `send_id` varchar(18) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT \' 发送方ID 酒店ID/分销ID/NULL\',\r\n  `send_type` enum(\'hotel\',\'ta\',\'admin\') COLLATE utf8_unicode_ci NOT NULL COMMENT \'发送方类型\',\r\n  `title` varchar(64) COLLATE utf8_unicode_ci NOT NULL COMMENT \'消息标题\',\r\n  `message_text` varchar(512) COLLATE utf8_unicode_ci NOT NULL COMMENT \'消息内容\',\r\n  `priority` int(4) DEFAULT NULL COMMENT \'优先级\',\r\n  `send_status` tinyint(4) NOT NULL DEFAULT \'0\' COMMENT \'0:直接触发记录(主动)  1:登录过后记录(被动)\',\r\n  `overdue_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT \'过期时间\',\r\n  `create_id` varchar(18) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT \'消息创建人ID\',\r\n  `create_name` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT \'消息创建人名称\',\r\n  `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT \'消息创建时间\',\r\n  `update_id` varchar(18) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT \'消息更新人Id\',\r\n  `update_name` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT \'消息更新人姓名\',\r\n  `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT \'消息更新时间\',\r\n  PRIMARY KEY (`id`)\r\n) ENGINE=InnoDB AUTO_INCREMENT=180 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;\r\n\r\nCREATE TABLE `nda_message_reader` (\r\n  `id` bigint(20) NOT NULL AUTO_INCREMENT,\r\n  `message_id` bigint(20) NOT NULL COMMENT \'对应nda_message中的id\',\r\n  `read_id` varchar(18) COLLATE utf8_unicode_ci NOT NULL COMMENT \'接收方ID 对应到用户的id\',\r\n  `read_type` enum(\'hotel\',\'ta\',\'admin\') COLLATE utf8_unicode_ci NOT NULL COMMENT \'接收方类型\',\r\n  `status` tinyint(1) DEFAULT \'0\' COMMENT \'0-未读 1-已读\',\r\n  `enabled` tinyint(1) DEFAULT \'1\' COMMENT \'0-无效 1-有效\',\r\n  `create_id` varchar(18) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT \'创建人ID\',\r\n  `create_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT \'创建人姓名\',\r\n  `create_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT \'创建时间\',\r\n  `update_id` varchar(18) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT \'更新人Id\',\r\n  `update_name` varchar(255) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT \'更新人姓名\',\r\n  `update_time` datetime DEFAULT NULL ON UPDATE CURRENT_TIMESTAMP COMMENT \'更新时间\',\r\n  PRIMARY KEY (`id`)\r\n) ENGINE=InnoDB AUTO_INCREMENT=658 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;', 1533026397, 1533026397),
+	(27, 1, 1, 4, 'DROP TABLE IF EXISTS `order_api`;\r\nCREATE TABLE `order_api` (\r\n  `order_id` char(18) NOT NULL COMMENT \'订单ID\',\r\n  `notify_url` varchar(128) DEFAULT NULL COMMENT \'回调地址\',\r\n  `create_time` datetime DEFAULT NULL,\r\n  PRIMARY KEY (`order_id`)\r\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;', 1533794495, 1533794495),
+	(28, 1, 1, 3, 'ALTER TABLE `order_api`\r\nADD COLUMN `app_id`  varchar(128) NULL AFTER `order_id`,\r\nADD COLUMN `out_order_id`  varchar(50) NULL AFTER `app_id`;\r\n\r\n', 1533880732, 1533880732),
+	(29, 1, 1, 14, 'CREATE TABLE `hotel_api_supplier` (\r\n  `id` char(18) NOT NULL,\r\n  `hotel_id` char(18) NOT NULL,\r\n  `channel_type_id` char(18) NOT NULL COMMENT \'api(如:飞猪)对应的渠道id\',\r\n  `api_type` varchar(45) NOT NULL COMMENT \'是哪个api（如:飞猪）英文\',\r\n  `app_id` varchar(128) NOT NULL,\r\n  `app_key` varchar(128) NOT NULL,\r\n  `status` tinyint(1) NOT NULL DEFAULT \'0\' COMMENT \'是否准备好，数据同步到api。针对有酒店没房型的情况\',\r\n  `create_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,\r\n  `update_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\r\n  PRIMARY KEY (`id`)\r\n) ENGINE=InnoDB DEFAULT CHARSET=utf8;', 1534727903, 1534727903),
+	(30, 1, 1, 3, 'CREATE TABLE `sys_area_match` (\r\n  `id` int(7) NOT NULL AUTO_INCREMENT,\r\n  `parent_api_code` varchar(48) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT \'该地区在api中上一级地区的code\',\r\n  `api_type` varchar(48) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT \'api名称\',\r\n  `api_code` varchar(48) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT \'api中的code\',\r\n  `api_name` varchar(48) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT \'api中的名称\',\r\n  `api_full_name` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT \'api地区全名称\',\r\n  `nda_code` varchar(48) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT \'nda中的code\',\r\n  `nda_name` varchar(48) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT \'nda中的名称\',\r\n  `nda_full_name` varchar(64) COLLATE utf8_unicode_ci DEFAULT NULL COMMENT \'nda中全名称\',\r\n  `level` varchar(32) COLLATE utf8_unicode_ci NOT NULL COMMENT \'行政区划级别.country:国家   province:省份（直辖市会在province和city显示且一致）city:市（直辖市会在province和city显示且一致）  district:区县     street:街道\',\r\n  `create_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,\r\n  `update_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,\r\n  PRIMARY KEY (`id`)\r\n) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci COMMENT=\'nda与各个系统省份，城市，区的匹配关系\';\r\n', 1534905492, 1534992772),
+	(31, 1, 1, 3, 'ALTER TABLE `hotel_room_plan`\r\nADD COLUMN `dinner_type`  tinyint(4) NULL COMMENT \'早餐类型 0 无早，1 单早，2双早 ,3:1份/人，4: 不定\' AFTER `reserver_num`;\r\nALTER TABLE `hotel_sale_room`\r\nMODIFY COLUMN `dinner_type`  tinyint(4) NULL DEFAULT NULL COMMENT \'早餐类型 0 无早，1 单早，2双早 ,3:1份/人，4: 不定\' AFTER `status`;\r\nALTER TABLE `order_room_price`\r\nADD COLUMN `dinner_type`  tinyint(4) NULL DEFAULT NULL COMMENT \'早餐类型 0 无早，1 单早，2双早 ,3:1份/人，4: 不定\' AFTER `cancel_last_datetime`;\r\n\r\n', 1536198757, 1536220271),
+	(32, 1, 1, 3, 'ALTER TABLE `hotel`\r\nADD COLUMN `supplier_type`  varchar(20) NULL COMMENT \'供应商类型：供应商或者直营\' AFTER `contract_status`;', 1540187729, 1540187729),
+	(33, 1, 1, 3, 'CREATE TABLE `user_third_part_info` (\r\n  `id` int(11) NOT NULL AUTO_INCREMENT COMMENT \'主键\',\r\n  `user_id` char(18) NOT NULL,\r\n  `third_part_id` varchar(60) NOT NULL COMMENT \'第三方Id\',\r\n  `third_part_type` char(20) NOT NULL COMMENT \'第三方类型\',\r\n  `login_type` varchar(18) NOT NULL DEFAULT \'\' COMMENT \'登陆方式：TA/HOTEL\',\r\n  PRIMARY KEY (`id`),\r\n  UNIQUE KEY `com_index` (`third_part_id`,`third_part_type`,`login_type`) USING BTREE\r\n) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;\r\n', 1540809188, 1540977164);
+/*!40000 ALTER TABLE `gt_change` ENABLE KEYS */;
 
--- 导出  表 geetask.gt_change 结构
-CREATE TABLE IF NOT EXISTS `gt_change` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `project_id` int(11) NOT NULL COMMENT '项目',
-  `category_id` int(11) NOT NULL COMMENT '分类',
-  `creator_id` int(11) NOT NULL COMMENT '创建人',
-  `content` text COMMENT '内容',
-  `created_at` int(11) DEFAULT NULL COMMENT '添加时间',
-  `updated_at` int(11) DEFAULT NULL COMMENT '更新时间',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=34 DEFAULT CHARSET=utf8mb4 COMMENT='变更';
-
-
-
--- 导出  表 geetask.gt_change_category 结构
-CREATE TABLE IF NOT EXISTS `gt_change_category` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` text COMMENT '名称',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='变更分类';
-
--- 正在导出表  geetask.gt_change_category 的数据：~0 rows (大约)
+-- 正在导出表  geetask.gt_change_category 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `gt_change_category` DISABLE KEYS */;
 INSERT INTO `gt_change_category` (`id`, `name`) VALUES
 	(1, 'SQL');
 /*!40000 ALTER TABLE `gt_change_category` ENABLE KEYS */;
 
--- 导出  表 geetask.gt_event 结构
-CREATE TABLE IF NOT EXISTS `gt_event` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `created_at` int(11) NOT NULL COMMENT '添加时间',
-  `updated_at` int(11) NOT NULL COMMENT '更新时间',
-  `name` varchar(64) NOT NULL COMMENT '名称',
-  `code` varchar(64) NOT NULL COMMENT '编码',
-  `intro` varchar(255) DEFAULT NULL COMMENT '介绍',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `code` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='事件';
-
--- 正在导出表  geetask.gt_event 的数据：~2 rows (大约)
+-- 正在导出表  geetask.gt_event 的数据：~3 rows (大约)
 /*!40000 ALTER TABLE `gt_event` DISABLE KEYS */;
 INSERT INTO `gt_event` (`id`, `created_at`, `updated_at`, `name`, `code`, `intro`) VALUES
 	(1, 1543392882, 1543548341, '添加新的故事', 'sprint.story.create', '在迭代计划中添加新的故事'),
-	(2, 1543548739, 1543551967, '更新故事', 'sprint.story.change', '在迭代计划中通过修改状态或者指派新的处理');
+	(2, 1543548739, 1543551967, '更新故事', 'sprint.story.change', '在迭代计划中通过修改状态或者指派新的处理'),
+	(3, 1547620062, 1547620062, '会议保存', 'meeting.save', '添加会议和保存会议的时候触发');
 /*!40000 ALTER TABLE `gt_event` ENABLE KEYS */;
 
--- 导出  表 geetask.gt_event_handler 结构
-CREATE TABLE IF NOT EXISTS `gt_event_handler` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `event_id` int(11) NOT NULL COMMENT '事件',
-  `created_at` int(11) NOT NULL COMMENT '添加时间',
-  `updated_at` int(11) NOT NULL COMMENT '更新时间',
-  `name` varchar(64) NOT NULL COMMENT '名称',
-  `handler` varchar(128) NOT NULL COMMENT '处理器',
-  `intro` varchar(255) DEFAULT NULL COMMENT '介绍',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `handler` (`handler`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='事件处理器';
-
--- 正在导出表  geetask.gt_event_handler 的数据：~2 rows (大约)
+-- 正在导出表  geetask.gt_event_handler 的数据：~4 rows (大约)
 /*!40000 ALTER TABLE `gt_event_handler` DISABLE KEYS */;
 INSERT INTO `gt_event_handler` (`id`, `event_id`, `created_at`, `updated_at`, `name`, `handler`, `intro`) VALUES
 	(1, 1, 1543462486, 1543549720, '发送机器人消息', '\\modules\\sprint\\handlers\\OnCreateStorySendMessageHandler', '发送标题消息'),
-	(2, 2, 1543549761, 1543551513, '发送机器人消息', '\\modules\\sprint\\handlers\\OnChangeStorySendMessageHandler', '发送标题消息');
+	(2, 2, 1543549761, 1543551513, '发送机器人消息', '\\modules\\sprint\\handlers\\OnChangeStorySendMessageHandler', '发送标题消息'),
+	(3, 3, 1547620166, 1547620166, '会话通知到钉钉', '\\modules\\meet\\handlers\\OnSaveMeetingSendMessageHandler', '会议通知到钉钉'),
+	(4, 3, 1547623198, 1547623198, '会议通过邮件通知', '\\modules\\meet\\handlers\\OnSaveMeetingSendEmailHandler', '邮件通知');
 /*!40000 ALTER TABLE `gt_event_handler` ENABLE KEYS */;
 
--- 导出  表 geetask.gt_meet 结构
-CREATE TABLE IF NOT EXISTS `gt_meet` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `project_id` int(11) NOT NULL COMMENT '项目',
-  `actors` text NOT NULL COMMENT '参会人',
-  `meet_date` date NOT NULL COMMENT '日期',
-  `creator_id` int(11) NOT NULL COMMENT '记录人',
-  `created_at` int(11) NOT NULL COMMENT '添加时间',
-  `updated_at` int(11) NOT NULL COMMENT '更新时间',
-  `title` varchar(128) NOT NULL COMMENT '议题',
-  `content` text NOT NULL COMMENT '内容',
-  `is_del` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=48 DEFAULT CHARSET=utf8mb4 COMMENT='会议';
+-- 正在导出表  geetask.gt_link 的数据：~2 rows (大约)
+/*!40000 ALTER TABLE `gt_link` DISABLE KEYS */;
+INSERT INTO `gt_link` (`id`, `project_id`, `label`, `url`) VALUES
+	(1, 1, '阿里云', 'https://www.aliyun.com'),
+	(2, 1, '支付宝', 'https://www.alipay.com');
+/*!40000 ALTER TABLE `gt_link` ENABLE KEYS */;
 
--- 正在导出表  geetask.gt_meet 的数据：~47 rows (大约)
-/*!40000 ALTER TABLE `gt_meet` DISABLE KEYS */;
-INSERT INTO `gt_meet` (`id`, `project_id`, `actors`, `meet_date`, `creator_id`, `created_at`, `updated_at`, `title`, `content`, `is_del`) VALUES
-	(47, 1, '钱攀，章宇飞，俞栋炜，顿刚', '2018-11-30', 1, 1543567773, 1543567843, '🎥回顾会议', '<p>1.hotelswtich的外部数据产生的日志不纳入到分布式事务中</p><p>2.NDAswitch当中不用加入分布事务</p><p>3.roomplan服务测试分布事务，特别是sql语句的改造</p><p>4.特别注意：sharding-jdbc 支持批量插入，不支持批量更新操作</p><p>5.服务升级需要升级版本号，解决无缝发布系统的问题</p><p>6.待处理问题 ： 提供酒店图片<br></p><p><br></p>', 0);
-/*!40000 ALTER TABLE `gt_meet` ENABLE KEYS */;
-
--- 导出  表 geetask.gt_project 结构
-CREATE TABLE IF NOT EXISTS `gt_project` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) NOT NULL COMMENT '名称',
-  `web_site` varchar(128) DEFAULT NULL COMMENT '官网',
-  `is_achived` tinyint(1) NOT NULL DEFAULT '0' COMMENT '归档',
-  `creator_id` int(11) NOT NULL COMMENT '创始人',
-  `created_at` int(11) DEFAULT NULL COMMENT '添加日期',
-  `updated_at` int(11) DEFAULT NULL COMMENT '更新日期',
-  `is_del` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `fk_project_user_idx` (`creator_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='项目';
-
--- 正在导出表  geetask.gt_project 的数据：~0 rows (大约)
+-- 正在导出表  geetask.gt_project 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `gt_project` DISABLE KEYS */;
 INSERT INTO `gt_project` (`id`, `name`, `web_site`, `is_achived`, `creator_id`, `created_at`, `updated_at`, `is_del`) VALUES
 	(1, 'NDA', 'http://www.ndabooking.com', 0, 1, 1543371042, 1543371042, 0);
 /*!40000 ALTER TABLE `gt_project` ENABLE KEYS */;
 
--- 导出  表 geetask.gt_project_member 结构
-CREATE TABLE IF NOT EXISTS `gt_project_member` (
-  `project_id` int(11) NOT NULL COMMENT '项目',
-  `user_id` int(11) NOT NULL COMMENT '成员',
-  `position` varchar(64) NOT NULL COMMENT '岗位',
-  PRIMARY KEY (`project_id`,`user_id`),
-  KEY `fk_project_mem_pid` (`project_id`),
-  KEY `fk_project_mem_user` (`user_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='项目成员';
-
--- 正在导出表  geetask.gt_project_member 的数据：~9 rows (大约)
+-- 正在导出表  geetask.gt_project_member 的数据：~5 rows (大约)
 /*!40000 ALTER TABLE `gt_project_member` DISABLE KEYS */;
 INSERT INTO `gt_project_member` (`project_id`, `user_id`, `position`) VALUES
 	(1, 1, '项目负责人'),
 	(1, 2, '敏捷教练'),
 	(1, 3, '开发人员'),
 	(1, 5, '开发人员'),
-	(1, 6, '项目负责人'),
-	(1, 11, '项目负责人'),
-	(1, 12, '项目负责人'),
-	(1, 14, '开发人员'),
-	(1, 15, '项目负责人');
+	(1, 14, '开发人员');
 /*!40000 ALTER TABLE `gt_project_member` ENABLE KEYS */;
 
--- 导出  表 geetask.gt_project_robot 结构
-CREATE TABLE IF NOT EXISTS `gt_project_robot` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `robot_id` int(11) NOT NULL COMMENT '机器人',
-  `project_id` int(11) NOT NULL COMMENT '项目',
-  `created_at` int(11) NOT NULL COMMENT '添加时间',
-  `updated_at` int(11) NOT NULL COMMENT '更新时间',
-  `name` varchar(64) DEFAULT NULL COMMENT '机器人名称',
-  `webhook` varchar(255) DEFAULT NULL COMMENT '通知地址',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='项目机器人';
-
--- 正在导出表  geetask.gt_project_robot 的数据：~0 rows (大约)
+-- 正在导出表  geetask.gt_project_robot 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `gt_project_robot` DISABLE KEYS */;
 INSERT INTO `gt_project_robot` (`id`, `robot_id`, `project_id`, `created_at`, `updated_at`, `name`, `webhook`) VALUES
 	(1, 1, 1, 1543400237, 1543990884, '项目鼓励师', 'https://oapi.dingtalk.com/robot/send?access_token=a5a2347f4524e93eb06f2a7aa806914c7202078ff07bc0395139325a24ed3262');
 /*!40000 ALTER TABLE `gt_project_robot` ENABLE KEYS */;
 
--- 导出  表 geetask.gt_robot 结构
-CREATE TABLE IF NOT EXISTS `gt_robot` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `created_at` int(11) NOT NULL COMMENT '添加时间',
-  `updated_at` int(11) NOT NULL COMMENT '更新时间',
-  `name` varchar(64) DEFAULT NULL COMMENT '名称',
-  `code_full_class` varchar(128) DEFAULT NULL COMMENT '代码类',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COMMENT='即时机器人';
-
--- 正在导出表  geetask.gt_robot 的数据：~0 rows (大约)
+-- 正在导出表  geetask.gt_robot 的数据：~1 rows (大约)
 /*!40000 ALTER TABLE `gt_robot` DISABLE KEYS */;
 INSERT INTO `gt_robot` (`id`, `created_at`, `updated_at`, `name`, `code_full_class`) VALUES
 	(1, 1543400079, 1543462291, '钉钉', '\\app\\robots\\DingTalkRobot');
 /*!40000 ALTER TABLE `gt_robot` ENABLE KEYS */;
 
--- 导出  表 geetask.gt_robot_message 结构
-CREATE TABLE IF NOT EXISTS `gt_robot_message` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `code` varchar(64) DEFAULT NULL COMMENT '消息代号',
-  `name` varchar(64) DEFAULT NULL COMMENT '消息名称',
-  `msg_subject` varchar(255) DEFAULT NULL COMMENT '消息主题',
-  `subject_vars` varchar(255) DEFAULT NULL COMMENT '主题变量',
-  `msg_body` text COMMENT '消息内容',
-  `body_vars` varchar(255) DEFAULT NULL COMMENT '内容变量',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `code` (`code`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COMMENT='机器人消息';
-
--- 正在导出表  geetask.gt_robot_message 的数据：~1 rows (大约)
+-- 正在导出表  geetask.gt_robot_message 的数据：~2 rows (大约)
 /*!40000 ALTER TABLE `gt_robot_message` DISABLE KEYS */;
 INSERT INTO `gt_robot_message` (`id`, `code`, `name`, `msg_subject`, `subject_vars`, `msg_body`, `body_vars`) VALUES
 	(1, 'OnChangeStoryInSprint', '修改迭代中的用户故事的时候', '{user.nick_name} -> 才更新了用户故事#{story.id}🎉🎉🎉', '{user.nick_name},{story.id},{story.name},{story.status},{story.user}', '> **处理人:** {story.user}\r\n> **状态:** {story.old_status} -> {story.status}\r\n> **内容:** {story.name}\r\n> **备注:** {story.remark}\r\n> ❤❤❤\r\n\r\n\r\n', '{story.id},{story.name},{story.status},{story.user},{story.remark}'),
 	(2, 'OnCreateStoryInSprint', '添加迭代中的用户故事的时候', '{user.nick_name} -> 才添加了用户故事#{story.id}🎉🎉🎉', '{user.nick_name},{story.id},{story.name},{story.status},{story.user}', '> **处理人:** {story.user}\r\n> **内容:** {story.name}\r\n> ❤❤❤', '{story.id},{story.name},{story.status},{story.user}');
 /*!40000 ALTER TABLE `gt_robot_message` ENABLE KEYS */;
-
--- 导出  表 geetask.gt_role 结构
-CREATE TABLE IF NOT EXISTS `gt_role` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `name` varchar(64) NOT NULL COMMENT '名称',
-  `scope` enum('ADMIN','POSITION') NOT NULL DEFAULT 'ADMIN' COMMENT '范围',
-  `description` varchar(255) NOT NULL COMMENT '说明',
-  `is_sys` tinyint(1) DEFAULT '1' COMMENT '系统内置',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='积分';
 
 -- 正在导出表  geetask.gt_role 的数据：~4 rows (大约)
 /*!40000 ALTER TABLE `gt_role` DISABLE KEYS */;
@@ -870,32 +748,15 @@ INSERT INTO `gt_role` (`id`, `name`, `scope`, `description`, `is_sys`) VALUES
 	(4, '开发人员', 'POSITION', 'developer', 1);
 /*!40000 ALTER TABLE `gt_role` ENABLE KEYS */;
 
--- 导出  表 geetask.gt_setting 结构
-CREATE TABLE IF NOT EXISTS `gt_setting` (
-  `name` varchar(64) NOT NULL COMMENT '名称',
-  `title` varchar(64) NOT NULL COMMENT '标题',
-  `value` text COMMENT '值',
-  PRIMARY KEY (`name`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='系统设置';
-
--- 正在导出表  geetask.gt_setting 的数据：~0 rows (大约)
+-- 正在导出表  geetask.gt_setting 的数据：~5 rows (大约)
 /*!40000 ALTER TABLE `gt_setting` DISABLE KEYS */;
+INSERT INTO `gt_setting` (`name`, `title`, `value`) VALUES
+	('email.host', '邮件主机', 'ssl://smtp.ndabooking.com'),
+	('email.password', '邮件密码', ''),
+	('email.port', '邮件端口', '465'),
+	('email.useralias', '邮件账号别名', 'GeeTask'),
+	('email.username', '邮件账号', '');
 /*!40000 ALTER TABLE `gt_setting` ENABLE KEYS */;
-
--- 导出  表 geetask.gt_sprint 结构
-CREATE TABLE IF NOT EXISTS `gt_sprint` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `project_id` int(11) NOT NULL COMMENT '项目',
-  `status` enum('todo','doing','done') NOT NULL DEFAULT 'todo' COMMENT '状态',
-  `start_date` date DEFAULT NULL COMMENT '开始日期',
-  `end_date` date DEFAULT NULL COMMENT '结束日期',
-  `created_at` int(11) DEFAULT NULL COMMENT '添加时间',
-  `updated_at` int(11) DEFAULT NULL COMMENT '更新时间',
-  `name` varchar(128) DEFAULT NULL COMMENT '名称',
-  `is_del` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=38 DEFAULT CHARSET=utf8mb4 COMMENT='迭代计划';
 
 -- 正在导出表  geetask.gt_sprint 的数据：~36 rows (大约)
 /*!40000 ALTER TABLE `gt_sprint` DISABLE KEYS */;
@@ -938,28 +799,7 @@ INSERT INTO `gt_sprint` (`id`, `project_id`, `status`, `start_date`, `end_date`,
 	(37, 1, 'done', NULL, NULL, 1540809070, 1542010574, 'dev4wxlogin', 0);
 /*!40000 ALTER TABLE `gt_sprint` ENABLE KEYS */;
 
--- 导出  表 geetask.gt_story 结构
-CREATE TABLE IF NOT EXISTS `gt_story` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `sprint_id` int(11) NOT NULL DEFAULT '0' COMMENT '计划',
-  `story_type` varchar(32) NOT NULL DEFAULT 'bug' COMMENT '类型',
-  `status` int(11) NOT NULL COMMENT '状态',
-  `important` smallint(6) NOT NULL DEFAULT '0' COMMENT '优先程度',
-  `points` float NOT NULL DEFAULT '1' COMMENT '故事点',
-  `project_id` int(11) NOT NULL COMMENT '项目',
-  `user_id` int(11) NOT NULL COMMENT '处理人',
-  `last_user_id` int(11) DEFAULT NULL COMMENT '更新者',
-  `creator_id` int(11) NOT NULL COMMENT '创建者',
-  `created_at` int(11) DEFAULT NULL COMMENT '添加时间',
-  `updated_at` int(11) DEFAULT NULL COMMENT '更新时间',
-  `name` varchar(128) DEFAULT NULL COMMENT '名称',
-  `project_version` varchar(32) DEFAULT NULL COMMENT '版本',
-  `is_del` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  KEY `task_status` (`status`)
-) ENGINE=InnoDB AUTO_INCREMENT=410 DEFAULT CHARSET=utf8mb4 COMMENT='用户故事';
-
--- 正在导出表  geetask.gt_story 的数据：~407 rows (大约)
+-- 正在导出表  geetask.gt_story 的数据：~409 rows (大约)
 /*!40000 ALTER TABLE `gt_story` DISABLE KEYS */;
 INSERT INTO `gt_story` (`id`, `sprint_id`, `story_type`, `status`, `important`, `points`, `project_id`, `user_id`, `last_user_id`, `creator_id`, `created_at`, `updated_at`, `name`, `project_version`, `is_del`) VALUES
 	(1, 1, 'requirement', 11, 100, 1, 1, 5, 9, 1, 1527735321, 1529395842, '酒店浏览后没记录到历史记录没有记录', NULL, 0),
@@ -1365,41 +1205,22 @@ INSERT INTO `gt_story` (`id`, `sprint_id`, `story_type`, `status`, `important`, 
 	(403, 35, 'requirement', 11, 100, 1, 1, 5, 5, 1, 1537942822, 1539339336, '房价和库存接口', NULL, 0),
 	(404, 35, 'requirement', 11, 100, 1, 1, 14, NULL, 1, 1537942863, 1537942863, '房价开关接口', NULL, 0),
 	(405, 36, 'requirement', 11, 100, 1, 1, 14, 3, 1, 1540180739, 1543990901, '售卖房型标签区分直营与供应商需求', NULL, 0),
-	(406, 37, 'requirement', 11, 100, 1, 1, 3, 3, 1, 1540809094, 1542010522, '扫码登录开发', NULL, 0);
+	(406, 37, 'requirement', 11, 100, 1, 1, 3, 3, 1, 1540809094, 1542010522, '扫码登录开发', NULL, 0),
+	(407, 36, 'requirement', 7, 0, 1, 1, 2, NULL, 1, 1544086447, 1547713338, 'ddddd', '', 0),
+	(408, 36, 'requirement', 6, 0, 1, 1, 1, NULL, 2, 1544086569, 1547713848, 'dddddd', '', 0),
+	(409, 0, 'requirement', 1, 0, 1, 1, 1, NULL, 2, 1544086770, 1547446335, 'ddddddd', '', 0),
+	(410, 0, 'requirement', 1, 60, 100, 1, 0, NULL, 1, 1544435322, 1544435322, 'dfdfsfdfdf❤', '', 0),
+	(411, 36, 'bug', 4, 0, 1, 1, 1, NULL, 1, 1547445928, 1547446302, 'ggggg', '', 0);
 /*!40000 ALTER TABLE `gt_story` ENABLE KEYS */;
 
--- 导出  表 geetask.gt_story_acceptance 结构
-CREATE TABLE IF NOT EXISTS `gt_story_acceptance` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `project_id` int(11) NOT NULL COMMENT '项目',
-  `story_id` int(11) NOT NULL COMMENT '故事',
-  `creator_id` int(11) NOT NULL COMMENT '处理人',
-  `created_at` int(11) NOT NULL COMMENT '添加时间',
-  `updated_at` int(11) DEFAULT NULL COMMENT '更新时间',
-  `acceptance` varchar(128) DEFAULT NULL COMMENT '接受项',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COMMENT='验收测试';
-
--- 正在导出表  geetask.gt_story_acceptance 的数据：~0 rows (大约)
+-- 正在导出表  geetask.gt_story_acceptance 的数据：~2 rows (大约)
 /*!40000 ALTER TABLE `gt_story_acceptance` DISABLE KEYS */;
+INSERT INTO `gt_story_acceptance` (`id`, `project_id`, `story_id`, `creator_id`, `created_at`, `updated_at`, `acceptance`) VALUES
+	(1, 1, 410, 1, 1544435747, 1544435747, '支付转账😁'),
+	(2, 1, 410, 1, 1544435763, 1544435763, '最大限额是1000');
 /*!40000 ALTER TABLE `gt_story_acceptance` ENABLE KEYS */;
 
--- 导出  表 geetask.gt_story_active 结构
-CREATE TABLE IF NOT EXISTS `gt_story_active` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `project_id` int(11) NOT NULL DEFAULT '0' COMMENT '项目',
-  `story_id` int(11) NOT NULL COMMENT '任务项',
-  `old_user` int(11) NOT NULL COMMENT '旧处理人',
-  `new_user` int(11) NOT NULL COMMENT '处理人',
-  `old_status` varchar(32) NOT NULL COMMENT '旧状态',
-  `new_status` varchar(32) NOT NULL COMMENT '状态',
-  `creator_id` int(11) NOT NULL COMMENT '更新人',
-  `created_at` int(11) DEFAULT NULL COMMENT '添加时间',
-  `remark` varchar(128) DEFAULT NULL COMMENT '备注',
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COMMENT='任务活动';
-
--- 正在导出表  geetask.gt_story_active 的数据：~14 rows (大约)
+-- 正在导出表  geetask.gt_story_active 的数据：~18 rows (大约)
 /*!40000 ALTER TABLE `gt_story_active` DISABLE KEYS */;
 INSERT INTO `gt_story_active` (`id`, `project_id`, `story_id`, `old_user`, `new_user`, `old_status`, `new_status`, `creator_id`, `created_at`, `remark`) VALUES
 	(1, 0, 1, 1, 1, '5', '5', 1, 1543550177, '🥘应该完成了'),
@@ -1415,19 +1236,12 @@ INSERT INTO `gt_story_active` (`id`, `project_id`, `story_id`, `old_user`, `new_
 	(11, 0, 405, 14, 14, '11', '11', 1, 1543978536, '测试'),
 	(12, 0, 405, 14, 14, '11', '11', 1, 1543978947, '测试\r\n'),
 	(13, 0, 405, 14, 14, '11', '11', 1, 1543979073, '测试\r\n'),
-	(14, 0, 405, 14, 14, '11', '11', 1, 1543990901, '测试\r\n');
+	(14, 0, 405, 14, 14, '11', '11', 1, 1543990901, '测试\r\n'),
+	(15, 0, 411, 0, 1, '4', '4', 1, 1547446302, ''),
+	(16, 0, 407, 1, 2, '4', '7', 1, 1547713338, ''),
+	(17, 0, 408, 1, 1, '4', '4', 1, 1547713441, ''),
+	(18, 0, 408, 1, 1, '4', '6', 1, 1547713848, '');
 /*!40000 ALTER TABLE `gt_story_active` ENABLE KEYS */;
-
--- 导出  表 geetask.gt_story_status 结构
-CREATE TABLE IF NOT EXISTS `gt_story_status` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `is_backlog` tinyint(1) DEFAULT '0' COMMENT '产品Backlog',
-  `name` varchar(64) NOT NULL COMMENT '名称',
-  `description` varchar(255) DEFAULT NULL COMMENT '说明',
-  `sort` int(11) DEFAULT NULL COMMENT '排序',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `name` (`name`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8mb4 COMMENT='故事状态';
 
 -- 正在导出表  geetask.gt_story_status 的数据：~11 rows (大约)
 /*!40000 ALTER TABLE `gt_story_status` DISABLE KEYS */;
@@ -1445,16 +1259,6 @@ INSERT INTO `gt_story_status` (`id`, `is_backlog`, `name`, `description`, `sort`
 	(11, 0, '完成', '结束任务项待发布', 400);
 /*!40000 ALTER TABLE `gt_story_status` ENABLE KEYS */;
 
--- 导出  表 geetask.gt_timeline 结构
-CREATE TABLE IF NOT EXISTS `gt_timeline` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `project_id` int(11) NOT NULL COMMENT '项目',
-  `title` date NOT NULL COMMENT '名称',
-  `description` varchar(255) DEFAULT NULL COMMENT '说明',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `title` (`project_id`,`title`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COMMENT='时间线';
-
 -- 正在导出表  geetask.gt_timeline 的数据：~6 rows (大约)
 /*!40000 ALTER TABLE `gt_timeline` DISABLE KEYS */;
 INSERT INTO `gt_timeline` (`id`, `project_id`, `title`, `description`) VALUES
@@ -1466,47 +1270,27 @@ INSERT INTO `gt_timeline` (`id`, `project_id`, `title`, `description`) VALUES
 	(6, 1, '2018-12-30', '🚁我们可以飞了');
 /*!40000 ALTER TABLE `gt_timeline` ENABLE KEYS */;
 
--- 导出  表 geetask.gt_user 结构
-CREATE TABLE IF NOT EXISTS `gt_user` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `username` varchar(32) NOT NULL COMMENT '用户名',
-  `nick_name` varchar(32) DEFAULT NULL COMMENT '姓名',
-  `auth_key` varchar(32) NOT NULL,
-  `password_hash` varchar(64) NOT NULL,
-  `password_reset_token` varchar(64) DEFAULT NULL,
-  `email` varchar(64) NOT NULL COMMENT '邮箱',
-  `mobile` varchar(32) NOT NULL COMMENT '手机',
-  `status` smallint(6) NOT NULL DEFAULT '10' COMMENT '状态',
-  `is_admin` tinyint(1) DEFAULT NULL COMMENT '管理员',
-  `is_super` tinyint(1) DEFAULT NULL COMMENT '超管',
-  `def_project` int(11) DEFAULT NULL COMMENT '默认项目',
-  `created_at` int(11) NOT NULL COMMENT '添加时间',
-  `updated_at` int(11) NOT NULL COMMENT '更新时间',
-  `role` varchar(64) DEFAULT NULL COMMENT '角色',
-  `is_del` tinyint(1) DEFAULT '0',
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`),
-  UNIQUE KEY `email` (`email`),
-  UNIQUE KEY `password_reset_token` (`password_reset_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8mb4 COMMENT='用户';
-
 -- 正在导出表  geetask.gt_user 的数据：~16 rows (大约)
 /*!40000 ALTER TABLE `gt_user` DISABLE KEYS */;
 INSERT INTO `gt_user` (`id`, `username`, `nick_name`, `auth_key`, `password_hash`, `password_reset_token`, `email`, `mobile`, `status`, `is_admin`, `is_super`, `def_project`, `created_at`, `updated_at`, `role`, `is_del`) VALUES
-	(1, 'admin', '管理员', 'dFIfQutSickXRaQXsZSCPB1LAJZ6FnbA', '$2y$13$m5Z6Ruhoi3NIVaCCdnhuvO4tS9SEeMOFEIWy4UXAw39qqPJaRVzTu', NULL, 'dungang@126.com', '', 10, 1, 1, 1, 1543204772, 1544087066, '管理员1', 0);
+	(1, 'admin', '管理员', 'dFIfQutSickXRaQXsZSCPB1LAJZ6FnbA', '$2y$13$m5Z6Ruhoi3NIVaCCdnhuvO4tS9SEeMOFEIWy4UXAw39qqPJaRVzTu', NULL, 'dungang@126.com', '', 10, 1, 1, 1, 1543204772, 1544087066, '管理员1', 0),
+	(2, '610004', '顿刚', '_wG1B_mUJosqiQK4lL6SXHWDfSe68N6G', '$2y$13$ve/x8cwm45iVXKJJEnn7ZeKnjSrAvhRbqa11T3oIRWYzcEtyvBRBu', NULL, 'gang.dun@ndabooking.com', '15355498106', 10, NULL, NULL, 1, 1527487851, 1543587648, '管理员1', 0),
+	(3, '610012', '钱攀', 'BcSjuF9Ab3JYXaUb89tWCLDt_1Y4Zb67', '$2y$13$5pCRX9nz1YYLl2lI/FH89ewuO/5qNaPHgLZZkjTKc.IVGrcgH5HSm', NULL, 'pan.qian@ndabooking.com', '13588152377', 10, NULL, NULL, 1, 1527734840, 1528075748, NULL, 0),
+	(4, '610006', '陈政', 't6EnSjGi4bKdQZ_JqqjrcYqRMbwO86YQ', '$2y$13$N6F30j9aVqaBBiOVisVDNudM0Rlx3U1DLwg40dTLlzzBVQ9G3bc/m', NULL, 'zheng.chen@ndabooking.com', '13067988513', 10, NULL, NULL, 1, 1527734883, 1528074496, NULL, 0),
+	(5, '610008', '俞栋炜', 'AYe3JqfTbfi419UoVbMgoA8MJngUorxu', '$2y$13$Uzcm2i4FQ/fZyX9CentGUemFTcHvVUqTI9ES/N/ywiKiH499kxvOS', NULL, 'dongwei.yu@ndabooking.com', '17764509752', 10, NULL, NULL, 1, 1527734920, 1528075362, NULL, 0),
+	(6, '610005', '缪灵健', 'SthEtoBhkBgCSkYW6oP7_KmKplWXkvkd', '$2y$13$N.OxI0CHXhku3yojPzymo.ic4Csx5Jv3DY5UAT3YMseAZ2JUvO63u', NULL, 'lingjian.miao@ndabooking.com', '18968406753', 10, NULL, NULL, 1, 1527734971, 1528074850, NULL, 0),
+	(7, '610010', '赵金桥', 'JRYT4jczqOe77IPYUg5ATfJjyKDrW0Wn', '$2y$13$lYsGN6CFpqG58Vq5xUAxV.dnrEvoGFbbZT4RmS3qfU0VNJas/5/rC', NULL, 'jinqiao.zhao@ndabooking.com', '15669947317', 0, NULL, NULL, 1, 1527735099, 1534384485, NULL, 0),
+	(8, '610014', '管志伟', 'FPNUHAKtCRhFg1YheVxCOsu2P73N6KvV', '$2y$13$z4le5107ouKNR4gXB.ZXNOybpBv0ohptx1jerNyax/U05feHj9Dvu', NULL, 'zhiwei.guan@ndabooking.com', '15658822689', 0, NULL, NULL, 1, 1527737255, 1534384439, NULL, 0),
+	(9, '610015', '陈铭', 'nneJApsJMPBh1K2fJvtbK3dmpF1t6Z_T', '$2y$13$K5Srw92KGBXkZQ1DlbhFv.MFcBCINsmGp3a4Hcbu47WqrJPjiVhhO', NULL, 'ming.chen@ndabooking.com', '15869114413', 0, NULL, NULL, 1, 1527737291, 1534384494, NULL, 0),
+	(10, '610016', '刘丽苹', 'G7_n8zJ1igGLFJmeI_cDwhsLpNzgmJsi', '$2y$13$RKipNgHKC9p7BQlwylEiROMaR4ed16VnzITSijTgrKOvNyK0wnty2', NULL, 'liping.liu@ndabooking.com', '13282172034', 0, NULL, NULL, 1, 1527737325, 1534384474, NULL, 0),
+	(11, '610013', '章秀蓉', 'wFiXPnxA6zFCg1y6_B6Crq-SEpWgwXu2', '$2y$13$MbGy1c7NV2cKF6W0OsT6puvDDrPALtqtX2frvJcPcITr1N3zy4LqC', NULL, 'xiurong.zhang@ndabooking.com', '13777576172', 10, NULL, NULL, 1, 1527737361, 1538963511, NULL, 0),
+	(12, '610009', '施振国', 'ZOOsgGUWR69UaV4pbhLw9TFXlteI9w-6', '$2y$13$GkMn1nQLUVw9/IA2c/9ozuQyR6KZLbVyRRO9DA9l3QgQxNt9ctIS.', NULL, 'zhenguo.shi@ndabooking.com', '15757151402', 10, NULL, NULL, 1, 1527737472, 1528277397, NULL, 0),
+	(13, '610018', '陈波涛', 'S8o3giGrEyjBF_THay0kpCNDNNDx_8aA', '$2y$13$FEJH/786uT6kqDQfAniZxOr7Rkq3Fi6pW6V7MBpQHxbvAH/cH.K/6', NULL, 'botao.chen@ndabooking.com', '13588202612', 0, NULL, NULL, 1, 1527737509, 1534384450, NULL, 0),
+	(14, '610020', '章宇飞', 'mN7bBEzshhLeoXLYOV5VusHENe8S3rOP', '$2y$13$2Wxl7BSydXskBtMmT23uZOco0GMx7RaCZ.IsYGdjZZVRz0BG/UyQG', NULL, 'yufei.zhang@ndabooking.com', '15257137254', 10, NULL, NULL, 1, 1527737547, 1528074198, NULL, 0),
+	(15, '610003', '张高鹏', 'A7N7I4bRfVeD-UffDBZPxHRgcvmQiiax', '$2y$13$R/QxKaxR30OsTKIKypTAQuFnq8exTw9/WqyTNaR5Fe8/JWkOcwZo.', NULL, 'gaopeng.zhang@ndabooking.com', '13666637694', 10, NULL, NULL, 1, 1528091935, 1528091935, NULL, 0),
+	(16, '610022', '梁其滢', 'CpFHq5XSWTMkN69Z7LLFoUdZvvur5uFL', '$2y$13$YKmD8X6hsalC/1.2YoCkjOetGSUfTcVoDOB4fTNAeO0nNFOYQxNPS', NULL, 'qiying.liang@ndabooking.com', '15384050332', 0, NULL, NULL, 1, 1528092136, 1534384460, NULL, 0);
 /*!40000 ALTER TABLE `gt_user` ENABLE KEYS */;
-CREATE TABLE `gt_link` (
-	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`project_id` INT(11) NOT NULL COMMENT '项目',
-	`label` VARCHAR(32) NOT NULL COMMENT '名称',
-	`url` VARCHAR(128) NOT NULL COMMENT '地址',
-	PRIMARY KEY (`id`)
-)
-COMMENT='项目相关的链接'
-COLLATE='utf8mb4_general_ci'
-ENGINE=InnoDB;
-INSERT INTO `gt_link` (`id`, `project_id`, `label`, `url`) VALUES (1, 1, '阿里云', 'https://www.aliyun.com');
-INSERT INTO `gt_link` (`id`, `project_id`, `label`, `url`) VALUES (2, 1, '支付宝', 'https://www.alipay.com');
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

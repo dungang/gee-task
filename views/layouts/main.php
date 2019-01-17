@@ -112,6 +112,12 @@ var _hmt = _hmt || [];
                 'label' => '系统',
                 'items' => [
                     [
+                        'label' => '设置',
+                        'url' => [
+                            '/setting/index'
+                        ]
+                    ],
+                    [
                         'label' => '路由',
                         'url' => [
                             '/ac-route/index'

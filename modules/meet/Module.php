@@ -8,6 +8,7 @@ namespace modules\meet;
  */
 class Module extends \yii\base\Module
 {
+    const CUSTOM_EVENT_MEETING_SAVE = 'meeting.save';
     /**
      * {@inheritdoc}
      */

@@ -3,6 +3,7 @@
 namespace modules\meet\models;
 
 use Yii;
+use modules\meet\Module;
 
 /**
  * This is the model class for table "gt_meet".
@@ -69,5 +70,18 @@ class Meet extends \app\core\BaseModel
     public static function find()
     {
         return new MeetQuery(get_called_class());
+    }
+    
+    public function behaviors()
+    {
+        $b = parent::behaviors();
+        $b['onSaveEvent'] = [
+            'class' => '\app\behaviors\TriggerCustomEventOnSave',
+            'customEvents' => [
+                self::EVENT_AFTER_INSERT => Module::CUSTOM_EVENT_MEETING_SAVE,
+                self::EVENT_AFTER_UPDATE => Module::CUSTOM_EVENT_MEETING_SAVE
+            ]
+        ];
+        return $b;
     }
 }

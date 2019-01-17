@@ -1,5 +1,4 @@
 <?php
-
 $config = [
     'id' => 'geetask',
     'name' => 'GeeTask',
@@ -25,7 +24,7 @@ $config = [
         'robot' => 'modules\robot\Module',
         'myproject' => 'modules\myproject\Module',
         'aliyun-log' => 'modules\aliyunlog\Module',
-        'link' => 'modules\link\Module',
+        'link' => 'modules\link\Module'
     ],
     'components' => [
         'request' => [
@@ -65,6 +64,9 @@ $config = [
             'datetimeFormat' => 'yyyy-MM-dd HH:mm:ss',
             'dateFormat' => 'yyyy-MM-dd',
             'timeFormat' => 'HH:mm:ss'
+        ],
+        'mailer' => [
+            'class' => 'app\components\AppMailer'
         ],
         'assetManager' => [
             'bundles' => [

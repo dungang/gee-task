@@ -15,6 +15,7 @@ use Yii;
  */
 class Robot extends \app\core\BaseModel
 {
+    
     /**
      * {@inheritdoc}
      */
@@ -22,6 +23,7 @@ class Robot extends \app\core\BaseModel
     {
         return 'gt_robot';
     }
+    
 
     /**
      * {@inheritdoc}
@@ -58,4 +60,5 @@ class Robot extends \app\core\BaseModel
     {
         return new RobotQuery(get_called_class());
     }
+  
 }

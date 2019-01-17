@@ -7,11 +7,15 @@ use app\models\Robot;
 use modules\robot\models\ProjectRobot;
 use app\helpers\MiscHelper;
 use app\models\RobotMessage;
-use yii\base\Model;
+use yii\base\BaseObject;
 
-abstract class RobotSendMessageHandler extends Model implements CustomEventHandler
+abstract class RobotSendMessageHandler extends BaseObject implements CustomEventHandler
 {
     
+    /**
+     * 消息模板编码，并不是表示每个消息都需要模板。在robot_message表种配置
+     * @var string
+     */
     public $msg_code;
     
     /**
@@ -25,7 +29,7 @@ abstract class RobotSendMessageHandler extends Model implements CustomEventHandl
     }
     
     public function getMsgTmpl() {
-        if($tmpl = RobotMessage::findOne(['code'=>$this->msg_code])){
+        if($tmpl = RobotMessage::getMessageTempateByCode($this->msg_code)){
             return $tmpl;
         }
         return false;
@@ -39,6 +43,11 @@ abstract class RobotSendMessageHandler extends Model implements CustomEventHandl
      */
     protected abstract function getMessage($data);
 
+    /**
+     * 机器人处理消息的实现
+     * {@inheritDoc}
+     * @see \app\core\CustomEventHandler::process()
+     */
     public final function process($data)
     {
         $query = new Query();
