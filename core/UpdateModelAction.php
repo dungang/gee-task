@@ -7,12 +7,13 @@ use yii\web\Response;
 
 class UpdateModelAction extends BaseAction
 {
+    public $createOneOnNotFound = false;
 
     public function run()
     {
 
         /* @var $model \yii\db\ActiveRecord */
-        $model = $this->findModel(BaseAction::CREATE_ONE_ON_NOT_FOUND_NO);
+        $model = $this->findModel($this->createOneOnNotFound);
 
         $model->getPrimaryKey();
         $model->load(\Yii::$app->request->queryParams);

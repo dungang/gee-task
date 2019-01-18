@@ -32,7 +32,7 @@ class OnSaveMeetingSendEmailHandler extends EmailSendMessageHandler
             $emails[] = $mem['email'];
         }
         $body = '<table><tr><th><h1>' . $data->title . '</h1></th></tr>' 
-                . '<tr><td><p><strong>参与人员</strong>' . $data->actors . '</p></td></tr>' 
+                . '<tr><td><p><strong>参与人员：</strong>' . $data->actors . '</p></td></tr>' 
                 . '<tr><td>' . $data->content . '</td></tr></table>';
         return [
             array_unique($emails),
