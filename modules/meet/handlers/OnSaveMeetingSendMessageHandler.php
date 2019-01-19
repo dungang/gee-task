@@ -3,6 +3,7 @@ namespace modules\meet\handlers;
 
 use modules\robot\handlers\RobotSendMessageHandler;
 use modules\meet\models\Meet;
+use yii\helpers\Url;
 
 class OnSaveMeetingSendMessageHandler extends RobotSendMessageHandler
 {
@@ -17,7 +18,7 @@ class OnSaveMeetingSendMessageHandler extends RobotSendMessageHandler
     {
         return [
             $data->title . '[' . $data->meet_date . ']',
-            $data->content
+            '[会议内容]('.Url::to(['/meet/default/view','id'=>$data->id],true).')'
         ];
     }
 }
