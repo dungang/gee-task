@@ -10,6 +10,10 @@ use app\models\User;
 class SwitchProjectController extends AdminController
 {
 
+    public function init(){
+        $this->userActions = ['index'];
+    }
+
     public function actionIndex($id)
     {
         $projectMem = ProjectMember::findOne([

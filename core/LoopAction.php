@@ -1,5 +1,5 @@
 <?php
-namespace app\kit\core;
+namespace app\core;
 
 use yii\base\Action;
 
