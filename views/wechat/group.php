@@ -44,9 +44,9 @@ if ($model->status == 'STOP') :
         '/wechat/login-check',
         'tip' => 0,
         'uuid' => $uuid,
-        'id'=>$model->id,
+        'id' => $model->id
     ]);
-    echo Html::tag('h4','扫描登录');
+    echo Html::tag('h4', '扫描登录');
     echo Html::img([
         '/wechat/qr',
         'uuid' => $uuid
@@ -60,8 +60,6 @@ if ($model->status == 'STOP') :
             'url' => $url,
             'dataType' => 'json',
             'onSuccess' => new JsExpression("function(data){
-            this.data('timestamp',data.timestamp);
-            console.log(data);
             if(data.user){
                 window.loaction.refresh();
             }
@@ -73,8 +71,8 @@ endif;
 $api = new Api();
 $data = Json::decode($model->data);
 $rooms = [];
-if(!empty($data['cookie']) && !empty($data['base'])) {
-    $rooms = $api->getChatRoom();
+if (! empty($data['cookie']) && ! empty($data['base'])) {
+    $rooms = $api->getChatRoom($data);
 }
 
 ?>

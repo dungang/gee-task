@@ -51,9 +51,11 @@ class WechatController extends AdminController
             ],
             'group' => [
                 'class' => 'app\core\ViewModelAction',
-                'modelClass' => [
-                    'class' => 'app\models\Wechat',
+                'findParams'=>[
                     'user_id' => $user_id
+                ],
+                'modelClass' => [
+                    'class' => '\app\models\Wechat',
                 ]
             ],
             'delete' => [
@@ -67,7 +69,7 @@ class WechatController extends AdminController
                 'class' => 'app\webchat\QrAction'
             ],
             'login-check' => [
-                'class' => 'app\core\LongPollAction',
+                'class' => '\app\core\LongPollAction',
                 'longPollingHandlerClass' => '\app\webchat\ScanLoginHandler'
             ],
             'loop' => [

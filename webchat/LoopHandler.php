@@ -4,7 +4,6 @@ namespace app\webchat;
 use app\core\ILongPollHandler;
 use app\models\Setting;
 use app\models\Wechat;
-use yii\base\BaseObject;
 use yii\helpers\Json;
 
 /**
@@ -13,7 +12,7 @@ use yii\helpers\Json;
  * @author dungang
  *        
  */
-class LoopHandler extends BaseObject implements ILongPollHandler
+class LoopHandler extends ILongPollHandler
 {
 
     protected $api;

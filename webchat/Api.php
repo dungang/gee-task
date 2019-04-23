@@ -10,7 +10,6 @@ use yii\helpers\Json;
  * web微信协议api
  *
  * @author dungang
- *        
  */
 class Api extends Component
 {
@@ -32,7 +31,7 @@ class Api extends Component
                 'maxRedirects' => 0
             ],
             'headers' => [
-                // 'Host' => 'wx.qq.com',
+                'Host' => 'wx.qq.com',
                 'User-Agent' => 'Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:64.0) Gecko/20100101 Firefox/64.0',
                 'Accept' => '*/*',
                 'Accept-Language' => 'zh-CN,zh;q=0.8,zh-TW;q=0.7,zh-HK;q=0.5,en-US;q=0.3,en;q=0.2',
@@ -45,20 +44,20 @@ class Api extends Component
             ]
         ];
 
-        // $this->client->on(Client::EVENT_BEFORE_SEND, function ($event) {
-        // if($cookies = \Yii::$app->cache->get('webchat.cookie')) {
-        // //\var_dump($cookies->toArray());die;
-        // $event->request->addCookies($cookies);
-        // }
-        // });
-        // $this->client->on(Client::EVENT_AFTER_SEND, function ($event) {
-        // \Yii::$app->cache->set('webchat.cookie',$event->response->getCookies()->toArray());
-        // });
+        $this->client->on(Client::EVENT_BEFORE_SEND, function ($event) {
+            if ($cookies = \Yii::$app->cache->get('webchat.cookie')) {
+                //\var_dump($cookies);die;
+                $event->request->addCookies($cookies);
+            }
+        });
+        $this->client->on(Client::EVENT_AFTER_SEND, function ($event) {
+            \Yii::$app->cache->set('webchat.cookie', $event->response->getCookies()
+                ->toArray());
+        });
     }
 
     /**
      * https://login.wx.qq.com/jslogin?appid=wx782c26e4c19acffb&redirect_uri=https%3A%2F%2Fwx.qq.com%2Fcgi-bin%2Fmmwebwx-bin%2Fwebwxnewloginpage&fun=new&lang=zh_CN&_=1476606163580
-     *
      * <pre>
      * appid：固定为wx782c26e4c19acffb
      * redirect_rui：https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxnewloginpage经过url编码
@@ -187,19 +186,20 @@ class Api extends Component
     {
         if ($synckey = $data['synckey'] && $cookie = $data['cookie'] && $base = $data['base']) {
             $t = time();
-            $rsp = $this->client->get('https://webpush.wx.qq.com/cgi-bin/mmwebwx-bin/synccheck', [
-                'r' => $t,
-                'skey' => $base['skey'],
-                'sid' => $base['wxsid'],
-                'uid' => $base['wxuin'],
-                'deviceid' => $this->getDeviceId(),
-                'synckey' => $this->formatSyncKeys($synckey['List']),
-                '_' => $t
-            ])
+            $rsp = $this->client->get('https://webpush.wx.qq.com/cgi-bin/mmwebwx-bin/synccheck',
+                [
+                    'r' => $t,
+                    'skey' => $base['skey'],
+                    'sid' => $base['wxsid'],
+                    'uid' => $base['wxuin'],
+                    'deviceid' => $this->getDeviceId(),
+                    'synckey' => $this->formatSyncKeys($synckey['List']),
+                    '_' => $t
+                ])
                 ->addHeaders([
                 'Content-Type' => 'text/javascript'
             ])
-            ->addCookies($this->formatCookies($cookie))
+                ->addCookies($this->formatCookies($cookie))
                 ->send();
             if ($rsp->isOk) {
                 $matches = [];
@@ -279,6 +279,7 @@ class Api extends Component
                 '_' => $t
             ]))->send();
             if ($rsp->isOk) {
+                //echo $rsp->content;die();
                 $contact_data = Json::decode($rsp->content);
                 if ($contacts = $contact_data['MemberList']) {
                     // 获取群
@@ -305,18 +306,19 @@ class Api extends Component
         if ($base = $data['base']) {
             if (isset($base['wxuin']) && isset($base['wxsid']) && isset($base['skey'])) {
                 $localId = (time() * 1000) . substr(uniqid(), 0, 5);
-                $rsp = $this->client->post('https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxinit', [
-                    'BaseRequest' => $this->getBaseRequest($base),
-                    'Msg' => [
-                        'Type' => 1,
-                        'Content' => $message,
-                        'FromUserName' => $self,
-                        'ToUserName' => $toUserName,
-                        'LocalID' => $localId,
-                        'ClientMsgId' => $localId
-                    ],
-                    'Scene' => 0
-                ], $this->jsonContentTypeHearders())
+                $rsp = $this->client->post('https://wx.qq.com/cgi-bin/mmwebwx-bin/webwxinit',
+                    [
+                        'BaseRequest' => $this->getBaseRequest($base),
+                        'Msg' => [
+                            'Type' => 1,
+                            'Content' => $message,
+                            'FromUserName' => $self,
+                            'ToUserName' => $toUserName,
+                            'LocalID' => $localId,
+                            'ClientMsgId' => $localId
+                        ],
+                        'Scene' => 0
+                    ], $this->jsonContentTypeHearders())
                     ->setFormat(Client::FORMAT_JSON)
                     ->send();
                 if ($rsp->isOk) {

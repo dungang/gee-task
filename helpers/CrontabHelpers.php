@@ -46,7 +46,7 @@ class CrontabHelpers
 
     private static function writeCron($data, $cron_name = 'data')
     {
-        $raw = self::readCron();
+        $raw = self::readCron($cron_name);
         $file = \Yii::getAlias(self::getCronDataFile($cron_name));
         \file_put_contents($file, Json::encode(\array_merge($raw, $data)));
     }
@@ -54,7 +54,6 @@ class CrontabHelpers
     public static function prepareCronSetting($cron_name = 'data')
     {
         $data = self::readCron($cron_name);
-
         return [
             $data[self::CRON_STATUS_NAME],
             $data[self::CRON_TRACED_AT_NAME]

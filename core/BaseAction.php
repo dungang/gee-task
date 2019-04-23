@@ -14,32 +14,32 @@ use yii\db\ActiveRecord;
  */
 class BaseAction extends Action
 {
-    
+
     const EVENT_BEFORE_RUN = 'actionBeforeRun';
-    
+
     const EVENT_AFTER_RUN = 'actionAfterRun';
-    
+
     /**
      * view 文件的名称
      *
      * @var string
      */
     public $viewName;
-    
+
     /**
      * action的行为
      *
      * @var string
      */
     public $actionBehaviors = [];
-    
+
     /**
      * 模型的行为
      *
      * @var array
      */
     public $modelBehaviors = [];
-    
+
     /**
      * 模型配置参数
      * \Yii::createObject 的参数
@@ -48,30 +48,30 @@ class BaseAction extends Action
      * @var array|string
      */
     public $modelClass = null;
-    
+
     /**
      * 条件查找参数
      *
      * @var array|null
      */
     public $findParams = null;
-    
+
     /**
      * 固定赋值参数
      *
      * @var null|array
      */
     public $assignParams = null;
-    
+
     /**
      * 成功操作的跳转地址，如果没有设置，则使用默认的
      *
      * @var string
      */
     public $successRediretUrl = false;
-    
+
     public $successMsg = '添加成功';
-    
+
     /**
      * 设置固定的参数，避免被外部覆盖
      *
@@ -87,7 +87,7 @@ class BaseAction extends Action
         }
         return true;
     }
-    
+
     /**
      * 获取get参数
      *
@@ -100,11 +100,11 @@ class BaseAction extends Action
             $formName = $model->formName();
             if (empty($params[$formName]))
                 $params[$formName] = [];
-                $params[$formName] = \array_merge($params[$formName], $this->findParams);
+            $params[$formName] = \array_merge($params[$formName], $this->findParams);
         }
         return $params;
     }
-    
+
     /**
      * 获取post参数
      *
@@ -119,17 +119,17 @@ class BaseAction extends Action
             $formName = $model->formName();
             if (empty($params[$formName]))
                 $params[$formName] = [];
-                if ($multiple === false) {
-                    $params[$formName] = \array_merge($params[$formName], $this->assignParams);
-                } else {
-                    foreach ($params[$formName] as $i => $param) {
-                        $params[$formName][$i] = \array_merge($param, $this->assignParams);
-                    }
+            if ($multiple === false) {
+                $params[$formName] = \array_merge($params[$formName], $this->assignParams);
+            } else {
+                foreach ($params[$formName] as $i => $param) {
+                    $params[$formName][$i] = \array_merge($param, $this->assignParams);
                 }
+            }
         }
         return $params;
     }
-    
+
     /**
      *
      * {@inheritdoc}
@@ -139,7 +139,7 @@ class BaseAction extends Action
     {
         $this->trigger(self::EVENT_AFTER_RUN);
     }
-    
+
     /**
      *
      * {@inheritdoc}
@@ -150,7 +150,7 @@ class BaseAction extends Action
         $this->trigger(self::EVENT_BEFORE_RUN);
         return parent::beforeRun();
     }
-    
+
     public function init()
     {
         if (empty($this->viewName)) {
@@ -160,9 +160,10 @@ class BaseAction extends Action
             $this->attachBehaviors($this->actionBehaviors);
         }
     }
-    
+
     /**
      * 计算跳转的参数或url
+     *
      * @param BaseModel $model
      * @return mixed[]|string
      */
@@ -178,7 +179,7 @@ class BaseAction extends Action
         }
         return $this->successRediretUrl;
     }
-    
+
     /**
      * 获取模型的主键，并自动装配了关系数组
      *
@@ -199,7 +200,7 @@ class BaseAction extends Action
         }
         return null;
     }
-    
+
     /**
      * 查找一个模型对象实例
      *
@@ -225,17 +226,18 @@ class BaseAction extends Action
                 unset($args['scenario']);
             }
             if ($class) {
-                
+
                 $condition = array_merge($this->getPrimaryKeyCondition($class), $args);
-                
+
                 //是否设置了查找的固定参数
                 if ($this->findParams) {
                     $condition = \array_merge($condition, $this->findParams);
                 }
+
                 $model = call_user_func(array(
                     $class,
                     'findOne'
-                ), $condition);
+                ), $this->clearCond($condition));
             }
         }
         if ($model !== null) {
@@ -247,10 +249,10 @@ class BaseAction extends Action
                 'scenario' => $scenario
             ]);
         }
-        
+
         throw new NotFoundHttpException('The requested page does not exist.');
     }
-    
+
     /**
      * 根据多个id查找，目前该方法还不完善
      *
@@ -269,21 +271,28 @@ class BaseAction extends Action
             $cond = [
                 'id' => $ids
             ];
-            
+
             //是否设置了查找的固定参数
             if ($this->findParams) {
-                $cond = \array_merge($cond, $this->findParams);
+                $cond = $this->clearCond($cond, $this->findParams);
             }
             $models = call_user_func(array(
                 $class,
                 'findAll'
-            ), $cond);
+            ), \array_filter($cond));
         }
         if ($models !== null) {
             return $models;
         }
-        
+
         throw new NotFoundHttpException('The requested page does not exist.');
+    }
+
+    private function clearCond($cond)
+    {
+        return \array_filter($cond, function ($val) {
+            return ! \is_null($val);
+        });
     }
 }
 

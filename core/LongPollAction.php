@@ -35,6 +35,8 @@ class LongPollAction extends Action
      * @var ILongPollHandler
      */
     public $handler;
+    
+    public $format = 'html';
 
     public function init()
     {

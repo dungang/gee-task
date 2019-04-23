@@ -5,7 +5,7 @@ use app\core\ILongPollHandler;
 use app\models\Wechat;
 use yii\helpers\Json;
 
-class ScanLoginHandler implements ILongPollHandler
+class ScanLoginHandler extends ILongPollHandler
 {
 
     protected $api;
@@ -56,6 +56,7 @@ class ScanLoginHandler implements ILongPollHandler
                             $wechat_data['synckey'] = $info['SyncKey'];
                             $wechat_data['self'] = $info['User'];
                             $wechat->data = Json::encode($wechat_data);
+                            $wechat->status = 'RUN';
                             $wechat->save(false);
                             $data['cookie'] = $wechat_data['cookie'];
                             $data['user'] = $wechat_data['self'];
