@@ -32,9 +32,8 @@ class LongPollResponse extends Response
         $endTime = time() + $this->timeout;
 
         do {
-            \Yii::$app->db->close();
             sleep($this->sleepTime);
-            \Yii::$app->db->open();
+            $this->checkDbConnection();
             flush();//No new orders, flush to notify php still alive
             if ($data = $this->handler->process()) {
                 echo $data;
@@ -42,6 +41,16 @@ class LongPollResponse extends Response
                 break;
             }
         } while (time() < $endTime);
+    }
+    
+    /**
+     * 检查数据库是否正常，如果已经关闭则重新打开
+     */
+    protected function checkDbConnection()
+    {
+        if (! \Yii::$app->db->isActive) {
+            \Yii::$app->db->open();
+        }
     }
 }
 

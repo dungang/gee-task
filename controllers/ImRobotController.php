@@ -2,9 +2,6 @@
 
 namespace app\controllers;
 
-use app\controllers\AdminController;
-
-
 /**
  * RobotController implements the CRUD actions for Robot model.
  */

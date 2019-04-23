@@ -2,8 +2,6 @@
 
 namespace app\controllers;
 
-use app\controllers\AdminController;
-
 
 /**
  * SettingController implements the CRUD actions for Setting model.

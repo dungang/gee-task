@@ -1,8 +1,8 @@
 <?php
 use yii\helpers\Html;
 use yii\grid\GridView;
-use app\models\Setting;
 use yii\helpers\Url;
+use app\helpers\CrontabHelpers;
 
 /* @var $this yii\web\View */
 /* @var $searchModel app\models\WechatSearch */
@@ -10,40 +10,32 @@ use yii\helpers\Url;
 
 $this->title = 'Wechats';
 $this->params['breadcrumbs'][] = $this->title;
-$status = Setting::findOne([
-    'name' => 'wechat.loop.status'
-]);
-if (! $status) {
-    $status = new Setting([
-        'name' => 'wechat.loop.status',
-        'title' => '微信后台服务状态'
-    ]);
-    $status->save(false);
-}
-$trace = Setting::findOne([
-    'name' => 'wechat.loop.traced_at'
-]);
-
-if (! $trace) {
-    $trace = new Setting([
-        'name' => 'wechat.loop.traced_at',
-        'title' => '微信后台服务最后执行时间'
-    ]);
-    $trace->save(false);
-}
-;
 ?>
 <div class="wechat-index">
 
 	<h1><?= Html::encode($this->title) ?></h1>
-	<div class="panel panel-default">
-		<div class="panel-body">
-			<p><strong>微信服务运行状态: </strong>
-		<?= intval($status->value) > 0 ? Html::a('运行中 ... ',['switch-service'],['class'=>'btn btn-success btn-sm','id'=>'switch-service']) :  Html::a('已停止 ',['switch-service'],['class'=>'btn btn-danger btn-sm','id'=>'switch-service']) ?></p>
-			<p>开启执行：<?= \Yii::$app->formatter->asDatetime($status->value)?></p> 
-			<p>最后执行：<?= \Yii::$app->formatter->asDatetime($trace->value)?></p>
-		</div>
-	</div>
+	<div class="well">
+    <?php list ($cron_status, $cron_traced_at) = CrontabHelpers::prepareCronSetting();?>
+    <p>
+		<strong>服务运行状态: </strong>
+    <?php
+
+    echo intval($cron_status) > 0 ? '<span class="btn btn-xs btn-success">运行中 ... </span> ' . Html::a('<i class="fa  fa-stop"></i> 停止', [
+        'switch-service'
+    ], [
+        'class' => 'btn btn-default btn-xs',
+        'id' => 'switch-service',
+        'data-pjax' => '0'
+    ]) : '<span class="btn btn-xs btn-warning">已停止 </span> ' . Html::a('<i class="fa fa-play-circle"></i> 启动', [
+        'switch-service'
+    ], [
+        'class' => 'btn btn-default btn-xs',
+        'id' => 'switch-service',
+        'data-pjax' => '0'
+    ])?></p>
+	<p>服务启动时间：<?= \Yii::$app->formatter->asDatetime($cron_status)?></p>
+	<p>最后执行时间：<?= \Yii::$app->formatter->asDatetime($cron_traced_at)?></p>
+</div>
     <?php
     $dataProvider->pagination = false;
     echo GridView::widget([

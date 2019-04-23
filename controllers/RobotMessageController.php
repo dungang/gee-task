@@ -2,8 +2,6 @@
 
 namespace app\controllers;
 
-use app\controllers\AdminController;
-
 
 /**
  * RobotMessageController implements the CRUD actions for RobotMessage model.

@@ -17,6 +17,8 @@ class Log extends Model
     
     public $message;
     
+    public $throwable;
+    
     public $thread;
     
     
@@ -32,6 +34,7 @@ class Log extends Model
             'level' => 'LEVEL',
             'location' => '异常位置',
             'message' => '消息',
+            'throwable' => '异常',
             'thread' => '线程',
         ];
     }

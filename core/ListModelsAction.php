@@ -3,15 +3,13 @@ namespace app\core;
 
 class ListModelsAction extends BaseAction
 {
-    public function run(){
-        
+    public function run()
+    {
         $searchModel = \Yii::createObject($this->modelClass);
-        
-        $dataProvider = $searchModel->search(\Yii::$app->request->queryParams);
-        
-        return $this->controller->render($this->defaultView, [
+        $dataProvider = $searchModel->search($this->composeGetParams($searchModel));
+        return $this->controller->render($this->viewName, [
             'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
+            'dataProvider' => $dataProvider
         ]);
     }
 }

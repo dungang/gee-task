@@ -39,7 +39,8 @@ class LogSearch extends DataSearch
                     'location' => isset($content['location']) ? $content['location'] : '',
                     'thread' => $content['thread'],
                     'topic' => $content['__topic__'],
-                    'message' => $content['message']
+                    'message' => $content['message'],
+                    'throwable' => isset($content['throwable'])?$content['throwable']:''
                 ]);
             }, array_reverse($this->response->getLogs()));
         }

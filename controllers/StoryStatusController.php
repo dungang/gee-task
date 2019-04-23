@@ -2,8 +2,6 @@
 
 namespace app\controllers;
 
-use app\controllers\AdminController;
-
 
 /**
  * StoryStatusController implements the CRUD actions for StoryStatus model.

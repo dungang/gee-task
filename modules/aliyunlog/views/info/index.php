@@ -1,6 +1,5 @@
 <?php
 use yii\helpers\Html;
-use yii\grid\GridView;
 use yii\bootstrap\ActiveForm;
 use yii\widgets\ListView;
 use app\helpers\MiscHelper;
@@ -74,12 +73,16 @@ $form = ActiveForm::begin([
         'dataProvider' => $dataProvider,
         'summary' => false,
         'itemView' => function ($model, $key, $index, $widget) {
+            $msgs = [];
             $msgs[] = date('Y-m-d H:i:s', $model['time']);
             $msgs[] = '[' . $model['level'] . ']';
             $msgs[] = $model['ip'];
             $msgs[] = $model['thread'];
             $msgs[] = $model['location'];
-            $msgs[] = '<p>' . $model['message'] . '</p>';
+            $msgs[] = '<p>' . Html::encode($model['message']) . '</p>';
+            if(isset($model['throwable'])){
+                $msgs[] = '<p>' . Html::encode($model['throwable']) . '</p>';
+            }
             return implode(" ", $msgs);
         }
     ]);

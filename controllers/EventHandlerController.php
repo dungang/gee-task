@@ -2,8 +2,6 @@
 
 namespace app\controllers;
 
-use app\controllers\AdminController;
-
 
 /**
  * EventHandlerController implements the CRUD actions for EventHandler model.

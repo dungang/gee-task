@@ -2,9 +2,6 @@
 
 namespace app\controllers;
 
-use app\controllers\AdminController;
-
-
 /**
  * ChangeCategoryController implements the CRUD actions for ChangeCategory model.
  */

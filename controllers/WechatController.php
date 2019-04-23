@@ -1,13 +1,15 @@
 <?php
-namespace app\backend\controllers;
+namespace app\controllers;
 
-use app\models\Setting;
+use app\helpers\CrontabHelpers;
 
 /**
  * WechatController implements the CRUD actions for Wechat model.
  */
-class WechatController extends BackendController
+class WechatController extends AdminController
 {
+
+    const CRON_NAME = 'wechat';
 
     public function actions()
     {
@@ -69,40 +71,49 @@ class WechatController extends BackendController
                 'longPollingHandlerClass' => '\app\webchat\ScanLoginHandler'
             ],
             'loop' => [
-                'class' => 'app\core\LoopAction',
-                'beforeRunCallback'=>$this->checkLoop(),
+                'class' => '\app\core\LoopAction',
+                'beforeRunCallback' => [
+                    $this,
+                    'canStartCronProcess'
+                ],
+                'debug' => false,
                 'longPollingHandlerClass' => '\app\webchat\LoopHandler'
             ]
         ];
     }
-    
-    public function checkLoop(){
-        return function(){
-            if($trace = Setting::findOne([
-                'name' => 'wechat.loop.traced_at'
-            ])){
-                if(empty($trace->value) || intval($trace->value) + 180 < time()) {
-                    $trace->value = time();
-                    $trace->save(false);
-                    return true;
-                }
-            }
-            return false;
-        };
-    }
 
     /**
-     * 切换微信后台服务状态
+     * 切换定时任务服务状态
+     *
      * @return mixed|number[]|string[]
      */
     public function actionSwitchService()
     {
-        if($status = Setting::findOne([
-            'name' => 'wechat.loop.status'
-        ])){
-            $status->value > 0 ? $status = 0 : $status->value = time();
-            $status->save(false);
+        if (CrontabHelpers::getCronStatus(self::CRON_NAME)) {
+            CrontabHelpers::unactiveCronStatus(self::CRON_NAME);
+        } else {
+            CrontabHelpers::activeCronStatus(self::CRON_NAME);
         }
-        return $this->redirectOnSuccess(['index']);
+        return $this->redirectOnSuccess([
+            'index'
+        ]);
+    }
+
+    /**
+     * 处理定时器的可执行状态
+     *
+     * @return callable
+     */
+    public function canStartCronProcess()
+    {
+        list ($status, $traced_at) = CrontabHelpers::prepareCronSetting(self::CRON_NAME);
+        if ($status > 1) {
+            CrontabHelpers::tracedCron(self::CRON_NAME);
+            //表示没有cron进程在运行，需要重新启动，如果超过1800秒【半小时】没更新时间，也重新启动
+            if (empty($traced_at) || intval($traced_at) + 1800 < time()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
