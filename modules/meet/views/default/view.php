@@ -20,28 +20,27 @@ $this->params['breadcrumbs'][] = $this->title;
 	<h4 class="modal-title"><?= Html::encode($this->title) ?></h4>
 </div>
 <div class="modal-body">
-
     <?php
-
-    echo DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'title',
-            'meet_date',
-            [
-                'attribute' => 'creator_id',
-                'value' => function ($model, $widget) {
-                    $user = User::findOne([
-                        'id' => $model->creator_id
-                    ]);
-                    return empty($user) ?  '未设置' : $user->nick_name;
-                }
-            ],
-            'actors:ntext',
-            'content:html',
-            'created_at:datetime',
-            'updated_at:datetime'
-        ]
-    ])?>
+    echo DetailView::widget(
+        [
+            'model' => $model,
+            'attributes' => [
+                'title',
+                'meet_date',
+                [
+                    'attribute' => 'creator_id',
+                    'value' => function ($model, $widget) {
+                        $user = User::findOne([
+                            'id' => $model->creator_id
+                        ]);
+                        return empty($user) ? '未设置' : $user->nick_name;
+                    }
+                ],
+                'actors:ntext',
+                'content:html',
+                'created_at:datetime',
+                'updated_at:datetime'
+            ]
+        ])?>
 
 </div>

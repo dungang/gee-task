@@ -263,3 +263,7 @@ a.desc:after {
 #fixed-table-header.affix -bottom{
 	
 }
+
+p img {
+	max-width: 100%;
+}
