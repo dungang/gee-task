@@ -3,8 +3,6 @@ use yii\helpers\Html;
 use yii\grid\GridView;
 use modules\sprint\models\Sprint;
 use app\models\StoryStatus;
-use modules\sprint\models\Story;
-use app\models\ProjectMember;
 use app\widgets\FixedTableHeader;
 use app\helpers\MiscHelper;
 use app\models\User;
@@ -12,10 +10,11 @@ use app\models\User;
 /* @var $this yii\web\View */
 /* @var $searchModel modules\sprint\models\StorySearch */
 /* @var $dataProvider yii\data\ActiveDataProvider */
+
 $sprint = Sprint::findOne([
     'id' => $searchModel->sprint_id
 ]);
-$this->title = '{#' . $searchModel->sprint_id .'}'. $sprint->name . '用户故事';
+$this->title = '#' . $searchModel->sprint_id . ' ' . $sprint->name . '用户故事';
 $this->params['breadcrumbs'][] = $this->title;
 $storyStatuses = StoryStatus::allIdToName('id', 'name', [
     'is_backlog' => 0
@@ -23,10 +22,10 @@ $storyStatuses = StoryStatus::allIdToName('id', 'name', [
 ?>
 <div class="story-index">
 
-	<p>
-		<?= MiscHelper::goBackButton()?>
-        <?= Html::a('添加 Story', ['create','Story[sprint_id]'=>$sprint->id], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
-        
+    <p>
+        <?= MiscHelper::goBackButton() ?>
+        <?= Html::a('添加 Story', ['create', 'Story[sprint_id]' => $sprint->id], ['class' => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#modal-dailog']) ?>
+
         时间段：<?= $sprint->start_date ?> 至 <?= $sprint->end_date ?>
     </p>
 
@@ -153,15 +152,15 @@ $storyStatuses = StoryStatus::allIdToName('id', 'name', [
                 'label' => '转移',
                 'format' => 'raw',
                 'value' => function ($model, $key, $index, $column) {
-                return Html::a('设置', [
-                    'trans',
-                    'id' => $model['id']
-                ], [
-                    'data-toggle' => 'modal',
-                    'data-target' => '#modal-dailog'
-                ]);
+                    return Html::a('设置', [
+                        'trans',
+                        'id' => $model['id']
+                    ], [
+                        'data-toggle' => 'modal',
+                        'data-target' => '#modal-dailog'
+                    ]);
                 }
-                ],
+            ],
             [
                 'headerOptions' => [
                     'width' => $colWidth['action'] . 'px'
@@ -187,13 +186,12 @@ $storyStatuses = StoryStatus::allIdToName('id', 'name', [
         'options' => [
             'id' => 'fixed-table-header'
         ],
-        'clientOptions'=>[
-            'offset'=>[
-                'top'=>'400',
-                'bottom'=>'100'
+        'clientOptions' => [
+            'offset' => [
+                'top' => '400',
+                'bottom' => '100'
             ]
         ]
     ]);
     ?>
 </div>
-

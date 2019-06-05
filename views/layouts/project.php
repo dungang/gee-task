@@ -213,10 +213,10 @@ AppAsset::register($this);
 
             <div class="jumbotron">
                 <?php $project = MiscHelper::getProject(); ?>
-                <h1><?= Html::encode($project['name']) ?> <small><?= $this->title ?></small>
-                </h1>
-                <p>个体和互动高于流程和工具 , 可工作软件高于详尽的文档</p>
-                <p>客户合作高于合同谈判 , 响应变化高于遵循计划</p>
+                <h1><?= Html::encode($project['name']) ?> </h1>
+                <p class="lead"><?= $this->title ?></p>
+                <p class="text-muted">个体和互动高于流程和工具 , 可工作软件高于详尽的文档</p>
+                <p class="text-muted">客户合作高于合同谈判 , 响应变化高于遵循计划</p>
             </div>
 
             <?= $content ?>
