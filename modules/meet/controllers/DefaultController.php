@@ -26,6 +26,7 @@ class DefaultController extends AppController
                 'modelClass' => [
                     'class' => 'modules\meet\models\Meet',
                     'project_id'=>$project_id,
+                    'meet_date'=> date('Y-m-d')
                 ]
             ],
             'update' => [

@@ -6,6 +6,7 @@ use yii\web\NotFoundHttpException;
 use yii\base\InvalidConfigException;
 use yii\base\Model;
 use yii\db\ActiveRecord;
+use yii\base\InvalidArgumentException;
 
 /**
  *
@@ -239,15 +240,21 @@ class BaseAction extends Action
                     'findOne'
                 ), $this->clearCond($condition));
             }
+        }  else {
+            throw new InvalidArgumentException('modelClass缺失');
         }
         if ($model !== null) {
             $model->setScenario($scenario);
             return $model;
         } else if ($createOneOnNotFound) {
-            return \Yii::createObject([
-                'class' => $this->modelClass,
-                'scenario' => $scenario
-            ]);
+            $config = [];
+            if(!is_array($this->modelClass)) {
+                $config['class'] = $this->modelClass;
+            } else {
+                $config = $this->modelClass;
+            }
+            $config['scenario'] = $scenario;
+            return \Yii::createObject($config);
         }
 
         throw new NotFoundHttpException('The requested page does not exist.');

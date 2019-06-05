@@ -5,6 +5,7 @@ use app\filters\SwitchProjectFilter;
 use app\core\BaseController;
 use app\filters\SaveRouteFilter;
 use app\filters\AccessFilter;
+use app\helpers\MiscHelper;
 
 abstract class AppController extends BaseController
 {
@@ -17,7 +18,7 @@ abstract class AppController extends BaseController
     public function init(){
         parent::init();
         $this->layout = '/project';
-        $this->project_id = \Yii::$app->session->get(SwitchProjectFilter::SWITCH_PROJECT_ID);
+        $this->project_id = MiscHelper::getProjectId();
     }
     
     public function behaviors() {

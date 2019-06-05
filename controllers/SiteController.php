@@ -3,6 +3,7 @@ namespace app\controllers;
 
 use Yii;
 use app\forms\LoginForm;
+use app\helpers\MiscHelper;
 
 /**
  * Site controller
@@ -63,6 +64,15 @@ class SiteController extends AdminController
         return $this->render('about');
     }
 
+    protected function switchToDefaultProject(){
+        if($projectId = MiscHelper::getProjectId()) {
+            return $this->redirect(['/switch-project/index',
+                'id'=>$projectId
+            ]);
+        }
+        return false;
+    }
+
     /**
      * Login action.
      *
@@ -71,11 +81,18 @@ class SiteController extends AdminController
     public function actionLogin()
     {
         if (! Yii::$app->user->isGuest) {
+            if($resp = $this->switchToDefaultProject()){
+                return $resp;
+            }
             return $this->goHome();
         }
 
         $model = new LoginForm();
         if ($model->load(Yii::$app->request->post()) && $model->login()) {
+            MiscHelper::initUserDefultProject();
+            if($resp = $this->switchToDefaultProject()){
+                return $resp;
+            }
             return $this->goHomeOnSuccess();
         } else {
             $model->password = '';

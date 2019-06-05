@@ -1,7 +1,6 @@
 <?php
 namespace app\helpers;
 
-use app\filters\SwitchProjectFilter;
 use yii\base\NotSupportedException;
 use yii\helpers\Html;
 use app\filters\AccessFilter;
@@ -9,6 +8,7 @@ use yii\db\Query;
 use yii\helpers\ArrayHelper;
 use app\models\User;
 use app\models\ProjectMember;
+use app\models\Project;
 
 /**
  * 项目工具类
@@ -17,6 +17,9 @@ use app\models\ProjectMember;
  */
 class MiscHelper
 {
+
+    const SWITCH_PROJECT_ID = '_project_id';
+    const SWITCH_PROJECTS = '_joined_projects';
     
     public static function isAdmin(){
         return \Yii::$app->user->identity->is_admin;
@@ -28,16 +31,54 @@ class MiscHelper
     }
     
     public static function getProjectId(){
-        return \Yii::$app->session->get(SwitchProjectFilter::SWITCH_PROJECT_ID);
+        return \Yii::$app->session->get(self::SWITCH_PROJECT_ID);
     }
     
-    public static function getProject(){
-        $id = self::getProjectId();
-        $projects = \Yii::$app->session->get(SwitchProjectFilter::SWITCH_PROJECTS);
+    public static function getProject($project_id=null){
+        $id = $project_id?:self::getProjectId();
+        //echo $id;
+        $projects = self::loadUserJoinedProjects();
+        //print_r($projects[$id]);die;
         if($id && isset($projects[$id])){
             return $projects[$id];
         }
         return null;
+    }
+
+    public static function initUserDefultProject(){
+        $session = \Yii::$app->session;
+        $project_id = $session->get(self::SWITCH_PROJECT_ID);
+        $projects = self::loadUserJoinedProjects();
+        //$projects = $session->get(self::SWITCH_PROJECTS);
+        //如果session中没有存储用户参与的项目
+        // if( $projects== null) {
+        //     $projects = $this->loadUserJoinedProjects();
+        //     $session->set(self::SWITCH_PROJECTS,$projects);
+        // }
+        //如果当前的会话项目id为空 或者 默认的项目id不存在会员参与的项目中
+        //默认读取第一个作为会话项目
+        if($project_id == null || isset($projects[$project_id])==false) {
+            $project_ids = array_keys($projects);
+            $project_id =  array_shift($project_ids);
+            $session->set(self::SWITCH_PROJECT_ID,$project_id);
+        }
+        return $project_id;
+    }
+
+    
+    /**
+     * 加载用户的项目
+     * id:ProjectId
+     * name: ProjectName
+     * position: user position In project
+     */
+    public static function loadUserJoinedProjects()
+    {
+        // $key = 'projects:user:' . \Yii::$app->user->id;
+        // return \Yii::$app->cache->getOrSet($key,function(){
+            $q = Project::loadJoinedProjectsQuery('id,name,position');
+            return $q->indexBy('id')->all();
+        //});
     }
     
     public static function betweenDayWithTimestamp($field,$date) {
@@ -76,8 +117,8 @@ class MiscHelper
     public static function switchProjectMenuItems(){
         $rootItem = null;
         $switchProjects = [];
-        $_joined_projects = \Yii::$app->session->get(SwitchProjectFilter::SWITCH_PROJECTS);
-        $_project_id = \Yii::$app->session->get(SwitchProjectFilter::SWITCH_PROJECT_ID);
+        $_joined_projects = self::loadUserJoinedProjects();
+        $_project_id = \Yii::$app->session->get(self::SWITCH_PROJECT_ID);
         
         if(isset($_joined_projects) && is_array($_joined_projects)) {
             foreach($_joined_projects as $project_id => $org) {

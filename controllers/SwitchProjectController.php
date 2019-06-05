@@ -2,10 +2,10 @@
 namespace app\controllers;
 
 use app\models\ProjectMember;
-use app\filters\SwitchProjectFilter;
 use app\models\Project;
 use yii\web\BadRequestHttpException;
 use app\models\User;
+use app\helpers\MiscHelper;
 
 class SwitchProjectController extends AdminController
 {
@@ -21,7 +21,7 @@ class SwitchProjectController extends AdminController
             'user_id' => \Yii::$app->user->id
         ]);
         if (null != $projectMem) {
-            \Yii::$app->session->set(SwitchProjectFilter::SWITCH_PROJECT_ID, $id);
+            \Yii::$app->session->set(MiscHelper::SWITCH_PROJECT_ID, $id);
             $model = Project::findOne($id);
             //更新用户的默认控制台
             User::updateAll([

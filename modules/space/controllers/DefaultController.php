@@ -12,7 +12,7 @@ use app\helpers\MiscHelper;
 class DefaultController extends AppController
 {
 	public function actions(){
-	    $project_id = MiscHelper::getProjectId();
+		$project_id = MiscHelper::getProjectId();
 		return [
             'index' => [
                 'class' => 'app\core\ListModelsAction',
