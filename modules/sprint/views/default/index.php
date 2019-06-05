@@ -11,8 +11,8 @@ $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="sprint-index">
 
-	<p>
-        <?= Html::a('添加 Sprint', ['create'], ['class' => 'btn btn-success','data-toggle'=>'modal','data-target'=>'#modal-dailog']) ?>
+    <p>
+        <?= Html::a('添加 Sprint', ['create'], ['class' => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#modal-dailog']) ?>
     </p>
 
     <?php
@@ -22,28 +22,22 @@ $this->params['breadcrumbs'][] = $this->title;
         'filterModel' => $searchModel,
         'columns' => [
             [
-                'attribute' => 'id',
-                'headerOptions' => [
-                    'width' => '80px'
-                ],
+                'label' => '迭代',
+                'attribute'=>'name',
                 'format' => 'raw',
-                'value' => function ($model, $key, $index, $column) {
-                    return Html::a('#'.$model['id'], [
-                        'view',
-                        'id' => $model['id']
-                    ], [
-                        'data-toggle' => 'modal',
-                        'data-target' => '#modal-dailog'
-                    ]);
-                }
-            ],
-            [
-                'attribute' => 'name',
-                'format' => 'raw',
-                'value' => function ($model, $key, $index, $column) {
-                    return Html::a($model->name, [
+                'value' => function ($model, $key, $index, $column) use ($dataProvider) {
+                    $pagination = $dataProvider->getPagination();
+                    $count = $dataProvider->getTotalCount();
+                    if ($pagination !== false) {
+                        $idx = $pagination->getOffset() + $index;
+                    } else {
+                        $idx = $index;
+                    }
+                    $times = $count - $idx;
+                    return Html::a('#' . $times . ' ' . $model->name, [
                         '/sprint/story/index',
-                        'StorySearch[sprint_id]' => $model['id']
+                        'StorySearch[sprint_id]' => $model['id'],
+                        'sprint_times' => $times
                     ]);
                 }
             ],
